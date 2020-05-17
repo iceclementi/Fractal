@@ -16,22 +16,21 @@ public class Fractal extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        stage.setTitle("INFI-NUKE");
+        stage.setTitle("FRACTAL");
         // stage.getIcons().add(new Image("images/venus_icon.png"));
-        // stage.setMinWidth(1250);
-        // stage.setMinHeight(700);
+        stage.setMinWidth(800);
+        stage.setMinHeight(600);
 
         stage.setOnCloseRequest(event -> {
             // Close event
             stage.close();
         });
 
-        FXMLLoader sceneLoader = new FXMLLoader(getClass().getResource("/menu.fxml"));
-        Parent mainRoot = sceneLoader.load();
-        Scene main = new Scene(mainRoot);
+        FXMLLoader sceneLoader = new FXMLLoader(getClass().getResource("/scenes/menu.fxml"));
+        Parent root = sceneLoader.load();
+        Scene menuScene = new Scene(root);
 
-        stage.setScene(main);
+        stage.setScene(menuScene);
         stage.show();
     }
-
 }
