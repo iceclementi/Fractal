@@ -26,7 +26,7 @@ public class Fractal extends Application {
             stage.close();
         });
 
-        FXMLLoader sceneLoader = new FXMLLoader(getClass().getResource("/scenes/menu.fxml"));
+        FXMLLoader sceneLoader = new FXMLLoader(getClass().getResource("/scenes/game.fxml"));
         Parent root = sceneLoader.load();
         Scene menuScene = new Scene(root);
 
