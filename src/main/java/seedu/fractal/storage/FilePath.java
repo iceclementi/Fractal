@@ -7,5 +7,7 @@ public class FilePath {
     public static final String GAME_SCENE_PATH = "/scenes/game.fxml";
 
     /* Path to Card Images */
-    public static final String CARD_BACK_IMAGE_PATH = "/images/card_back.png";
+    public static final String CARD_BACK_IMAGE_PATH = "/images/cards/card_back.png";
+    public static final String CARD_EASY_PATH = "/images/cards/easy";
+
 }

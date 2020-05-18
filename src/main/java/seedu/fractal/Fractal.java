@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import seedu.fractal.storage.FilePath;
 
 import java.io.IOException;
 
@@ -26,7 +27,7 @@ public class Fractal extends Application {
             stage.close();
         });
 
-        FXMLLoader sceneLoader = new FXMLLoader(getClass().getResource("/scenes/game.fxml"));
+        FXMLLoader sceneLoader = new FXMLLoader(getClass().getResource(FilePath.GAME_SCENE_PATH));
         Parent root = sceneLoader.load();
         Scene menuScene = new Scene(root);
 

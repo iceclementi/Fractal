@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import seedu.fractal.logic.Card;
+import seedu.fractal.storage.FilePath;
 
 public class CardButton extends Button {
 
@@ -19,7 +20,7 @@ public class CardButton extends Button {
 
     private void initialiseStyle() {
         /* Set card back image */
-        Image image = new Image("/images/card_back.png", getWidth(), getHeight(), true, true, true);
+        Image image = new Image(FilePath.CARD_BACK_IMAGE_PATH, getWidth(), getHeight(), true, true, true);
         BackgroundImage backgroundImage = new BackgroundImage(
                 image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                 new BackgroundSize(getWidth(), getHeight(), true, true, true, false));
