@@ -1,9 +1,54 @@
-.card-button {
+.unactivated-button {
+    -fx-background-color: #e8e8e8;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-min-width: 50;
+    -fx-padding: 10;
+
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 18px;
+    -fx-text-fill: #c8c8c8;
+    -fx-cursor: default;
+
 }
 
-.card-button:hover {
+.match-button {
+    -fx-background-color: #7eabdb;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-min-width: 50;
+    -fx-padding: 10;
+
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 18px;
+    -fx-text-fill: #2a292b;
+    -fx-cursor: hand;
 }
 
-.card-button:pressed {
-    -fx-background-color: #d8d8d8;
+.match-button:hover {
+    -fx-background-color: #658bb6;
+}
+
+.match-button:pressed {
+    -fx-background-color: #5071a0;
+}
+
+.cancel-button {
+    -fx-background-color: #b1b5b5;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-min-width: 50;
+    -fx-padding: 10;
+
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 18px;
+    -fx-cursor: hand;
+}
+
+.cancel-button:hover {
+    -fx-background-color: #9a9e9e;
+}
+
+.cancel-button:pressed {
+    -fx-background-color: #848888;
 }

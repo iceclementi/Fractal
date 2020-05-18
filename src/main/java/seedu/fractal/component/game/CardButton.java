@@ -18,15 +18,53 @@ import seedu.fractal.storage.FilePath;
 public class CardButton extends Button {
 
     private Card card;
+    private MatchButton matchButton;
+    private CancelButton cancelButton;
+
     private boolean isSelected = false;
     private boolean isMatched = false;
+    private BackgroundImage cardBack;
+    private BackgroundImage cardFace;
 
-    public CardButton(Card card) {
+    private static Integer selectedCardCount = 0;
+
+    public CardButton(Card card, MatchButton matchButton, CancelButton cancelButton) {
         super();
         this.card = card;
+        this.matchButton = matchButton;
+        this.cancelButton = cancelButton;
+        this.cardBack = generateCardBack();
+        this.cardFace = generateCardFace();
 
         initialiseStyle();
         initialiseEvents();
+    }
+
+    public static Integer getSelectedCardCount() {
+        return selectedCardCount;
+    }
+
+    /**
+     * Resets all faced-up cards back to face-down.
+     */
+    public void reset() {
+        setBackground(new Background(cardBack));
+        setCursor(Cursor.HAND);
+        selectedCardCount = 0;
+    }
+
+    private BackgroundImage generateCardBack() {
+        Image image = new Image(FilePath.CARD_BACK_IMAGE_PATH, getWidth(), getHeight(), true, true, true);
+        return new BackgroundImage(
+                image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                new BackgroundSize(getWidth(), getHeight(), true, true, true, false));
+    }
+
+    private BackgroundImage generateCardFace() {
+        Image image = new Image(card.getImagePath(), getWidth(), getHeight(), true, false, true);
+        return new BackgroundImage(
+                image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                new BackgroundSize(getWidth(), getHeight(), true, true, true, true));
     }
 
     private void initialiseStyle() {
@@ -37,17 +75,10 @@ public class CardButton extends Button {
         setMinSize(120, 160);
 
         /* Set card back image */
-        Image image = new Image(FilePath.CARD_BACK_IMAGE_PATH, getWidth(), getHeight(), true, true, true);
-        BackgroundImage backgroundImage = new BackgroundImage(
-                image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                new BackgroundSize(getWidth(), getHeight(), true, true, true, false));
-
-        setBackground(new Background(backgroundImage));
+        setBackground(new Background(cardBack));
 
         setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(171, 171, 171), 5, 0, 0, 0));
         setCursor(Cursor.HAND);
-
-
     }
 
     private void initialiseEvents() {
@@ -69,13 +100,20 @@ public class CardButton extends Button {
     }
 
     private void onClick(MouseEvent mouseEvent) {
-        if (!isSelected && !isMatched) {
+        if (!isSelected && !isMatched && selectedCardCount < 2) {
             System.out.println(card.getImagePath());
-            Image image = new Image(card.getImagePath(), getWidth(), getHeight(), true, false, true);
-            BackgroundImage backgroundImage = new BackgroundImage(
-                    image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                    new BackgroundSize(getWidth(), getHeight(), true, true, true, true));
-            setBackground(new Background(backgroundImage));
+            setBackground(new Background(cardFace));
+
+            isSelected = true;
+            setCursor(Cursor.DEFAULT);
+            ++selectedCardCount;
+
+            if (selectedCardCount == 2) {
+                matchButton.setCanMatch();
+            }
+        } else if (isSelected) {
+            reset();
+            isSelected = false;
         }
     }
 }
