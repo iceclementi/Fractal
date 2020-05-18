@@ -21,6 +21,18 @@ public class Card {
         this.imagePath = imagePath;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
     /**
      * Checks if the card is the same value as another card.
      *

@@ -1,0 +1,9 @@
+.card-button {
+}
+
+.card-button:hover {
+}
+
+.card-button:pressed {
+    -fx-background-color: #d8d8d8;
+}

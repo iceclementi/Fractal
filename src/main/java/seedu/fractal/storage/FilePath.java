@@ -1,6 +1,9 @@
 package seedu.fractal.storage;
 
 public class FilePath {
+    /* Path to Resource Directory */
+    public static final String RESOURCE_PATH = "src\\main\\resources";
+
 
     /* Path to Scenes */
     public static final String MENU_SCENE_PATH = "/scenes/menu.fxml";
