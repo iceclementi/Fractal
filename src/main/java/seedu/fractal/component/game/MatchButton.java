@@ -1,6 +1,5 @@
 package seedu.fractal.component.game;
 
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import seedu.fractal.logic.Card;
@@ -37,11 +36,11 @@ public class MatchButton extends Button {
         setOnMouseReleased(this::onRelease);
     }
 
-
-
     private void onClick(MouseEvent mouseEvent) {
         if (canMatch) {
-            
+            for (CardButton card : CardButton.getSelectedCards()) {
+                card.reset();
+            }
         }
     }
 

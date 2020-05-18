@@ -26,7 +26,8 @@ public class CardButton extends Button {
     private BackgroundImage cardBack;
     private BackgroundImage cardFace;
 
-    private static Integer selectedCardCount = 0;
+    private static int selectedCardCount = 0;
+    private static CardButton[] selectedCards = new CardButton[2];
 
     public CardButton(Card card, MatchButton matchButton, CancelButton cancelButton) {
         super();
@@ -40,8 +41,8 @@ public class CardButton extends Button {
         initialiseEvents();
     }
 
-    public static Integer getSelectedCardCount() {
-        return selectedCardCount;
+    public static CardButton[] getSelectedCards() {
+        return selectedCards;
     }
 
     /**
@@ -50,6 +51,7 @@ public class CardButton extends Button {
     public void reset() {
         setBackground(new Background(cardBack));
         setCursor(Cursor.HAND);
+        isSelected = false;
         selectedCardCount = 0;
     }
 
@@ -106,14 +108,11 @@ public class CardButton extends Button {
 
             isSelected = true;
             setCursor(Cursor.DEFAULT);
-            ++selectedCardCount;
+            selectedCards[selectedCardCount++] = this;
 
             if (selectedCardCount == 2) {
                 matchButton.setCanMatch();
             }
-        } else if (isSelected) {
-            reset();
-            isSelected = false;
         }
     }
 }
