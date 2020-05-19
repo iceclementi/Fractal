@@ -3,8 +3,8 @@ package seedu.fractal.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import seedu.fractal.component.menu.ContinueButton;
 import seedu.fractal.component.menu.MenuButton;
 import seedu.fractal.component.menu.NewGameButton;
@@ -55,6 +55,10 @@ public class MenuController implements Initializable {
         MenuButton continueButton = new ContinueButton("CONTINUE");
         MenuButton helpButton = new MenuButton("HOW TO PLAY");
         MenuButton aboutButton = new MenuButton("ABOUT");
+
+        helpButton.setDisable(true);
+        aboutButton.setDisable(true);
+
         menuButtonBox.getChildren().addAll(newGameButton, continueButton, helpButton, aboutButton);
     }
 
