@@ -3,6 +3,7 @@ package seedu.fractal.component.menu;
 import javafx.scene.control.Button;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import seedu.fractal.storage.FilePath;
 
@@ -16,6 +17,7 @@ public class MenuButton extends Button {
      */
     public MenuButton(String name) {
         super();
+
         initialiseStyle();
         setText(name);
     }

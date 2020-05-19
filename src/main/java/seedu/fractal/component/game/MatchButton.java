@@ -2,6 +2,7 @@ package seedu.fractal.component.game;
 
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import seedu.fractal.storage.FilePath;
 
 public class MatchButton extends Button {
 
@@ -28,7 +29,7 @@ public class MatchButton extends Button {
 
     private void initialiseStyle() {
         setText("MATCH!");
-        getStylesheets().add(getClass().getResource("/styles/gameStyle.css").toExternalForm());
+        getStylesheets().add(getClass().getResource(FilePath.GAME_STYLE_PATH).toExternalForm());
         getStyleClass().add("unactivated-button");
         reset();
     }

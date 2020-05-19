@@ -1,12 +1,13 @@
 package seedu.fractal.component.menu;
 
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.SceneUtil;
 
-public class StartButton extends MenuButton {
+public class ContinueButton extends MenuButton {
 
-    public StartButton(String name) {
+    public ContinueButton(String name) {
         super(name);
 
         initialiseEvents();
@@ -19,5 +20,4 @@ public class StartButton extends MenuButton {
     private void onRelease(MouseEvent mouseEvent) {
         SceneUtil.changeScene(this, FilePath.GAME_SCENE_PATH);
     }
-
 }

@@ -2,6 +2,7 @@ package seedu.fractal.component.game;
 
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import seedu.fractal.storage.FilePath;
 
 public class CancelButton extends Button {
 
@@ -28,7 +29,7 @@ public class CancelButton extends Button {
 
     private void initialiseStyle() {
         setText("CANCEL");
-        getStylesheets().add(getClass().getResource("/styles/gameStyle.css").toExternalForm());
+        getStylesheets().add(getClass().getResource(FilePath.GAME_STYLE_PATH).toExternalForm());
         getStyleClass().add("unactivated-button");
         reset();
     }

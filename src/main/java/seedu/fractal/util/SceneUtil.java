@@ -5,8 +5,11 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import seedu.fractal.storage.FilePath;
 
 import java.io.IOException;
 
@@ -28,7 +31,7 @@ public class SceneUtil {
             stage.setScene(nextScene);
 
             stage.show();
-            
+
             centreScene(stage);
         } catch (IOException e) {
             System.out.println("Error!!");
@@ -39,5 +42,13 @@ public class SceneUtil {
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((screenBounds.getWidth() - stage.getWidth()) / 2);
         stage.setY((screenBounds.getHeight() - stage.getHeight()) / 2);
+    }
+
+    public static Background generateBackground(String backgroundPath) {
+        Image image = new Image(backgroundPath);
+        BackgroundImage backgroundImage = new BackgroundImage(
+                image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER,
+                BackgroundSize.DEFAULT);
+        return new Background(backgroundImage);
     }
 }

@@ -2,11 +2,15 @@ package seedu.fractal.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import seedu.fractal.component.menu.ContinueButton;
 import seedu.fractal.component.menu.MenuButton;
-import seedu.fractal.component.menu.StartButton;
+import seedu.fractal.component.menu.NewGameButton;
+import seedu.fractal.component.menu.newGamePopupBoxFiller;
 import seedu.fractal.storage.FilePath;
+import seedu.fractal.util.SceneUtil;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,32 +19,49 @@ public class MenuController implements Initializable {
 
     @FXML
     private GridPane menuPane;
-
     @FXML
     private VBox menuButtonBox;
 
-    private MenuButton startButton;
-    private MenuButton helpButton;
-    private MenuButton aboutButton;
-    private MenuButton settingsButton;
+    @FXML
+    private GridPane popupPane;
+    @FXML
+    private VBox popupBox;
+
+    @FXML
+    private VBox difficultyBox;
+    @FXML
+    private Label difficultyHeader;
+    @FXML
+    private VBox matchCountBox;
+    @FXML
+    private Label matchCountHeader;
+    @FXML
+    private VBox advancedOptionsBox;
+    @FXML
+    private Label advancedOptionsHeader;
+    @FXML
+    private VBox playBox;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setBackground();
+        menuPane.setBackground(SceneUtil.generateBackground(FilePath.BACKGROUND_IMAGE_PATH));
 
-        startButton = new StartButton("PLAY!!");
-        helpButton = new MenuButton("HOW TO PLAY");
-        aboutButton = new MenuButton("ABOUT");
-        settingsButton = new MenuButton("SETTINGS");
-        menuButtonBox.getChildren().addAll(startButton, helpButton, aboutButton, settingsButton);
+        // Do NOT display pop up on start up
+        popupPane.setVisible(false);
+        fillPopupBoxes();
+
+        MenuButton newGameButton = new NewGameButton("NEW GAME", menuPane, popupPane);
+        MenuButton continueButton = new ContinueButton("CONTINUE");
+        MenuButton helpButton = new MenuButton("HOW TO PLAY");
+        MenuButton aboutButton = new MenuButton("ABOUT");
+        menuButtonBox.getChildren().addAll(newGameButton, continueButton, helpButton, aboutButton);
     }
 
-    private void setBackground() {
-        Image image = new Image(FilePath.BACKGROUND_IMAGE_PATH);
-        BackgroundImage backgroundImage = new BackgroundImage(
-                image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER,
-                BackgroundSize.DEFAULT);
-        menuPane.setBackground(new Background(backgroundImage));
+    private void fillPopupBoxes() {
+        new newGamePopupBoxFiller(difficultyBox, difficultyHeader, matchCountBox, matchCountHeader,
+                advancedOptionsBox, advancedOptionsHeader, playBox).fillNewGamePopup();
     }
+
 
 }

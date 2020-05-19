@@ -27,8 +27,8 @@ public class CardButton extends Button {
 
     private boolean isSelected = false;
     private boolean isMatched = false;
-    private static BackgroundImage cardBack;
-    private BackgroundImage cardFace;
+    private static Background cardBack;
+    private Background cardFace;
 
     public CardButton(Card card, MatchButton matchButton, CancelButton cancelButton) {
         super();
@@ -55,7 +55,7 @@ public class CardButton extends Button {
      */
     public static void reset() {
         for (CardButton card : selectedCards) {
-            card.setBackground(new Background(cardBack));
+            card.setBackground(cardBack);
             card.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(171, 171, 171), 5, 0, 0, 0));
             card.setCursor(Cursor.HAND);
             card.isSelected = false;
@@ -80,18 +80,20 @@ public class CardButton extends Button {
         cancelButton.reset();
     }
 
-    private BackgroundImage generateCardBack() {
+    private Background generateCardBack() {
         Image image = new Image(FilePath.CARD_BACK_IMAGE_PATH, getWidth(), getHeight(), true, true, true);
-        return new BackgroundImage(
+        BackgroundImage cardBackImage = new BackgroundImage(
                 image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                 new BackgroundSize(getWidth(), getHeight(), true, true, true, false));
+        return new Background(cardBackImage);
     }
 
-    private BackgroundImage generateCardFace() {
+    private Background generateCardFace() {
         Image image = new Image(card.getImagePath(), getWidth(), getHeight(), true, false, true);
-        return new BackgroundImage(
+        BackgroundImage cardFaceImage = new BackgroundImage(
                 image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                 new BackgroundSize(getWidth(), getHeight(), true, true, true, true));
+        return new Background(cardFaceImage);
     }
 
     private void initialiseStyle() {
@@ -99,7 +101,7 @@ public class CardButton extends Button {
         setMinSize(120, 160);
 
         /* Set card back image */
-        setBackground(new Background(cardBack));
+        setBackground(cardBack);
 
         setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(171, 171, 171), 5, 0, 0, 0));
         setCursor(Cursor.HAND);
@@ -126,7 +128,7 @@ public class CardButton extends Button {
     private void onClick(MouseEvent mouseEvent) {
         if (!isSelected && !isMatched && selectedCardCount < 2) {
             System.out.println(card.getImagePath());
-            setBackground(new Background(cardFace));
+            setBackground(cardFace);
 
             isSelected = true;
             setCursor(Cursor.DEFAULT);

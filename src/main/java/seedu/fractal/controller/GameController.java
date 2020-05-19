@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import seedu.fractal.component.game.CancelButton;
@@ -11,12 +12,17 @@ import seedu.fractal.component.game.CardButton;
 import seedu.fractal.component.game.MatchButton;
 import seedu.fractal.logic.Card;
 import seedu.fractal.logic.CardGenerator;
+import seedu.fractal.storage.FilePath;
+import seedu.fractal.util.SceneUtil;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
+
+    @FXML
+    private GridPane gamePane;
 
     @FXML
     private VBox cardBox;
@@ -28,6 +34,7 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        gamePane.setBackground(SceneUtil.generateBackground(FilePath.BACKGROUND_IMAGE_PATH));
         // Get dimensions from some storage to be implemented in future
 
         MatchButton matchButton = new MatchButton();
