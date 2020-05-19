@@ -2,24 +2,40 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.fractal.controller.MenuController">
+
+<StackPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.fractal.controller.MenuController">
    <children>
-      <VBox alignment="CENTER" prefHeight="138.0">
+      <GridPane fx:id="menuPane" alignment="CENTER" StackPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" percentHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <Label text="FracTal">
-               <font>
-                  <Font name="Arial Black" size="48.0" />
-               </font>
-            </Label>
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+               <children>
+                  <Label text="FracTal">
+                     <font>
+                        <Font name="Arial Black" size="48.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox fx:id="menuButtonBox" alignment="CENTER" prefHeight="263.0" prefWidth="600.0" spacing="10.0" GridPane.rowIndex="1">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
          </children>
-      </VBox>
-      <VBox fx:id="menuButtonBox" alignment="CENTER" prefHeight="263.0" prefWidth="600.0" spacing="10.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </VBox>
+      </GridPane>
    </children>
-</VBox>
+</StackPane>

@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.paint.Color;
+import seedu.fractal.storage.FilePath;
 
 public class MenuButton extends Button {
 
@@ -19,9 +20,8 @@ public class MenuButton extends Button {
         setText(name);
     }
 
-
     private void initialiseStyle() {
-        getStylesheets().add(getClass().getResource("/styles/menuStyle.css").toExternalForm());
+        getStylesheets().add(getClass().getResource(FilePath.MENU_STYLE_PATH).toExternalForm());
         getStyleClass().add("menu-button");
         setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.rgb(171, 171, 171), 5, 0, 0, 0));
     }
