@@ -35,8 +35,8 @@
 
 .cancel-button {
     -fx-background-color: #b1b5b5;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
     -fx-min-width: 50;
     -fx-padding: 10;
 

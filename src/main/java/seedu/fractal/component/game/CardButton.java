@@ -50,9 +50,13 @@ public class CardButton extends Button {
      */
     public void reset() {
         setBackground(new Background(cardBack));
+        setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(171, 171, 171), 5, 0, 0, 0));
         setCursor(Cursor.HAND);
         isSelected = false;
         selectedCardCount = 0;
+
+        matchButton.reset();
+        cancelButton.reset();
     }
 
     private BackgroundImage generateCardBack() {
@@ -111,7 +115,8 @@ public class CardButton extends Button {
             selectedCards[selectedCardCount++] = this;
 
             if (selectedCardCount == 2) {
-                matchButton.setCanMatch();
+                matchButton.activate();
+                cancelButton.activate();
             }
         }
     }

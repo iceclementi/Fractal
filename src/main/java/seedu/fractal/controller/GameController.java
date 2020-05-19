@@ -52,6 +52,6 @@ public class GameController implements Initializable {
             cardBox.getChildren().add(cardRows.get(i));
         }
 
-        selectionBox.getChildren().add(matchButton);
+        selectionBox.getChildren().addAll(matchButton, cancelButton);
     }
 }

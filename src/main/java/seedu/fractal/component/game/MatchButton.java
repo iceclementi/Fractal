@@ -18,7 +18,10 @@ public class MatchButton extends Button {
         initialiseEvents();
     }
 
-    public void setCanMatch() {
+    /**
+     * Activates the match button.
+     */
+    public void activate() {
         canMatch = true;
         getStyleClass().clear();
         getStyleClass().add("match-button");
@@ -32,11 +35,10 @@ public class MatchButton extends Button {
     }
 
     private void initialiseEvents() {
-        setOnMousePressed(this::onClick);
         setOnMouseReleased(this::onRelease);
     }
 
-    private void onClick(MouseEvent mouseEvent) {
+    private void onRelease(MouseEvent mouseEvent) {
         if (canMatch) {
             for (CardButton card : CardButton.getSelectedCards()) {
                 card.reset();
@@ -44,13 +46,10 @@ public class MatchButton extends Button {
         }
     }
 
-    private void onRelease(MouseEvent mouseEvent) {
-        if (canMatch) {
-            reset();
-        }
-    }
-
-    private void reset() {
+    /**
+     * Resets the match button to unactivated mode.
+     */
+    public void reset() {
         canMatch = false;
         getStyleClass().clear();
         getStyleClass().add("unactivated-button");
