@@ -40,9 +40,7 @@ public class CancelButton extends Button {
 
     private void onRelease(MouseEvent mouseEvent) {
         if (canMatch) {
-            for (CardButton card : CardButton.getSelectedCards()) {
-                card.reset();
-            }
+            CardButton.reset();
         }
     }
 

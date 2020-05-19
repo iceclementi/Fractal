@@ -3,6 +3,7 @@ package seedu.fractal.component.game;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.effect.BlurType;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
@@ -17,24 +18,24 @@ import seedu.fractal.storage.FilePath;
 
 public class CardButton extends Button {
 
+    private static int selectedCardCount = 0;
+    private static CardButton[] selectedCards = new CardButton[2];
+
     private Card card;
-    private MatchButton matchButton;
-    private CancelButton cancelButton;
+    private static MatchButton matchButton;
+    private static CancelButton cancelButton;
 
     private boolean isSelected = false;
     private boolean isMatched = false;
-    private BackgroundImage cardBack;
+    private static BackgroundImage cardBack;
     private BackgroundImage cardFace;
-
-    private static int selectedCardCount = 0;
-    private static CardButton[] selectedCards = new CardButton[2];
 
     public CardButton(Card card, MatchButton matchButton, CancelButton cancelButton) {
         super();
         this.card = card;
-        this.matchButton = matchButton;
-        this.cancelButton = cancelButton;
-        this.cardBack = generateCardBack();
+        CardButton.matchButton = matchButton;
+        CardButton.cancelButton = cancelButton;
+        cardBack = generateCardBack();
         this.cardFace = generateCardFace();
 
         initialiseStyle();
@@ -45,16 +46,36 @@ public class CardButton extends Button {
         return selectedCards;
     }
 
+    public Card getCard() {
+        return card;
+    }
+
     /**
      * Resets all faced-up cards back to face-down.
      */
-    public void reset() {
-        setBackground(new Background(cardBack));
-        setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(171, 171, 171), 5, 0, 0, 0));
-        setCursor(Cursor.HAND);
-        isSelected = false;
-        selectedCardCount = 0;
+    public static void reset() {
+        for (CardButton card : selectedCards) {
+            card.setBackground(new Background(cardBack));
+            card.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(171, 171, 171), 5, 0, 0, 0));
+            card.setCursor(Cursor.HAND);
+            card.isSelected = false;
+        }
 
+        selectedCardCount = 0;
+        matchButton.reset();
+        cancelButton.reset();
+    }
+
+    /**
+     * Match the cards and fade image.
+     */
+    public static void match() {
+        for (CardButton card : selectedCards) {
+            card.setEffect(new ColorAdjust(0, -0.5, -0.1, 0));
+            card.isMatched = true;
+        }
+
+        selectedCardCount = 0;
         matchButton.reset();
         cancelButton.reset();
     }
@@ -74,9 +95,6 @@ public class CardButton extends Button {
     }
 
     private void initialiseStyle() {
-        // getStylesheets().add(getClass().getResource("/styles/gameStyle.css").toExternalForm());
-        // getStyleClass().add("card-button");
-
         /* Set dimensions */
         setMinSize(120, 160);
 
