@@ -8,7 +8,11 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.paint.Color;
 import seedu.fractal.logic.Card;
 import seedu.fractal.storage.FilePath;
@@ -18,25 +22,16 @@ public class CardButton extends Button {
     private static int selectedCardCount = 0;
     private static CardButton[] selectedCards = new CardButton[2];
 
-    private boolean isSelected = false;
-    private boolean isMatched = false;
-    private static Background cardBack;
+    private static Background cardBack = null;
     private Background cardFace;
 
+    private int id;
     private Card card;
-    private static MatchButton matchButton;
-    private static CancelButton cancelButton;
-    private Label matchCounter;
 
-    public CardButton(Card card, MatchButton matchButton, CancelButton cancelButton, Label matchCounter) {
+    public CardButton(int id, Card card) {
         super();
+        this.id = id;
         this.card = card;
-        CardButton.matchButton = matchButton;
-        CardButton.cancelButton = cancelButton;
-        this.matchCounter = matchCounter;
-
-        cardBack = generateCardBack();
-        cardFace = generateCardFace();
 
         initialiseStyle();
         initialiseEvents();
@@ -53,32 +48,20 @@ public class CardButton extends Button {
     /**
      * Resets all faced-up cards back to face-down.
      */
-    public static void reset() {
-        for (CardButton card : selectedCards) {
-            card.setBackground(cardBack);
-            card.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(171, 171, 171), 5, 0, 0, 0));
-            card.setCursor(Cursor.HAND);
-            card.isSelected = false;
-        }
-
-        selectedCardCount = 0;
-        matchButton.reset();
-        cancelButton.reset();
+    public void reset() {
+        setBackground(cardBack);
+        setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(171, 171, 171), 5, 0, 0, 0));
+        setCursor(Cursor.HAND);
+        getCard().setStatus(CardStatus.DEFAULT);
     }
 
     /**
      * Match the cards and fade image.
      */
-    public static void match() {
-        for (CardButton card : selectedCards) {
-            card.setEffect(new ColorAdjust(0, -0.5, 0, 0));
-            card.setOpacity(0.5);
-            card.isMatched = true;
-        }
-
-        selectedCardCount = 0;
-        matchButton.reset();
-        cancelButton.reset();
+    public void match() {
+        setEffect(new ColorAdjust(0, -0.5, 0, 0));
+        setOpacity(0.5);
+        getCard().setStatus(CardStatus.MATCHED);
     }
 
     private Background generateCardBack() {
@@ -103,7 +86,12 @@ public class CardButton extends Button {
         setPrefWidth(120);
 
         /* Set card back image */
+        if (cardBack == null) {
+            cardBack = generateCardBack();
+        }
+
         setBackground(cardBack);
+        cardFace = generateCardFace();
 
         setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(171, 171, 171), 5, 0, 0, 0));
         setCursor(Cursor.HAND);
@@ -116,33 +104,25 @@ public class CardButton extends Button {
     }
 
     private void onHover(MouseEvent mouseEvent) {
-        if (!isSelected && !isMatched) {
+        if (getCard().getStatus() == CardStatus.DEFAULT) {
             setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(99, 133, 171), 10, 0, 0, 0));
         }
     }
 
     private void onUnhover(MouseEvent mouseEvent) {
-        if (!isSelected && !isMatched) {
+        if (getCard().getStatus() == CardStatus.DEFAULT) {
             setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(171, 171, 171), 5, 0, 0, 0));
         }
     }
 
     private void onClick(MouseEvent mouseEvent) {
-        if (!isSelected && !isMatched && selectedCardCount < 2) {
+        if (getCard().getStatus() == CardStatus.DEFAULT && GameBoard.getInstance().canSelect()) {
             System.out.println(card.getImagePath());
             setBackground(cardFace);
 
-            isSelected = true;
+            getCard().setStatus(CardStatus.SELECTED);
             setCursor(Cursor.DEFAULT);
-            selectedCards[selectedCardCount++] = this;
-
-            if (selectedCardCount == 2) {
-                matchButton.activate();
-                cancelButton.activate();
-
-                int currentCount = Integer.parseInt(matchCounter.getText());
-                matchCounter.setText(String.valueOf(currentCount+1));
-            }
+            GameBoard.getInstance().selectCard(this);
         }
     }
 }

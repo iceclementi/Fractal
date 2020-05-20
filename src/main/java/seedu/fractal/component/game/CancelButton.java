@@ -6,8 +6,6 @@ import seedu.fractal.storage.FilePath;
 
 public class CancelButton extends Button {
 
-    private boolean canMatch = false;
-
     /**
      * Constructor for the cancel button.
      */
@@ -22,7 +20,6 @@ public class CancelButton extends Button {
      * Activates the cancel button.
      */
     public void activate() {
-        canMatch = true;
         setDisable(false);
     }
 
@@ -37,18 +34,14 @@ public class CancelButton extends Button {
         setOnMouseReleased(this::onRelease);
     }
 
-
     private void onRelease(MouseEvent mouseEvent) {
-        if (canMatch) {
-            CardButton.reset();
-        }
+        GameBoard.getInstance().reset();
     }
 
     /**
      * Resets the cancel button to unactivated mode.
      */
     public void reset() {
-        canMatch = false;
         setDisable(true);
     }
 }

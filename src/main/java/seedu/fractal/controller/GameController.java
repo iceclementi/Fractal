@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import seedu.fractal.component.game.CancelButton;
 import seedu.fractal.component.game.CardButton;
+import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.component.game.MatchButton;
 import seedu.fractal.logic.Card;
 import seedu.fractal.logic.CardGenerator;
@@ -36,6 +37,7 @@ public class GameController implements Initializable {
     private Label matchCounter;
 
     private ArrayList<HBox> cardRows = new ArrayList<>();
+    private ArrayList<CardButton> allCards;
 
 
     /* To be changed to appropriate file retrieval process */
@@ -52,13 +54,15 @@ public class GameController implements Initializable {
 
         MatchButton matchButton = new MatchButton();
         CancelButton cancelButton = new CancelButton();
+        allCards = generateCards();
+        GameBoard.getInstance().initialise(allCards, matchButton, cancelButton, matchCounter);
 
-        arrangeCards(matchButton, cancelButton);
+        arrangeCards();
 
         selectionBox.getChildren().addAll(matchButton, cancelButton);
     }
 
-    private void arrangeCards(MatchButton matchButton, CancelButton cancelButton) {
+    private void arrangeCards() {
         int numberOfRows = rows[numberOfMatches];
         int numberOfColumns = columns[numberOfMatches];
 
@@ -71,19 +75,26 @@ public class GameController implements Initializable {
             cardRows.add(newRow);
         }
 
-        ArrayList<Card> cards = new CardGenerator(numberOfMatches).generateCards();
-
         for (int i = 0; i < numberOfRows; ++i) {
             for (int j = 0; j < numberOfColumns; ++j) {
                 if (i*numberOfColumns + j >= numberOfMatches*2) {
                     break;
                 }
-                CardButton cardButton = new CardButton(cards.get(i*numberOfColumns + j),
-                        matchButton, cancelButton, matchCounter);
-                cardRows.get(i).getChildren().add(cardButton);
+                cardRows.get(i).getChildren().add(allCards.get(i*numberOfColumns + j));
             }
             cardBox.getChildren().add(cardRows.get(i));
         }
+    }
+
+    private ArrayList<CardButton> generateCards() {
+        ArrayList<Card> cards = new CardGenerator(numberOfMatches).generateCards();
+
+        ArrayList<CardButton> cardButtons = new ArrayList<>();
+        for (int i = 0; i < cards.size(); ++i) {
+            cardButtons.add(new CardButton(i, cards.get(i)));
+        }
+
+        return cardButtons;
     }
 
 

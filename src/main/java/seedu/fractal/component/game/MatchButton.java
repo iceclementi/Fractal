@@ -6,8 +6,6 @@ import seedu.fractal.storage.FilePath;
 
 public class MatchButton extends Button {
 
-    private boolean canMatch = false;
-
     /**
      * Constructor for the match button.
      */
@@ -22,7 +20,6 @@ public class MatchButton extends Button {
      * Activates the match button.
      */
     public void activate() {
-        canMatch = true;
         setDisable(false);
     }
 
@@ -38,13 +35,10 @@ public class MatchButton extends Button {
     }
 
     private void onRelease(MouseEvent mouseEvent) {
-        if (canMatch) {
-            CardButton[] cards = CardButton.getSelectedCards();
-            if (cards[0].getCard().isSameValue(cards[1].getCard())) {
-                CardButton.match();
-            } else {
-                CardButton.reset();
-            }
+        if (GameBoard.getInstance().isMatched()) {
+            GameBoard.getInstance().match();
+        } else {
+            GameBoard.getInstance().reset();
         }
     }
 
@@ -52,7 +46,6 @@ public class MatchButton extends Button {
      * Resets the match button to unactivated mode.
      */
     public void reset() {
-        canMatch = false;
         setDisable(true);
     }
 }

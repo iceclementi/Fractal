@@ -58,6 +58,9 @@ public class Storage {
         return String.format("%s%s%s", difficulty.name(), DIVIDER, String.valueOf(numberOfMatches));
     }
 
+    private static void saveGameCards() {
+
+    }
 
 
 }

@@ -1,9 +1,13 @@
 package seedu.fractal.logic;
 
+import seedu.fractal.component.game.CardStatus;
+
 public class Card {
+
     private String name;
     private String value;
     private String imagePath;
+    private CardStatus status = CardStatus.DEFAULT;
 
     /**
      * Constructor for a math memory card.
@@ -31,6 +35,14 @@ public class Card {
 
     public String getImagePath() {
         return imagePath;
+    }
+
+    public CardStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CardStatus status) {
+        this.status = status;
     }
 
     /**
