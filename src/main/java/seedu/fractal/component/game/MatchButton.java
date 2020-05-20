@@ -23,15 +23,14 @@ public class MatchButton extends Button {
      */
     public void activate() {
         canMatch = true;
-        getStyleClass().clear();
-        getStyleClass().add("match-button");
+        setDisable(false);
     }
 
     private void initialiseStyle() {
         setText("MATCH!");
         getStylesheets().add(getClass().getResource(FilePath.GAME_STYLE_PATH).toExternalForm());
-        getStyleClass().add("unactivated-button");
-        reset();
+        getStyleClass().add("match-button");
+        setDisable(true);
     }
 
     private void initialiseEvents() {
@@ -54,7 +53,6 @@ public class MatchButton extends Button {
      */
     public void reset() {
         canMatch = false;
-        getStyleClass().clear();
-        getStyleClass().add("unactivated-button");
+        setDisable(true);
     }
 }

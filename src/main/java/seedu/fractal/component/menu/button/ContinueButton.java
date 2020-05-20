@@ -1,16 +1,20 @@
-package seedu.fractal.component.menu;
+package seedu.fractal.component.menu.button;
 
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.SceneUtil;
 
 public class ContinueButton extends MenuButton {
 
-    public ContinueButton(String name) {
-        super(name);
+    public ContinueButton() {
+        super();
 
+        initialiseStyle();
         initialiseEvents();
+    }
+
+    private void initialiseStyle() {
+        setButtonBackground(FilePath.CONTINUE_BUTTON_IMAGE_PATH);
     }
 
     private void initialiseEvents() {

@@ -5,9 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import seedu.fractal.component.menu.ContinueButton;
-import seedu.fractal.component.menu.MenuButton;
-import seedu.fractal.component.menu.NewGameButton;
+import seedu.fractal.component.menu.button.*;
 import seedu.fractal.component.menu.newGamePopupBoxFiller;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.SceneUtil;
@@ -51,11 +49,12 @@ public class MenuController implements Initializable {
         popupPane.setVisible(false);
         fillPopupBoxes();
 
-        MenuButton newGameButton = new NewGameButton("NEW GAME", menuPane, popupPane);
-        MenuButton continueButton = new ContinueButton("CONTINUE");
-        MenuButton helpButton = new MenuButton("HOW TO PLAY");
-        MenuButton aboutButton = new MenuButton("ABOUT");
+        MenuButton newGameButton = new NewGameButton(menuPane, popupPane);
+        MenuButton continueButton = new ContinueButton();
+        MenuButton helpButton = new HelpButton();
+        MenuButton aboutButton = new AboutButton();
 
+        continueButton.setDisable(true);
         helpButton.setDisable(true);
         aboutButton.setDisable(true);
 

@@ -23,15 +23,14 @@ public class CancelButton extends Button {
      */
     public void activate() {
         canMatch = true;
-        getStyleClass().clear();
-        getStyleClass().add("cancel-button");
+        setDisable(false);
     }
 
     private void initialiseStyle() {
         setText("CANCEL");
         getStylesheets().add(getClass().getResource(FilePath.GAME_STYLE_PATH).toExternalForm());
-        getStyleClass().add("unactivated-button");
-        reset();
+        getStyleClass().add("cancel-button");
+        setDisable(true);
     }
 
     private void initialiseEvents() {
@@ -50,7 +49,6 @@ public class CancelButton extends Button {
      */
     public void reset() {
         canMatch = false;
-        getStyleClass().clear();
-        getStyleClass().add("unactivated-button");
+        setDisable(true);
     }
 }

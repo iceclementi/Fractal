@@ -3,6 +3,7 @@ package seedu.fractal.component.menu;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.layout.VBox;
+import seedu.fractal.component.menu.button.PlayButton;
 import seedu.fractal.storage.FilePath;
 
 public class newGamePopupBoxFiller {
@@ -54,7 +55,7 @@ public class newGamePopupBoxFiller {
     }
 
     private void fillPlaySection() {
-        PlayButton playButton = new PlayButton("PLAY", difficultySlider, spinner);
+        PlayButton playButton = new PlayButton(difficultySlider, spinner);
         playBox.getChildren().add(playButton);
     }
 
