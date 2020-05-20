@@ -28,10 +28,10 @@ public class MenuButton extends Button {
         getStyleClass().add("menu-button");
         // setEffect(new InnerShadow(BlurType.THREE_PASS_BOX, Color.rgb(171, 171, 171), 5, 0, 0, 0));
         Image image = new Image(FilePath.MENU_BUTTON_IMAGE_PATH, getWidth(), getHeight(), false, true, true);
-        BackgroundImage cardBackImage = new BackgroundImage(
+        BackgroundImage menuBackground = new BackgroundImage(
                 image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                new BackgroundSize(getWidth(), getHeight(), false, false, true, true));
-        setBackground(new Background(cardBackImage));
+                new BackgroundSize(getWidth(), getHeight(), true, true, true, false));
+        setBackground(new Background(menuBackground));
     }
 
 }

@@ -1,8 +1,6 @@
 .menu-button {
-    /*-fx-background-color: white;*/
-    -fx-background-radius: 30;
-    -fx-border-radius: 30;
-    -fx-min-width: 200;
+    -fx-pref-width: 400;
+    -fx-pref-height: 67;
     -fx-padding: 10;
 
     -fx-font-family: "Arial Black";
@@ -11,11 +9,11 @@
 }
 
 .menu-button:hover {
-    /*-fx-background-color: #f3f3f3;*/
+    /*-fx-fill: hsb(0, 0%, -0.05%);*/
 }
 
 .menu-button:pressed {
-    /*-fx-background-color: #d8d8d8;*/
+
 }
 
 

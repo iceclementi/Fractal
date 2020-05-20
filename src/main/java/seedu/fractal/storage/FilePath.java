@@ -15,6 +15,7 @@ public class FilePath {
 
     /* Path to Button Images */
     public static final String MENU_BUTTON_IMAGE_PATH = "/images/buttons/menu_button.png";
+    public static final String NEW_GAME_BUTTON_IMAGE_PATH = "/images/buttons/new_game_button.png";
 
     /* Path to Card Images */
     public static final String CARD_BACK_IMAGE_PATH = "/images/cards/card_back.png";
