@@ -2,7 +2,6 @@ package seedu.fractal.component.game;
 
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
@@ -19,30 +18,35 @@ import seedu.fractal.storage.FilePath;
 
 public class CardButton extends Button {
 
-    private static int selectedCardCount = 0;
-    private static CardButton[] selectedCards = new CardButton[2];
-
     private static Background cardBack = null;
     private Background cardFace;
 
-    private int id;
+    private int buttonId;
     private Card card;
 
-    public CardButton(int id, Card card) {
+    public CardButton(int buttonId, Card card) {
         super();
-        this.id = id;
+        this.buttonId = buttonId;
         this.card = card;
 
         initialiseStyle();
         initialiseEvents();
     }
 
-    public static CardButton[] getSelectedCards() {
-        return selectedCards;
-    }
-
     public Card getCard() {
         return card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
+    public int getButtonId() {
+        return buttonId;
+    }
+
+    public void setButtonId(int buttonId) {
+        this.buttonId = buttonId;
     }
 
     /**

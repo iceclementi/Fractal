@@ -16,6 +16,7 @@ import seedu.fractal.logic.Card;
 import seedu.fractal.logic.CardGenerator;
 import seedu.fractal.logic.Difficulty;
 import seedu.fractal.storage.FilePath;
+import seedu.fractal.storage.Storage;
 import seedu.fractal.util.SceneUtil;
 
 import java.net.URL;
@@ -56,6 +57,7 @@ public class GameController implements Initializable {
         CancelButton cancelButton = new CancelButton();
         allCards = generateCards();
         GameBoard.getInstance().initialise(allCards, matchButton, cancelButton, matchCounter);
+        Storage.saveGame();
 
         arrangeCards();
 

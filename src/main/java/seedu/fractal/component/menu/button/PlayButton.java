@@ -3,6 +3,7 @@ package seedu.fractal.component.menu.button;
 import javafx.scene.control.Spinner;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.component.menu.DifficultySlider;
 import seedu.fractal.controller.GameController;
 import seedu.fractal.storage.FilePath;
@@ -38,7 +39,8 @@ public class PlayButton extends MenuButton {
         GameController.setDifficulty(difficultySlider.getDifficulty());
         GameController.setNumberOfMatches(spinner.getValue());
 
-        Storage.saveGame(difficultySlider.getDifficulty(), spinner.getValue());
+        GameBoard.getInstance().setDetails(difficultySlider.getDifficulty(), spinner.getValue());
+        Storage.saveGameDetails();
 
         SceneUtil.changeScene(this, FilePath.GAME_SCENE_PATH);
     }

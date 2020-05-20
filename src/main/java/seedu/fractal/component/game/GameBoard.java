@@ -1,20 +1,20 @@
 package seedu.fractal.component.game;
 
-import javafx.scene.Cursor;
 import javafx.scene.control.Label;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.paint.Color;
+import seedu.fractal.logic.Difficulty;
+import seedu.fractal.storage.Storage;
 
 import java.util.ArrayList;
 
 public class GameBoard {
 
+    private Difficulty difficulty;
+    private int numberOfMatches;
     private int selectedCardCount = 0;
     private CardButton[] selectedCards = new CardButton[2];
+    private int matchCount = 0;
 
-    private ArrayList<CardButton> cards = new ArrayList<>();
+    private ArrayList<CardButton> cardButtons = new ArrayList<>();
     private MatchButton matchButton;
     private CancelButton cancelButton;
     private Label matchCounter;
@@ -32,12 +32,49 @@ public class GameBoard {
         return gameBoard;
     }
 
-    public void initialise(ArrayList<CardButton> cards, MatchButton matchButton,
+    public void initialise(ArrayList<CardButton> cardButtons, MatchButton matchButton,
                CancelButton cancelButton, Label matchCounter) {
-        this.cards = cards;
+        this.cardButtons = cardButtons;
         this.matchButton = matchButton;
         this.cancelButton = cancelButton;
         this.matchCounter = matchCounter;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public int getNumberOfMatches() {
+        return numberOfMatches;
+    }
+
+    public void setDetails(Difficulty difficulty, int numberOfMatches) {
+        this.difficulty = difficulty;
+        this.numberOfMatches = numberOfMatches;
+    }
+
+    public int getSelectedCardCount() {
+        return selectedCardCount;
+    }
+
+    public void setSelectedCardCount(int selectedCardCount) {
+        this.selectedCardCount = selectedCardCount;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public void setMatchCount(int matchCount) {
+        this.matchCount = matchCount;
+    }
+
+    public ArrayList<CardButton> getCardButtons() {
+        return cardButtons;
+    }
+
+    public void setCardButtons(ArrayList<CardButton> cardButtons) {
+        this.cardButtons = cardButtons;
     }
 
     /**
@@ -51,6 +88,8 @@ public class GameBoard {
         selectedCardCount = 0;
         matchButton.reset();
         cancelButton.reset();
+
+        Storage.saveGame();
     }
 
     /**
@@ -64,6 +103,8 @@ public class GameBoard {
         selectedCardCount = 0;
         matchButton.reset();
         cancelButton.reset();
+
+        Storage.saveGame();
     }
 
     public void selectCard(CardButton card) {
@@ -73,9 +114,10 @@ public class GameBoard {
             matchButton.activate();
             cancelButton.activate();
 
-            int currentCount = Integer.parseInt(matchCounter.getText());
-            matchCounter.setText(String.valueOf(currentCount+1));
+            matchCounter.setText(String.valueOf(++matchCount));
         }
+
+        Storage.saveGame();
     }
 
     public boolean canSelect() {

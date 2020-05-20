@@ -1,14 +1,18 @@
 package seedu.fractal.storage;
 
+import seedu.fractal.component.game.CardButton;
+import seedu.fractal.component.game.GameBoard;
+import seedu.fractal.logic.Card;
 import seedu.fractal.logic.Difficulty;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
+import java.util.ArrayList;
 
 public class Storage {
 
     private final static String DIVIDER = " ||| ";
+    private final static GameBoard gameBoard = GameBoard.getInstance();
 
     /*
     private static int difficulty;
@@ -24,16 +28,12 @@ public class Storage {
     }
      */
 
-    public static void saveGame(Difficulty difficulty, int numberOfMatches) {
-        saveGameDetails(difficulty, numberOfMatches);
+    public static void saveGameDetails() {
+        saveToFile(FilePath.GAME_DETAILS_STORAGE_PATH, generateGameDetailsContent());
+    }
 
-        // Save cards
-        // card name, value and image location
-        // selected, matched status
-        //
-
-        // Save match count
-
+    public static void saveGame() {
+        saveToFile(FilePath.GAME_STORAGE_PATH, generateGameCardsContent());
         // Save time?
     }
 
@@ -41,12 +41,12 @@ public class Storage {
 
     }
 
-    private static void saveGameDetails(Difficulty difficulty, int numberOfMatches) {
+    private static void saveToFile(String filePath, String content) {
         try {
-            File saveFile = new File(FilePath.GAME_DETAILS_STORAGE_PATH);
+            File saveFile = new File(filePath);
             saveFile.getParentFile().mkdirs();
             FileWriter fileWriter = new FileWriter(saveFile);
-            fileWriter.write(generateGameDetailsContent(difficulty, numberOfMatches));
+            fileWriter.write(content);
             fileWriter.flush();
             fileWriter.close();
         } catch (Exception e) {
@@ -54,13 +54,27 @@ public class Storage {
         }
     }
 
-    private static String generateGameDetailsContent(Difficulty difficulty, int numberOfMatches) {
-        return String.format("%s%s%s", difficulty.name(), DIVIDER, String.valueOf(numberOfMatches));
+    private static String generateGameDetailsContent() {
+        Difficulty difficulty = gameBoard.getDifficulty();
+        int numberOfMatches = gameBoard.getNumberOfMatches();
+        return String.format("%s%s%s\n", difficulty.name(), DIVIDER, numberOfMatches);
     }
 
-    private static void saveGameCards() {
+    private static String generateGameCardsContent() {
+        StringBuilder gameCardsContent = new StringBuilder();
 
+        ArrayList<CardButton> cardButtons = gameBoard.getCardButtons();
+        for (CardButton cardButton : cardButtons) {
+            Card card = cardButton.getCard();
+            gameCardsContent.append(String.format("%s%s%s%s%s%s%s%s%s\n",
+                    cardButton.getButtonId(), DIVIDER, card.getName(), DIVIDER,
+                    card.getValue(), DIVIDER, card.getImagePath(), DIVIDER, card.getStatus()));
+        }
+
+        gameCardsContent.append(String.format("%s%s%s\n",
+                gameBoard.getSelectedCardCount(), DIVIDER, gameBoard.getMatchCount()));
+
+        return gameCardsContent.toString();
     }
-
 
 }
