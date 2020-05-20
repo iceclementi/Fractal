@@ -2,6 +2,7 @@ package seedu.fractal.component.menu;
 
 import javafx.scene.control.Slider;
 import javafx.util.StringConverter;
+import seedu.fractal.logic.Difficulty;
 import seedu.fractal.storage.FilePath;
 
 public class DifficultySlider extends Slider {
@@ -13,12 +14,40 @@ public class DifficultySlider extends Slider {
         initialiseEvents();
     }
 
+    public Difficulty getDifficulty() {
+        switch ((int) getValue()) {
+        case 0:
+            return Difficulty.EASY;
+        case 1:
+            return Difficulty.INTERMEDIATE;
+        case 2:
+            return Difficulty.ADVANCED;
+        case 3:
+            return Difficulty.GENIUS;
+        default:
+            return Difficulty.EASY;
+        }
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        switch (difficulty) {
+        case EASY:
+            setValue(0);
+        case INTERMEDIATE:
+            setValue(1);
+        case ADVANCED:
+            setValue(2);
+        case GENIUS:
+            setValue(3);
+        default:
+            setValue(0);
+        }
+    }
 
     private void initialiseStyle() {
         /* Set CSS */
         getStylesheets().add(getClass().getResource(FilePath.MENU_STYLE_PATH).toExternalForm());
         getStyleClass().add("difficulty-slider");
-
 
         /* Set range */
         setMin(0);
@@ -65,7 +94,6 @@ public class DifficultySlider extends Slider {
 
         setPrefWidth(800);
     }
-
 
     private void initialiseEvents() {
 

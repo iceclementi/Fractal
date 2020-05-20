@@ -13,6 +13,7 @@ import seedu.fractal.component.game.CardButton;
 import seedu.fractal.component.game.MatchButton;
 import seedu.fractal.logic.Card;
 import seedu.fractal.logic.CardGenerator;
+import seedu.fractal.logic.Difficulty;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.SceneUtil;
 
@@ -38,7 +39,7 @@ public class GameController implements Initializable {
 
 
     /* To be changed to appropriate file retrieval process */
-    private static int difficulty;
+    private static Difficulty difficulty;
     private static int numberOfMatches;
 
     /* Template for card arrangement */
@@ -87,7 +88,7 @@ public class GameController implements Initializable {
 
 
     /* To be changed to appropriate file retrieval process */
-    public static void setDifficulty(int difficulty) {
+    public static void setDifficulty(Difficulty difficulty) {
         GameController.difficulty = difficulty;
     }
 

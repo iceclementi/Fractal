@@ -28,4 +28,7 @@ public class FilePath {
     /* Path to Miscellaneous Images */
     public static final String BACKGROUND_IMAGE_PATH = "/images/misc/background.png";
 
+    /* Path to Storage */
+    public static final String GAME_DETAILS_STORAGE_PATH = "data\\game\\details.log";
+    public static final String GAME_STORAGE_PATH = "data\\game\\game.log";
 }

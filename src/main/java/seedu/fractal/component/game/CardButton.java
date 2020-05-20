@@ -18,15 +18,15 @@ public class CardButton extends Button {
     private static int selectedCardCount = 0;
     private static CardButton[] selectedCards = new CardButton[2];
 
-    private Card card;
-    private static MatchButton matchButton;
-    private static CancelButton cancelButton;
-    private Label matchCounter;
-
     private boolean isSelected = false;
     private boolean isMatched = false;
     private static Background cardBack;
     private Background cardFace;
+
+    private Card card;
+    private static MatchButton matchButton;
+    private static CancelButton cancelButton;
+    private Label matchCounter;
 
     public CardButton(Card card, MatchButton matchButton, CancelButton cancelButton, Label matchCounter) {
         super();
