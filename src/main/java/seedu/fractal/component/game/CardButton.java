@@ -2,16 +2,13 @@ package seedu.fractal.component.game;
 
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import seedu.fractal.logic.Card;
 import seedu.fractal.storage.FilePath;
@@ -24,19 +21,22 @@ public class CardButton extends Button {
     private Card card;
     private static MatchButton matchButton;
     private static CancelButton cancelButton;
+    private Label matchCounter;
 
     private boolean isSelected = false;
     private boolean isMatched = false;
     private static Background cardBack;
     private Background cardFace;
 
-    public CardButton(Card card, MatchButton matchButton, CancelButton cancelButton) {
+    public CardButton(Card card, MatchButton matchButton, CancelButton cancelButton, Label matchCounter) {
         super();
         this.card = card;
         CardButton.matchButton = matchButton;
         CardButton.cancelButton = cancelButton;
+        this.matchCounter = matchCounter;
+
         cardBack = generateCardBack();
-        this.cardFace = generateCardFace();
+        cardFace = generateCardFace();
 
         initialiseStyle();
         initialiseEvents();
@@ -71,7 +71,8 @@ public class CardButton extends Button {
      */
     public static void match() {
         for (CardButton card : selectedCards) {
-            card.setEffect(new ColorAdjust(0, -0.5, -0.1, 0));
+            card.setEffect(new ColorAdjust(0, -0.5, 0, 0));
+            card.setOpacity(0.5);
             card.isMatched = true;
         }
 
@@ -92,13 +93,14 @@ public class CardButton extends Button {
         Image image = new Image(card.getImagePath(), getWidth(), getHeight(), true, false, true);
         BackgroundImage cardFaceImage = new BackgroundImage(
                 image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                new BackgroundSize(getWidth(), getHeight(), true, true, true, true));
+                new BackgroundSize(getWidth(), getHeight(), true, true, true, false));
         return new Background(cardFaceImage);
     }
 
     private void initialiseStyle() {
         /* Set dimensions */
-        setMinSize(120, 160);
+        setPrefHeight(160);
+        setPrefWidth(120);
 
         /* Set card back image */
         setBackground(cardBack);
@@ -110,7 +112,7 @@ public class CardButton extends Button {
     private void initialiseEvents() {
         setOnMouseEntered(this::onHover);
         setOnMouseExited(this::onUnhover);
-        setOnMouseClicked(this::onClick);
+        setOnMouseReleased(this::onClick);
     }
 
     private void onHover(MouseEvent mouseEvent) {
@@ -137,6 +139,9 @@ public class CardButton extends Button {
             if (selectedCardCount == 2) {
                 matchButton.activate();
                 cancelButton.activate();
+
+                int currentCount = Integer.parseInt(matchCounter.getText());
+                matchCounter.setText(String.valueOf(currentCount+1));
             }
         }
     }

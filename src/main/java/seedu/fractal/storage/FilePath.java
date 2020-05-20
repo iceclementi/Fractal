@@ -13,6 +13,9 @@ public class FilePath {
     public static final String MENU_STYLE_PATH = "/styles/menuStyle.css";
     public static final String GAME_STYLE_PATH = "/styles/gameStyle.css";
 
+    /* Path to Button Images */
+    public static final String MENU_BUTTON_IMAGE_PATH = "/images/buttons/menu_button.png";
+
     /* Path to Card Images */
     public static final String CARD_BACK_IMAGE_PATH = "/images/cards/card_back.png";
     public static final String CARD_EASY_PATH = "/images/cards/easy";

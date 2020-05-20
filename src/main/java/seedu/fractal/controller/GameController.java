@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -30,6 +31,9 @@ public class GameController implements Initializable {
     @FXML
     private HBox selectionBox;
 
+    @FXML
+    private Label matchCounter;
+
     private ArrayList<HBox> cardRows = new ArrayList<>();
 
 
@@ -37,17 +41,23 @@ public class GameController implements Initializable {
     private static int difficulty;
     private static int numberOfMatches;
 
+    /* Template for card arrangement */
     private final int[] rows = {0, 2, 2, 2, 2, 2, 3, 3, 4, 3, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 5};
     private final int[] columns = {0, 1, 2, 3, 4, 5, 4, 5, 4, 6, 5, 6, 6, 7, 7, 6, 8, 8, 8, 8, 8};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         gamePane.setBackground(SceneUtil.generateBackground(FilePath.BACKGROUND_IMAGE_PATH));
-        // Get dimensions from some storage to be implemented in future
 
         MatchButton matchButton = new MatchButton();
         CancelButton cancelButton = new CancelButton();
 
+        arrangeCards(matchButton, cancelButton);
+
+        selectionBox.getChildren().addAll(matchButton, cancelButton);
+    }
+
+    private void arrangeCards(MatchButton matchButton, CancelButton cancelButton) {
         int numberOfRows = rows[numberOfMatches];
         int numberOfColumns = columns[numberOfMatches];
 
@@ -67,13 +77,12 @@ public class GameController implements Initializable {
                 if (i*numberOfColumns + j >= numberOfMatches*2) {
                     break;
                 }
-                CardButton cardButton = new CardButton(cards.get(i*numberOfColumns + j), matchButton, cancelButton);
+                CardButton cardButton = new CardButton(cards.get(i*numberOfColumns + j),
+                        matchButton, cancelButton, matchCounter);
                 cardRows.get(i).getChildren().add(cardButton);
             }
             cardBox.getChildren().add(cardRows.get(i));
         }
-
-        selectionBox.getChildren().addAll(matchButton, cancelButton);
     }
 
 
