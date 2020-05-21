@@ -2,7 +2,6 @@ package seedu.fractal.component.menu.button;
 
 import javafx.scene.control.Spinner;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.component.menu.DifficultySlider;
 import seedu.fractal.storage.FilePath;

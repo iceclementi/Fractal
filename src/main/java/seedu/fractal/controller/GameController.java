@@ -8,10 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import seedu.fractal.component.game.CancelButton;
-import seedu.fractal.component.game.CardButton;
-import seedu.fractal.component.game.GameBoard;
-import seedu.fractal.component.game.MatchButton;
+import seedu.fractal.component.game.*;
 import seedu.fractal.logic.Card;
 import seedu.fractal.logic.CardGenerator;
 import seedu.fractal.storage.FilePath;
@@ -28,6 +25,9 @@ public class GameController implements Initializable {
     private GridPane gamePane;
 
     @FXML
+    private HBox controlBox;
+
+    @FXML
     private VBox cardBox;
 
     @FXML
@@ -41,8 +41,8 @@ public class GameController implements Initializable {
     private ArrayList<CardButton> allCards;
 
     /* Template for card arrangement */
-    private final int[] rows = {0, 2, 2, 2, 2, 2, 3, 3, 4, 3, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 5};
-    private final int[] columns = {0, 1, 2, 3, 4, 5, 4, 5, 4, 6, 5, 6, 6, 7, 7, 6, 8, 8, 8, 8, 8};
+    private final int[] ROWS = {0, 2, 2, 2, 2, 2, 3, 3, 4, 3, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 5};
+    private final int[] COLUMNS = {0, 1, 2, 3, 4, 5, 4, 5, 4, 6, 5, 6, 6, 7, 7, 6, 8, 8, 8, 8, 8};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,6 +50,7 @@ public class GameController implements Initializable {
 
         Storage.loadGameDetails();
 
+        BackButton backButton = new BackButton();
         MatchButton matchButton = new MatchButton();
         CancelButton cancelButton = new CancelButton();
         allCards = generateCards();
@@ -57,14 +58,15 @@ public class GameController implements Initializable {
 
         arrangeCards();
 
+        controlBox.getChildren().addAll(backButton);
         selectionBox.getChildren().addAll(matchButton, cancelButton);
 
         Storage.saveGame();
     }
 
     private void arrangeCards() {
-        int numberOfRows = rows[gameBoard.getNumberOfMatches()];
-        int numberOfColumns = columns[gameBoard.getNumberOfMatches()];
+        int numberOfRows = ROWS[gameBoard.getNumberOfMatches()];
+        int numberOfColumns = COLUMNS[gameBoard.getNumberOfMatches()];
 
         for (int i = 0; i < numberOfRows; ++i) {
             HBox newRow = new HBox();
