@@ -5,15 +5,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.component.menu.DifficultySlider;
-import seedu.fractal.controller.GameController;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.storage.Storage;
+import seedu.fractal.util.ComponentUtil;
 import seedu.fractal.util.SceneUtil;
 
 public class PlayButton extends MenuButton {
 
-    private GridPane menuPane;
-    private GridPane popupPane;
     private DifficultySlider difficultySlider;
     private Spinner<Integer> spinner;
 
@@ -27,7 +25,7 @@ public class PlayButton extends MenuButton {
     }
 
     private void initialiseStyle() {
-        setButtonBackground(FilePath.PLAY_BUTTON_IMAGE_PATH);
+        ComponentUtil.setBackground(this, FilePath.PLAY_BUTTON_IMAGE_PATH);
     }
 
     private void initialiseEvents() {

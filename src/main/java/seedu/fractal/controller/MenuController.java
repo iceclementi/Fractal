@@ -4,9 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import seedu.fractal.component.menu.button.*;
-import seedu.fractal.component.menu.newGamePopupBoxFiller;
+import seedu.fractal.component.menu.NewGamePopupBoxFiller;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.SceneUtil;
 
@@ -22,9 +23,9 @@ public class MenuController implements Initializable {
 
     @FXML
     private GridPane popupPane;
-    @FXML
-    private VBox popupBox;
 
+    @FXML
+    private HBox closeNewGameBox;
     @FXML
     private VBox difficultyBox;
     @FXML
@@ -47,12 +48,13 @@ public class MenuController implements Initializable {
 
         // Do NOT display pop up on start up
         popupPane.setVisible(false);
-        fillPopupBoxes();
 
         MenuButton newGameButton = new NewGameButton(menuPane, popupPane);
         MenuButton continueButton = new ContinueButton();
         MenuButton helpButton = new HelpButton();
         MenuButton aboutButton = new AboutButton();
+
+        fillPopupBoxes();
 
         continueButton.setDisable(true);
         helpButton.setDisable(true);
@@ -62,8 +64,9 @@ public class MenuController implements Initializable {
     }
 
     private void fillPopupBoxes() {
-        new newGamePopupBoxFiller(difficultyBox, difficultyHeader, matchCountBox, matchCountHeader,
-                advancedOptionsBox, advancedOptionsHeader, playBox).fillNewGamePopup();
+        new NewGamePopupBoxFiller(menuPane, popupPane,
+                closeNewGameBox, difficultyBox, difficultyHeader, matchCountBox, matchCountHeader,
+                advancedOptionsBox, advancedOptionsHeader, playBox).fillPopup();
     }
 
 

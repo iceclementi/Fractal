@@ -2,6 +2,7 @@ package seedu.fractal.component.menu.button;
 
 import javafx.scene.input.MouseEvent;
 import seedu.fractal.storage.FilePath;
+import seedu.fractal.util.ComponentUtil;
 import seedu.fractal.util.SceneUtil;
 
 public class ContinueButton extends MenuButton {
@@ -14,7 +15,7 @@ public class ContinueButton extends MenuButton {
     }
 
     private void initialiseStyle() {
-        setButtonBackground(FilePath.CONTINUE_BUTTON_IMAGE_PATH);
+        ComponentUtil.setBackground(this, FilePath.CONTINUE_BUTTON_IMAGE_PATH);
     }
 
     private void initialiseEvents() {

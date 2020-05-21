@@ -1,6 +1,7 @@
 package seedu.fractal.component.menu.button;
 
 import seedu.fractal.storage.FilePath;
+import seedu.fractal.util.ComponentUtil;
 
 public class HelpButton extends MenuButton {
 
@@ -11,7 +12,7 @@ public class HelpButton extends MenuButton {
     }
 
     private void initialiseStyle() {
-        setButtonBackground(FilePath.HELP_BUTTON_IMAGE_PATH);
+        ComponentUtil.setBackground(this, FilePath.HELP_BUTTON_IMAGE_PATH);
     }
 
 }

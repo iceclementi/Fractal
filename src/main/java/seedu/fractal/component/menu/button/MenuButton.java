@@ -1,10 +1,7 @@
 package seedu.fractal.component.menu.button;
 
 import javafx.scene.control.Button;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.ColorAdjust;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.InnerShadow;
+import javafx.scene.effect.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -49,15 +46,4 @@ public class MenuButton extends Button {
     protected void reset() {
         setEffect(null);
     }
-
-    protected void setButtonBackground(String imagePath) {
-        Image image = new Image(imagePath, getWidth(), getHeight(), false, true, true);
-        BackgroundImage background = new BackgroundImage(
-                image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                new BackgroundSize(getWidth(), getHeight(), true, true, true, false));
-        setBackground(new Background(background));
-    }
-
-
-
 }

@@ -5,7 +5,10 @@ import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.logic.Card;
 import seedu.fractal.logic.Difficulty;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;

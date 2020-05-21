@@ -2,12 +2,15 @@ package seedu.fractal.component.menu;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import seedu.fractal.component.menu.button.PlayButton;
 import seedu.fractal.storage.FilePath;
 
-public class newGamePopupBoxFiller {
+public class NewGamePopupBoxFiller extends PopupBoxFiller  {
 
+    private HBox closeNewGameBox;
     private VBox difficultyBox;
     private Label difficultyHeader;
     private VBox matchCountBox;
@@ -19,8 +22,11 @@ public class newGamePopupBoxFiller {
     private DifficultySlider difficultySlider;
     private Spinner<Integer> spinner;
 
-    public newGamePopupBoxFiller(VBox difficultyBox, Label difficultyHeader, VBox matchCountBox,
+    public NewGamePopupBoxFiller(GridPane menuPane, GridPane newGamePopupPane,
+             HBox closeNewGameBox, VBox difficultyBox, Label difficultyHeader, VBox matchCountBox,
              Label matchCountHeader, VBox advancedOptionsBox, Label advancedOptionsHeader, VBox playBox) {
+        super(menuPane, newGamePopupPane);
+        this.closeNewGameBox = closeNewGameBox;
         this.difficultyBox = difficultyBox;
         this.difficultyHeader = difficultyHeader;
         this.matchCountBox = matchCountBox;
@@ -30,11 +36,16 @@ public class newGamePopupBoxFiller {
         this.playBox = playBox;
     }
 
-    public void fillNewGamePopup() {
+    public void fillPopup() {
+        fillCloseSection();
         fillDifficultySection();
         fillMatchCountSection();
         fillAdvancedOptionsSection();
         fillPlaySection();
+    }
+
+    private void fillCloseSection() {
+        closeNewGameBox.getChildren().add(generateCloseButton());
     }
 
     private void fillDifficultySection() {

@@ -4,6 +4,7 @@ import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import seedu.fractal.storage.FilePath;
+import seedu.fractal.util.ComponentUtil;
 
 public class NewGameButton extends MenuButton {
 
@@ -20,7 +21,7 @@ public class NewGameButton extends MenuButton {
     }
 
     private void initialiseStyle() {
-        setButtonBackground(FilePath.NEW_GAME_BUTTON_IMAGE_PATH);
+        ComponentUtil.setBackground(this, FilePath.NEW_GAME_BUTTON_IMAGE_PATH);
     }
 
     private void initialiseEvents() {

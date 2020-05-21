@@ -14,7 +14,6 @@ import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.component.game.MatchButton;
 import seedu.fractal.logic.Card;
 import seedu.fractal.logic.CardGenerator;
-import seedu.fractal.logic.Difficulty;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.storage.Storage;
 import seedu.fractal.util.SceneUtil;
