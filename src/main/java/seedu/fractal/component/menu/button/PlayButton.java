@@ -35,12 +35,8 @@ public class PlayButton extends MenuButton {
     }
 
     private void onRelease(MouseEvent mouseEvent) {
-        /* To be changed to appropriate file retrieval process */
-        GameController.setDifficulty(difficultySlider.getDifficulty());
-        GameController.setNumberOfMatches(spinner.getValue());
-
         GameBoard.getInstance().setDetails(difficultySlider.getDifficulty(), spinner.getValue());
-        Storage.saveGameDetails();
+        Storage.saveGameDetails(difficultySlider.getDifficulty(), spinner.getValue());
 
         SceneUtil.changeScene(this, FilePath.GAME_SCENE_PATH);
     }

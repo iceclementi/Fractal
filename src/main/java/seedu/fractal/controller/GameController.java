@@ -37,13 +37,9 @@ public class GameController implements Initializable {
     @FXML
     private Label matchCounter;
 
+    private GameBoard gameBoard = GameBoard.getInstance();
     private ArrayList<HBox> cardRows = new ArrayList<>();
     private ArrayList<CardButton> allCards;
-
-
-    /* To be changed to appropriate file retrieval process */
-    private static Difficulty difficulty;
-    private static int numberOfMatches;
 
     /* Template for card arrangement */
     private final int[] rows = {0, 2, 2, 2, 2, 2, 3, 3, 4, 3, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 5};
@@ -53,20 +49,23 @@ public class GameController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         gamePane.setBackground(SceneUtil.generateBackground(FilePath.BACKGROUND_IMAGE_PATH));
 
+        Storage.loadGameDetails();
+
         MatchButton matchButton = new MatchButton();
         CancelButton cancelButton = new CancelButton();
         allCards = generateCards();
-        GameBoard.getInstance().initialise(allCards, matchButton, cancelButton, matchCounter);
-        Storage.saveGame();
+        gameBoard.initialise(allCards, matchButton, cancelButton, matchCounter);
 
         arrangeCards();
 
         selectionBox.getChildren().addAll(matchButton, cancelButton);
+
+        Storage.saveGame();
     }
 
     private void arrangeCards() {
-        int numberOfRows = rows[numberOfMatches];
-        int numberOfColumns = columns[numberOfMatches];
+        int numberOfRows = rows[gameBoard.getNumberOfMatches()];
+        int numberOfColumns = columns[gameBoard.getNumberOfMatches()];
 
         for (int i = 0; i < numberOfRows; ++i) {
             HBox newRow = new HBox();
@@ -79,7 +78,7 @@ public class GameController implements Initializable {
 
         for (int i = 0; i < numberOfRows; ++i) {
             for (int j = 0; j < numberOfColumns; ++j) {
-                if (i*numberOfColumns + j >= numberOfMatches*2) {
+                if (i*numberOfColumns + j >= gameBoard.getNumberOfMatches()*2) {
                     break;
                 }
                 cardRows.get(i).getChildren().add(allCards.get(i*numberOfColumns + j));
@@ -89,7 +88,7 @@ public class GameController implements Initializable {
     }
 
     private ArrayList<CardButton> generateCards() {
-        ArrayList<Card> cards = new CardGenerator(numberOfMatches).generateCards();
+        ArrayList<Card> cards = new CardGenerator(gameBoard.getNumberOfMatches()).generateCards();
 
         ArrayList<CardButton> cardButtons = new ArrayList<>();
         for (int i = 0; i < cards.size(); ++i) {
@@ -97,15 +96,5 @@ public class GameController implements Initializable {
         }
 
         return cardButtons;
-    }
-
-
-    /* To be changed to appropriate file retrieval process */
-    public static void setDifficulty(Difficulty difficulty) {
-        GameController.difficulty = difficulty;
-    }
-
-    public static void setNumberOfMatches(int numberOfMatches) {
-        GameController.numberOfMatches = numberOfMatches;
     }
 }
