@@ -23,8 +23,8 @@ public class NewGamePopupFiller extends PopupFiller {
     private Spinner<Integer> spinner;
 
     public NewGamePopupFiller(GridPane menuPane, GridPane newGamePopupPane,
-                              HBox closeNewGameBox, VBox difficultySliderBox, Label difficultyHeader, VBox spinnerBox,
-                              Label matchCountHeader, VBox advancedOptionsBox, Label advancedOptionsHeader, VBox playBox) {
+          HBox closeNewGameBox, VBox difficultySliderBox, Label difficultyHeader, VBox spinnerBox,
+          Label matchCountHeader, VBox advancedOptionsBox, Label advancedOptionsHeader, VBox playBox) {
         super(menuPane, newGamePopupPane);
         this.closeNewGameBox = closeNewGameBox;
         this.difficultySliderBox = difficultySliderBox;

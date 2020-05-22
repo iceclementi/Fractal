@@ -2,18 +2,18 @@ package seedu.fractal.component.menu.button;
 
 import javafx.scene.control.Button;
 import javafx.scene.effect.BlurType;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import seedu.fractal.storage.FilePath;
+import seedu.fractal.util.ComponentUtil;
 
-public class MenuButton extends Button {
+public class LogoButton extends Button {
 
     /**
-     * Constructor for a custom menu button.
+     * Constructor for the logo "button".
      */
-    public MenuButton() {
+    public LogoButton() {
         super();
 
         initialiseStyle();
@@ -21,14 +21,17 @@ public class MenuButton extends Button {
     }
 
     private void initialiseStyle() {
-        getStylesheets().add(getClass().getResource(FilePath.MENU_STYLE_PATH).toExternalForm());
-        getStyleClass().add("menu-button");
+        ComponentUtil.setButtonBackground(this, FilePath.LOGO_IMAGE_PATH);
+
+        setPrefWidth(600);
+        setPrefHeight(200);
+
+        prefWidthProperty().bind(heightProperty().multiply(3));
     }
 
     private void initialiseEvents() {
         setOnMouseEntered(this::onHover);
         setOnMouseExited(this::onUnhover);
-        setOnMousePressed(this::onClick);
     }
 
     private void onHover(MouseEvent mouseEvent) {
@@ -36,14 +39,6 @@ public class MenuButton extends Button {
     }
 
     private void onUnhover(MouseEvent mouseEvent) {
-        reset();
-    }
-
-    private void onClick(MouseEvent mouseEvent) {
-        setEffect(new ColorAdjust(0, 0, -0.05, 0));
-    }
-
-    protected void reset() {
         setEffect(null);
     }
 }

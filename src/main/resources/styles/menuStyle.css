@@ -27,12 +27,11 @@
 .difficulty-slider .thumb {
     -fx-background-color: #cdcdcd;
     -fx-background-radius: 12;
-    -fx-border-color: #b4b4b4;
-    -fx-border-width: 2;
     -fx-border-radius: 10;
-    -fx-pref-width: 30;
+    -fx-pref-width: 25;
     -fx-pref-height: 25;
     -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgb(68, 68, 68), 7, 0, 0, 3);
 }
 
 .difficulty-slider .track {

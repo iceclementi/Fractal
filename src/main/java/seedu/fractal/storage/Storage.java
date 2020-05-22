@@ -18,11 +18,11 @@ import java.util.stream.Collectors;
 
 public class Storage {
 
-    private final static String DIVIDER = " ||| ";
-    private final static String NEWLINE = "\n";
-    private final static String END = "--- END ---";
+    private static final String DIVIDER = " ||| ";
+    private static final String NEWLINE = "\n";
+    private static final String END = "--- END ---";
 
-    private final static GameBoard gameBoard = GameBoard.getInstance();
+    private static final GameBoard gameBoard = GameBoard.getInstance();
 
     public static void saveGameDetails(Difficulty difficulty, int numberOfMatches, boolean isOngoing) {
         saveToFile(FilePath.GAME_DETAILS_STORAGE_PATH,
@@ -203,7 +203,7 @@ public class Storage {
         }
 
         if (isCheckForEnd) {
-            if (!lines[lines.length-1].equals(END)) {
+            if (!lines[lines.length - 1].equals(END)) {
                 throw new Exception("Last line is not END line.");
             }
         }

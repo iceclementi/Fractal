@@ -14,6 +14,14 @@ public class PlayButton extends MenuButton {
     private DifficultySlider difficultySlider;
     private Spinner<Integer> spinner;
 
+    /**
+     * Constructor of the play button.
+     *
+     * @param difficultySlider
+     *  The difficulty slider on the new game popup
+     * @param spinner
+     *  The match count spinner on the new game popup
+     */
     public PlayButton(DifficultySlider difficultySlider, Spinner<Integer> spinner) {
         super();
         this.difficultySlider = difficultySlider;
@@ -24,7 +32,7 @@ public class PlayButton extends MenuButton {
     }
 
     private void initialiseStyle() {
-        ComponentUtil.setBackground(this, FilePath.PLAY_BUTTON_IMAGE_PATH);
+        ComponentUtil.setButtonBackground(this, FilePath.PLAY_BUTTON_IMAGE_PATH);
     }
 
     private void initialiseEvents() {

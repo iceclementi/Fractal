@@ -60,7 +60,7 @@ public class CardButton extends Button {
     }
 
     /**
-     * Select the card and flip face up
+     * Select the card and flip face up.
      */
     public void select() {
         setBackground(cardFace);

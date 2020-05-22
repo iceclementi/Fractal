@@ -27,7 +27,7 @@ public class CloseButton extends Button {
     private void initialiseStyle() {
         getStylesheets().add(getClass().getResource(FilePath.MENU_STYLE_PATH).toExternalForm());
         getStyleClass().add("close-button");
-        ComponentUtil.setBackground(this, FilePath.CLOSE_BUTTON_IMAGE_PATH);
+        ComponentUtil.setButtonBackground(this, FilePath.CLOSE_BUTTON_IMAGE_PATH);
 
         prefWidthProperty().bind(heightProperty());
     }

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.fractal.storage.FilePath;
@@ -21,7 +22,7 @@ public class Fractal extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("FRACTAL");
-        // stage.getIcons().add(new Image("images/venus_icon.png"));
+        stage.getIcons().add(new Image(FilePath.ICON_IMAGE_PATH));
         stage.setMinWidth(800);
         stage.setMinHeight(600);
 

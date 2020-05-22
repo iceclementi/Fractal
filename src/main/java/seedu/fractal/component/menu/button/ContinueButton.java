@@ -16,7 +16,7 @@ public class ContinueButton extends MenuButton {
     }
 
     private void initialiseStyle() {
-        ComponentUtil.setBackground(this, FilePath.CONTINUE_BUTTON_IMAGE_PATH);
+        ComponentUtil.setButtonBackground(this, FilePath.CONTINUE_BUTTON_IMAGE_PATH);
 
         if (!GameBoard.getInstance().isOngoing()) {
             setDisable(true);

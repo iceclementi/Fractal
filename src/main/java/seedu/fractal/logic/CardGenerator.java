@@ -55,7 +55,7 @@ public class CardGenerator {
     }
 
     private ArrayList<File> selectRandomDirectories() {
-        File[] cardDirectories= new File(FilePath.RESOURCE_PATH + FilePath.CARD_EASY_PATH).listFiles();
+        File[] cardDirectories = new File(FilePath.RESOURCE_PATH + FilePath.CARD_EASY_PATH).listFiles();
         assert cardDirectories != null : "No cards found.";
 
         ArrayList<File> selectedDirectories = new ArrayList<>();

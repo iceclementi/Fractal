@@ -6,30 +6,30 @@ import javafx.scene.layout.GridPane;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.ComponentUtil;
 
-public class NewGameButton extends MenuButton {
+public class ContributeButton extends MenuButton {
 
     private GridPane menuPane;
-    private GridPane newGamePopupPane;
+    private GridPane contributePopupPane;
 
     /**
-     * Constructor of the new game button.
+     * Constructor for the contribute button.
      *
      * @param menuPane
      *  The grid pane of the menu screen
-     * @param newGamePopupPane
-     *  The grid pane of the new game popup
+     * @param contributePopupPane
+     *  The grid pane of contribute popup
      */
-    public NewGameButton(GridPane menuPane, GridPane newGamePopupPane) {
+    public ContributeButton(GridPane menuPane, GridPane contributePopupPane) {
         super();
         this.menuPane = menuPane;
-        this.newGamePopupPane = newGamePopupPane;
+        this.contributePopupPane = contributePopupPane;
 
         initialiseStyle();
         initialiseEvents();
     }
 
     private void initialiseStyle() {
-        ComponentUtil.setButtonBackground(this, FilePath.NEW_GAME_BUTTON_IMAGE_PATH);
+        ComponentUtil.setButtonBackground(this, FilePath.CONTRIBUTE_BUTTON_IMAGE_PATH);
     }
 
     private void initialiseEvents() {
@@ -38,7 +38,7 @@ public class NewGameButton extends MenuButton {
 
     private void onRelease(MouseEvent mouseEvent) {
         reset();
-        newGamePopupPane.setVisible(true);
+        contributePopupPane.setVisible(true);
         menuPane.setEffect(new BoxBlur(5, 5, 3));
     }
 }

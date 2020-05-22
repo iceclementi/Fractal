@@ -9,6 +9,9 @@ import seedu.fractal.util.SceneUtil;
 
 public class BackButton extends MenuButton {
 
+    /**
+     * Constructor for the back button.
+     */
     public BackButton() {
 
         initialiseStyle();
@@ -21,7 +24,7 @@ public class BackButton extends MenuButton {
         getStylesheets().add(getClass().getResource(FilePath.GAME_STYLE_PATH).toExternalForm());
         getStyleClass().add("back-button");
 
-        ComponentUtil.setBackground(this, FilePath.BACK_BUTTON_IMAGE_PATH);
+        ComponentUtil.setButtonBackground(this, FilePath.BACK_BUTTON_IMAGE_PATH);
         prefWidthProperty().bind(heightProperty());
     }
 
@@ -34,5 +37,4 @@ public class BackButton extends MenuButton {
         Storage.saveGame();
         SceneUtil.changeScene(this, FilePath.MENU_SCENE_PATH);
     }
-
 }

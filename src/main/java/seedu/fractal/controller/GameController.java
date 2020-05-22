@@ -8,7 +8,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import seedu.fractal.component.game.*;
+import seedu.fractal.component.game.BackButton;
+import seedu.fractal.component.game.CancelButton;
+import seedu.fractal.component.game.CardButton;
+import seedu.fractal.component.game.GameBoard;
+import seedu.fractal.component.game.MatchButton;
 import seedu.fractal.logic.Card;
 import seedu.fractal.logic.CardGenerator;
 import seedu.fractal.storage.FilePath;
@@ -40,8 +44,8 @@ public class GameController implements Initializable {
     private ArrayList<HBox> cardRows = new ArrayList<>();
 
     /* Template for card arrangement */
-    private final int[] ROWS = {0, 2, 2, 2, 2, 2, 3, 3, 4, 3, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 5};
-    private final int[] COLUMNS = {0, 1, 2, 3, 4, 5, 4, 5, 4, 6, 5, 6, 6, 7, 7, 6, 8, 8, 8, 8, 8};
+    private static final int[] ROWS = {0, 2, 2, 2, 2, 2, 3, 3, 4, 3, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 5};
+    private static final int[] COLUMNS = {0, 1, 2, 3, 4, 5, 4, 5, 4, 6, 5, 6, 6, 7, 7, 6, 8, 8, 8, 8, 8};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -51,17 +55,19 @@ public class GameController implements Initializable {
         Storage.loadGame();
 
         BackButton backButton = new BackButton();
+        controlBox.getChildren().addAll(backButton);
+
         MatchButton matchButton = new MatchButton();
         CancelButton cancelButton = new CancelButton();
 
         if (!gameBoard.isOngoing()) {
             gameBoard.setCardButtons(generateCards());
         }
+
         gameBoard.initialise(matchButton, cancelButton, matchCounter);
 
         arrangeCards();
 
-        controlBox.getChildren().addAll(backButton);
         selectionBox.getChildren().addAll(matchButton, cancelButton);
 
         Storage.saveGame();
@@ -85,10 +91,10 @@ public class GameController implements Initializable {
 
         for (int i = 0; i < numberOfRows; ++i) {
             for (int j = 0; j < numberOfColumns; ++j) {
-                if (i*numberOfColumns + j >= numberOfCards) {
+                if (i * numberOfColumns + j >= numberOfCards) {
                     break;
                 }
-                cardRows.get(i).getChildren().add(cards.get(i*numberOfColumns + j));
+                cardRows.get(i).getChildren().add(cards.get(i * numberOfColumns + j));
             }
             cardBox.getChildren().add(cardRows.get(i));
         }

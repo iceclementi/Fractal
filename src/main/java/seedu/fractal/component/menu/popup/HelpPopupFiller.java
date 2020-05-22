@@ -7,17 +7,18 @@ import javafx.scene.text.TextFlow;
 
 public class HelpPopupFiller extends PopupFiller {
 
-    private final static String HELP_TEXT =
+    private static final String HELP_TEXT =
             "Frac/Tal is an interactive mathematics memory card game that exercises your "
             + "ability and speed to convert between fractions, decimals, percentages and ratios.";
-    private final static String GOAL_TEXT =
+    private static final String GOAL_TEXT =
             "The goal of this game is to match cards that have the same value.\n"
-            + "The game ends when all the cards have been correctly matched, or you ran out of lives.\n";
-    private final static String RULE_TEXT =
+            // + "The game ends when all the cards have been correctly matched, or you ran out of lives.\n";
+            + "The game ends when all the cards have been correctly matched.\n";
+    private static final String RULE_TEXT =
             "Only two cards may be selected at any one time. After that, you have to decide whether the two cards "
-            + "have the same value and match them, or to reset the cards.\n"
-            + "Every incorrect match will remove one life.\n\n"
-            + "HAVE FUN!! \uD83D\uDE09\n";
+            + "have the same value and match them, or to reset the cards.\n\n"
+            // + "Every incorrect match will remove one life.\n\n"
+            + "HAVE FUN!! " + new String(Character.toChars(0x1F609));
 
     private HBox closeHelpBox;
     private Label helpHeader;

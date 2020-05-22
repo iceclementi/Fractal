@@ -7,11 +7,16 @@ import seedu.fractal.storage.FilePath;
 
 public class DifficultySlider extends Slider {
 
+    /**
+     * Constructor for the difficulty slider.
+     */
     public DifficultySlider() {
         super();
 
         initialiseStyle();
         initialiseEvents();
+
+        setDisable(true);
     }
 
     public Difficulty getDifficulty() {
@@ -33,14 +38,19 @@ public class DifficultySlider extends Slider {
         switch (difficulty) {
         case EASY:
             setValue(0);
+            return;
         case INTERMEDIATE:
             setValue(1);
+            return;
         case ADVANCED:
             setValue(2);
+            return;
         case GENIUS:
             setValue(3);
+            return;
         default:
             setValue(0);
+            return;
         }
     }
 

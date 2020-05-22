@@ -7,7 +7,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
-import seedu.fractal.component.menu.button.*;
+import seedu.fractal.component.menu.button.ContinueButton;
+import seedu.fractal.component.menu.button.ContributeButton;
+import seedu.fractal.component.menu.button.HelpButton;
+import seedu.fractal.component.menu.button.LogoButton;
+import seedu.fractal.component.menu.button.MenuButton;
+import seedu.fractal.component.menu.button.NewGameButton;
+import seedu.fractal.component.menu.popup.ContributePopupFiller;
 import seedu.fractal.component.menu.popup.HelpPopupFiller;
 import seedu.fractal.component.menu.popup.NewGamePopupFiller;
 import seedu.fractal.storage.FilePath;
@@ -21,6 +27,8 @@ public class MenuController implements Initializable {
 
     @FXML
     private GridPane menuPane;
+    @FXML
+    private VBox logoBox;
     @FXML
     private VBox menuButtonBox;
 
@@ -65,21 +73,29 @@ public class MenuController implements Initializable {
     @FXML
     private TextFlow ruleText;
 
+    @FXML
+    private GridPane contributePopupPane;
+    @FXML
+    private HBox closeContributeBox;
+    @FXML
+    private Label contributeHeader;
+    @FXML
+    private TextFlow contributeText;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         /* Load game */
         Storage.loadGameDetails();
 
+        logoBox.getChildren().add(new LogoButton());
         menuPane.setBackground(SceneUtil.generateBackground(FilePath.BACKGROUND_IMAGE_PATH));
 
         MenuButton newGameButton = new NewGameButton(menuPane, newGamePopupPane);
         MenuButton continueButton = new ContinueButton();
         MenuButton helpButton = new HelpButton(menuPane, helpPopupPane);
-        MenuButton aboutButton = new AboutButton();
+        MenuButton aboutButton = new ContributeButton(menuPane, contributePopupPane);
 
         fillPopupBoxes();
-
-        aboutButton.setDisable(true);
 
         menuButtonBox.getChildren().addAll(newGameButton, continueButton, helpButton, aboutButton);
     }
@@ -90,6 +106,8 @@ public class MenuController implements Initializable {
                 advancedOptionsBox, advancedOptionsHeader, playBox).fillPopup();
         new HelpPopupFiller(menuPane, helpPopupPane, closeHelpBox, helpHeader, helpText, goalHeader, goalText,
                 ruleHeader, ruleText).fillPopup();
+        new ContributePopupFiller(menuPane, contributePopupPane, closeContributeBox,
+                contributeHeader, contributeText).fillPopup();
     }
 
 

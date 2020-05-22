@@ -11,6 +11,14 @@ public class HelpButton extends MenuButton {
     private GridPane menuPane;
     private GridPane helpPopupPane;
 
+    /**
+     * Constructor of the help button.
+     *
+     * @param menuPane
+     *  The grid pane of the menu screen
+     * @param helpPopupPane
+     *  The grid pane of the help popup
+     */
     public HelpButton(GridPane menuPane, GridPane helpPopupPane) {
         super();
         this.menuPane = menuPane;
@@ -21,7 +29,7 @@ public class HelpButton extends MenuButton {
     }
 
     private void initialiseStyle() {
-        ComponentUtil.setBackground(this, FilePath.HELP_BUTTON_IMAGE_PATH);
+        ComponentUtil.setButtonBackground(this, FilePath.HELP_BUTTON_IMAGE_PATH);
     }
 
     private void initialiseEvents() {
@@ -33,5 +41,4 @@ public class HelpButton extends MenuButton {
         helpPopupPane.setVisible(true);
         menuPane.setEffect(new BoxBlur(5, 5, 3));
     }
-
 }

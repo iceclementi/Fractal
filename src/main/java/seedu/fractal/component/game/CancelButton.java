@@ -23,6 +23,13 @@ public class CancelButton extends Button {
         setDisable(false);
     }
 
+    /**
+     * Resets the cancel button to unactivated mode.
+     */
+    public void reset() {
+        setDisable(true);
+    }
+
     private void initialiseStyle() {
         setText("CANCEL");
         getStylesheets().add(getClass().getResource(FilePath.GAME_STYLE_PATH).toExternalForm());
@@ -36,12 +43,5 @@ public class CancelButton extends Button {
 
     private void onRelease(MouseEvent mouseEvent) {
         GameBoard.getInstance().reset();
-    }
-
-    /**
-     * Resets the cancel button to unactivated mode.
-     */
-    public void reset() {
-        setDisable(true);
     }
 }
