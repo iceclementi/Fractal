@@ -19,7 +19,7 @@
 .popup-header {
     -fx-text-fill: #5c7fae;
     -fx-font-family: "Arial Narrow";
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
 
@@ -47,5 +47,16 @@
 .difficulty-slider .axis {
     -fx-tick-label-fill: #446187;
     -fx-tick-label-font: bold 14px "Arial Narrow";
-
 }
+
+/* Spinner */
+
+
+/* Text Flow */
+.text-flow {
+    /*-fx-text-fill: #5282b3;*/
+    -fx-font-family: "Arial Narrow";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+

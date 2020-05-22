@@ -6,9 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import seedu.fractal.component.game.GameBoard;
+import javafx.scene.text.TextFlow;
 import seedu.fractal.component.menu.button.*;
-import seedu.fractal.component.menu.NewGamePopupBoxFiller;
+import seedu.fractal.component.menu.popup.HelpPopupFiller;
+import seedu.fractal.component.menu.popup.NewGamePopupFiller;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.storage.Storage;
 import seedu.fractal.util.SceneUtil;
@@ -24,8 +25,7 @@ public class MenuController implements Initializable {
     private VBox menuButtonBox;
 
     @FXML
-    private GridPane popupPane;
-
+    private GridPane newGamePopupPane;
     @FXML
     private HBox closeNewGameBox;
     @FXML
@@ -33,15 +33,37 @@ public class MenuController implements Initializable {
     @FXML
     private Label difficultyHeader;
     @FXML
+    private VBox difficultySliderBox;
+    @FXML
     private VBox matchCountBox;
     @FXML
     private Label matchCountHeader;
+    @FXML
+    private VBox spinnerBox;
     @FXML
     private VBox advancedOptionsBox;
     @FXML
     private Label advancedOptionsHeader;
     @FXML
     private VBox playBox;
+
+
+    @FXML
+    private GridPane helpPopupPane;
+    @FXML
+    private HBox closeHelpBox;
+    @FXML
+    private Label helpHeader;
+    @FXML
+    private TextFlow helpText;
+    @FXML
+    private Label goalHeader;
+    @FXML
+    private TextFlow goalText;
+    @FXML
+    private Label ruleHeader;
+    @FXML
+    private TextFlow ruleText;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -50,26 +72,24 @@ public class MenuController implements Initializable {
 
         menuPane.setBackground(SceneUtil.generateBackground(FilePath.BACKGROUND_IMAGE_PATH));
 
-        // Do NOT display pop up on start up
-        popupPane.setVisible(false);
-
-        MenuButton newGameButton = new NewGameButton(menuPane, popupPane);
+        MenuButton newGameButton = new NewGameButton(menuPane, newGamePopupPane);
         MenuButton continueButton = new ContinueButton();
-        MenuButton helpButton = new HelpButton();
+        MenuButton helpButton = new HelpButton(menuPane, helpPopupPane);
         MenuButton aboutButton = new AboutButton();
 
         fillPopupBoxes();
 
-        helpButton.setDisable(true);
         aboutButton.setDisable(true);
 
         menuButtonBox.getChildren().addAll(newGameButton, continueButton, helpButton, aboutButton);
     }
 
     private void fillPopupBoxes() {
-        new NewGamePopupBoxFiller(menuPane, popupPane,
-                closeNewGameBox, difficultyBox, difficultyHeader, matchCountBox, matchCountHeader,
+        new NewGamePopupFiller(menuPane, newGamePopupPane,
+                closeNewGameBox, difficultySliderBox, difficultyHeader, spinnerBox, matchCountHeader,
                 advancedOptionsBox, advancedOptionsHeader, playBox).fillPopup();
+        new HelpPopupFiller(menuPane, helpPopupPane, closeHelpBox, helpHeader, helpText, goalHeader, goalText,
+                ruleHeader, ruleText).fillPopup();
     }
 
 

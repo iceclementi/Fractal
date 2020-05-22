@@ -9,12 +9,12 @@ import seedu.fractal.util.ComponentUtil;
 public class NewGameButton extends MenuButton {
 
     private GridPane menuPane;
-    private GridPane popupPane;
+    private GridPane newGamePopupPane;
 
-    public NewGameButton(GridPane menuPane, GridPane popupPane) {
+    public NewGameButton(GridPane menuPane, GridPane newGamePopupPane) {
         super();
         this.menuPane = menuPane;
-        this.popupPane = popupPane;
+        this.newGamePopupPane = newGamePopupPane;
 
         initialiseStyle();
         initialiseEvents();
@@ -30,7 +30,7 @@ public class NewGameButton extends MenuButton {
 
     private void onRelease(MouseEvent mouseEvent) {
         reset();
-        popupPane.setVisible(true);
+        newGamePopupPane.setVisible(true);
         menuPane.setEffect(new BoxBlur(5, 5, 3));
     }
 }
