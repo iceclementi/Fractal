@@ -7,7 +7,8 @@ public class Card {
     private String name;
     private String value;
     private String imagePath;
-    private CardStatus status = CardStatus.DEFAULT;
+    private CardStatus status;
+
 
     /**
      * Constructor for a math memory card.
@@ -18,11 +19,28 @@ public class Card {
      *  The value of the card for comparison
      * @param imagePath
      *  The path to the card's image
+     * @param status
+     *  The status of the card (default, selected, matched)
      */
-    public Card(String name, String value, String imagePath) {
+    public Card(String name, String value, String imagePath, CardStatus status) {
         this.name = name;
         this.value = value;
         this.imagePath = imagePath;
+        this.status = status;
+    }
+
+    /**
+     * Constructor for a math memory card with default status.
+     *
+     * @param name
+     *  The name of the card
+     * @param value
+     *  The value of the card for comparison
+     * @param imagePath
+     *  The path to the card's image
+     */
+    public Card(String name, String value, String imagePath) {
+        this(name, value, imagePath, CardStatus.DEFAULT);
     }
 
     public String getName() {

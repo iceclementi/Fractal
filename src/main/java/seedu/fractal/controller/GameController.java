@@ -38,7 +38,6 @@ public class GameController implements Initializable {
 
     private GameBoard gameBoard = GameBoard.getInstance();
     private ArrayList<HBox> cardRows = new ArrayList<>();
-    private ArrayList<CardButton> allCards;
 
     /* Template for card arrangement */
     private final int[] ROWS = {0, 2, 2, 2, 2, 2, 3, 3, 4, 3, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 5};
@@ -49,12 +48,16 @@ public class GameController implements Initializable {
         gamePane.setBackground(SceneUtil.generateBackground(FilePath.BACKGROUND_IMAGE_PATH));
 
         Storage.loadGameDetails();
+        Storage.loadGame();
 
         BackButton backButton = new BackButton();
         MatchButton matchButton = new MatchButton();
         CancelButton cancelButton = new CancelButton();
-        allCards = generateCards();
-        gameBoard.initialise(allCards, matchButton, cancelButton, matchCounter);
+
+        if (!gameBoard.isOngoing()) {
+            gameBoard.setCardButtons(generateCards());
+        }
+        gameBoard.initialise(matchButton, cancelButton, matchCounter);
 
         arrangeCards();
 
@@ -77,12 +80,15 @@ public class GameController implements Initializable {
             cardRows.add(newRow);
         }
 
+        int numberOfCards = gameBoard.getNumberOfMatches() * 2;
+        ArrayList<CardButton> cards = gameBoard.getCardButtons();
+
         for (int i = 0; i < numberOfRows; ++i) {
             for (int j = 0; j < numberOfColumns; ++j) {
-                if (i*numberOfColumns + j >= gameBoard.getNumberOfMatches()*2) {
+                if (i*numberOfColumns + j >= numberOfCards) {
                     break;
                 }
-                cardRows.get(i).getChildren().add(allCards.get(i*numberOfColumns + j));
+                cardRows.get(i).getChildren().add(cards.get(i*numberOfColumns + j));
             }
             cardBox.getChildren().add(cardRows.get(i));
         }

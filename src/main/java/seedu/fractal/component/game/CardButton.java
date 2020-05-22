@@ -60,7 +60,17 @@ public class CardButton extends Button {
     }
 
     /**
-     * Match the cards and fade image.
+     * Select the card and flip face up
+     */
+    public void select() {
+        setBackground(cardFace);
+
+        getCard().setStatus(CardStatus.SELECTED);
+        setCursor(Cursor.DEFAULT);
+    }
+
+    /**
+     * Match the card and fade image.
      */
     public void match() {
         setEffect(new ColorAdjust(0, -0.5, 0, 0));
@@ -120,12 +130,8 @@ public class CardButton extends Button {
     }
 
     private void onClick(MouseEvent mouseEvent) {
-        if (getCard().getStatus() == CardStatus.DEFAULT && GameBoard.getInstance().canSelect()) {
+        if (getCard().getStatus() == CardStatus.DEFAULT) {
             System.out.println(card.getImagePath());
-            setBackground(cardFace);
-
-            getCard().setStatus(CardStatus.SELECTED);
-            setCursor(Cursor.DEFAULT);
             GameBoard.getInstance().selectCard(this);
         }
     }

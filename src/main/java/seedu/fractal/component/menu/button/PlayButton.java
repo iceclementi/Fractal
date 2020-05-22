@@ -33,7 +33,7 @@ public class PlayButton extends MenuButton {
 
     private void onRelease(MouseEvent mouseEvent) {
         GameBoard.getInstance().setDetails(difficultySlider.getDifficulty(), spinner.getValue());
-        Storage.saveGameDetails(difficultySlider.getDifficulty(), spinner.getValue());
+        Storage.saveGameDetails(difficultySlider.getDifficulty(), spinner.getValue(), false);
 
         SceneUtil.changeScene(this, FilePath.GAME_SCENE_PATH);
     }

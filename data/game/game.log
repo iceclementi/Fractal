@@ -1,10 +1,8 @@
-6 ||| 0
-0 ||| 1-5_fraction.png ||| 1-5 ||| \images\cards\easy\1-5\fraction.png ||| DEFAULT
-1 ||| 1-2_decimal.png ||| 1-2 ||| \images\cards\easy\1-2\decimal.png ||| DEFAULT
-2 ||| 3-4_decimal.png ||| 3-4 ||| \images\cards\easy\3-4\decimal.png ||| DEFAULT
-3 ||| 4-5_decimal.png ||| 4-5 ||| \images\cards\easy\4-5\decimal.png ||| DEFAULT
-4 ||| 3-4_fraction.png ||| 3-4 ||| \images\cards\easy\3-4\fraction.png ||| DEFAULT
-5 ||| 4-5_part.png ||| 4-5 ||| \images\cards\easy\4-5\part.png ||| DEFAULT
-6 ||| 1-2_fraction.png ||| 1-2 ||| \images\cards\easy\1-2\fraction.png ||| DEFAULT
-7 ||| 1-5_part.png ||| 1-5 ||| \images\cards\easy\1-5\part.png ||| DEFAULT
+0 ||| 0 ||| 0
+0 ||| 4-5_part.png ||| 4-5 ||| \images\cards\easy\4-5\part.png ||| MATCHED
+1 ||| 3-5_fraction.png ||| 3-5 ||| \images\cards\easy\3-5\fraction.png ||| MATCHED
+2 ||| 4-5_fraction.png ||| 4-5 ||| \images\cards\easy\4-5\fraction.png ||| MATCHED
+3 ||| 9-10_part.png ||| 9-10 ||| \images\cards\easy\9-10\part.png ||| MATCHED
+4 ||| 9-10_fraction.png ||| 9-10 ||| \images\cards\easy\9-10\fraction.png ||| MATCHED
+5 ||| 3-5_part.png ||| 3-5 ||| \images\cards\easy\3-5\part.png ||| MATCHED
 --- END ---

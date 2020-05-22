@@ -6,9 +6,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.component.menu.button.*;
 import seedu.fractal.component.menu.NewGamePopupBoxFiller;
 import seedu.fractal.storage.FilePath;
+import seedu.fractal.storage.Storage;
 import seedu.fractal.util.SceneUtil;
 
 import java.net.URL;
@@ -41,9 +43,11 @@ public class MenuController implements Initializable {
     @FXML
     private VBox playBox;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        /* Load game */
+        Storage.loadGameDetails();
+
         menuPane.setBackground(SceneUtil.generateBackground(FilePath.BACKGROUND_IMAGE_PATH));
 
         // Do NOT display pop up on start up
@@ -56,7 +60,6 @@ public class MenuController implements Initializable {
 
         fillPopupBoxes();
 
-        continueButton.setDisable(true);
         helpButton.setDisable(true);
         aboutButton.setDisable(true);
 
