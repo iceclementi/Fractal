@@ -37,7 +37,8 @@ public class SceneUtil {
 
             centreScene(stage);
         } catch (IOException e) {
-            System.out.println("Error!!");
+            System.out.println("Error changing scene!");
+            e.printStackTrace();
         }
     }
 

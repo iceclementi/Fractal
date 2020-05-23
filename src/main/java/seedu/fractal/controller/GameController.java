@@ -61,6 +61,7 @@ public class GameController implements Initializable {
         CancelButton cancelButton = new CancelButton();
 
         if (!gameBoard.isOngoing()) {
+            gameBoard.resetGame();
             gameBoard.setCardButtons(generateCards());
         }
 

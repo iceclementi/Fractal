@@ -69,5 +69,4 @@ public class NewGamePopupFiller extends PopupFiller {
         PlayButton playButton = new PlayButton(difficultySlider, spinner);
         playBox.getChildren().add(playButton);
     }
-
 }

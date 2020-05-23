@@ -131,7 +131,6 @@ public class CardButton extends Button {
 
     private void onClick(MouseEvent mouseEvent) {
         if (getCard().getStatus() == CardStatus.DEFAULT) {
-            System.out.println(card.getImagePath());
             GameBoard.getInstance().selectCard(this);
         }
     }

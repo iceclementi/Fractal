@@ -45,6 +45,4 @@ public class PlayButton extends MenuButton {
 
         SceneUtil.changeScene(this, FilePath.GAME_SCENE_PATH);
     }
-
-
 }

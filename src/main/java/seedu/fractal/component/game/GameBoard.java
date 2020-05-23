@@ -135,7 +135,7 @@ public class GameBoard {
         Storage.saveGame();
 
         if (matchedCardCount == numberOfMatches * 2) {
-            endGame();
+            resetGame();
         }
     }
 
@@ -159,7 +159,10 @@ public class GameBoard {
         return selectedCards[0].getCard().isSameValue(selectedCards[1].getCard());
     }
 
-    private void endGame() {
+    /**
+     * Resets the game board.
+     */
+    public void resetGame() {
         matchedCardCount = 0;
         selectedCardCount = 0;
         matchCounter = 0;

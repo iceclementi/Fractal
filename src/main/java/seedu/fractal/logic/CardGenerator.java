@@ -2,11 +2,14 @@ package seedu.fractal.logic;
 
 import seedu.fractal.storage.FilePath;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class CardGenerator {
+
+    private static final String[] CARDS = {"fraction.png", "percentage.png", "decimal.png", "part.png", "ratio.png"};
+    private static final String[] EASY_DIRECTORIES = {
+            "1-2", "1-4", "3-4", "1-5", "2-5", "3-5", "4-5", "1-10", "3-10", "7-10", "9-10"};
 
     private int matchCount;
     private Difficulty difficulty;
@@ -35,15 +38,11 @@ public class CardGenerator {
     public ArrayList<Card> generateCards() {
         ArrayList<Card> selectedCards = new ArrayList<>();
 
-        // Choose 2 random cards for a card value
-        for (File directory : selectRandomDirectories()) {
-            File[] cards = new File(directory.getPath()).listFiles();
-            assert cards != null;
-
-            for (Integer index : selectRandom(cards.length, 2)) {
-                String cardName = String.format("%s_%s", directory.getName(), cards[index].getName());
-                String cardValue = directory.getName();
-                String imagePath = cards[index].getPath().replace(FilePath.RESOURCE_PATH, "");
+        for (String directory : selectRandomDirectories()) {
+            for (Integer index : selectRandom(CARDS.length, 2)) {
+                String cardName = String.format("%s_%s", directory, CARDS[index]);
+                String cardValue = directory;
+                String imagePath = String.format("%s/%s/%s", FilePath.CARD_EASY_PATH, directory, CARDS[index]);
 
                 selectedCards.add(new Card(cardName, cardValue, imagePath));
             }
@@ -54,9 +53,45 @@ public class CardGenerator {
         return selectedCards;
     }
 
+    /*
+    public ArrayList<Card> generateCards() {
+        ArrayList<Card> selectedCards = new ArrayList<>();
+
+        // Choose 2 random cards for a card value
+        for (File directory : selectRandomDirectories()) {
+            File[] cards = new File(directory.getPath()).listFiles();
+            assert cards != null;
+
+            for (Integer index : selectRandom(cards.length, 2)) {
+                String cardName = String.format("%s_%s", directory.getName(), cards[index].getName());
+                String cardValue = directory.getName();
+                String imagePath = String.format("%s/%s", FilePath.CARD_EASY_PATH, cards[index].getName());
+
+                selectedCards.add(new Card(cardName, cardValue, imagePath));
+            }
+        }
+
+        Collections.shuffle(selectedCards);
+
+        return selectedCards;
+    }
+     */
+
+    private ArrayList<String> selectRandomDirectories() {
+        ArrayList<String> selectedDirectories = new ArrayList<>();
+
+        for (Integer index : selectRandom(EASY_DIRECTORIES.length, matchCount)) {
+            selectedDirectories.add(EASY_DIRECTORIES[index]);
+        }
+
+        return selectedDirectories;
+    }
+
+    /*
     private ArrayList<File> selectRandomDirectories() {
-        File[] cardDirectories = new File(FilePath.RESOURCE_PATH + FilePath.CARD_EASY_PATH).listFiles();
+        File[] cardDirectories = new File(getClass().getResource(FilePath.CARD_EASY_PATH).getFile()).listFiles();
         assert cardDirectories != null : "No cards found.";
+        System.out.println(Arrays.toString(cardDirectories));
 
         ArrayList<File> selectedDirectories = new ArrayList<>();
         for (Integer index : selectRandom(cardDirectories.length, matchCount)) {
@@ -65,6 +100,7 @@ public class CardGenerator {
 
         return selectedDirectories;
     }
+     */
 
     /**
      * Selects n random numbers from the range 0 inclusive to the upper limit exclusive.
