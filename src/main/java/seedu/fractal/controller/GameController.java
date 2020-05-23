@@ -102,7 +102,8 @@ public class GameController implements Initializable {
     }
 
     private ArrayList<CardButton> generateCards() {
-        ArrayList<Card> cards = new CardGenerator(gameBoard.getNumberOfMatches()).generateCards();
+        ArrayList<Card> cards =
+                new CardGenerator(gameBoard.getNumberOfMatches(), gameBoard.getDifficulty()).generateCards();
 
         ArrayList<CardButton> cardButtons = new ArrayList<>();
         for (int i = 0; i < cards.size(); ++i) {

@@ -27,6 +27,9 @@ public class FilePath {
     /* Path to Card Images */
     public static final String CARD_BACK_IMAGE_PATH = "/images/cards/card_back.png";
     public static final String CARD_EASY_PATH = "/images/cards/easy";
+    public static final String CARD_INTERMEDIATE_PATH = "/images/cards/intermediate";
+    public static final String CARD_ADVANCED_PATH = "/images/cards/advanced";
+    public static final String CARD_GENIUS_PATH = "/images/cards/genius";
 
     /* Path to Miscellaneous Images */
     public static final String ICON_IMAGE_PATH = "/images/misc/icon.png";

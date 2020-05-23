@@ -15,8 +15,6 @@ public class DifficultySlider extends Slider {
 
         initialiseStyle();
         initialiseEvents();
-
-        setDisable(true);
     }
 
     public Difficulty getDifficulty() {
@@ -50,7 +48,6 @@ public class DifficultySlider extends Slider {
             return;
         default:
             setValue(0);
-            return;
         }
     }
 

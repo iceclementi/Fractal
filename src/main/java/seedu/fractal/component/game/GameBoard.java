@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class GameBoard {
 
     /* Game details */
-    private Difficulty difficulty;
-    private int numberOfMatches;
+    private Difficulty difficulty = Difficulty.EASY;
+    private int numberOfMatches = 4;
 
     /* Current game information */
     private int matchedCardCount = 0;
