@@ -1,9 +1,9 @@
 package seedu.fractal.component.menu.button;
 
-import javafx.scene.control.Spinner;
 import javafx.scene.input.MouseEvent;
 import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.component.menu.DifficultySlider;
+import seedu.fractal.component.menu.MatchCountSpinner;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.storage.Storage;
 import seedu.fractal.util.ComponentUtil;
@@ -12,7 +12,7 @@ import seedu.fractal.util.SceneUtil;
 public class PlayButton extends MenuButton {
 
     private DifficultySlider difficultySlider;
-    private Spinner<Integer> spinner;
+    private MatchCountSpinner spinner;
 
     /**
      * Constructor of the play button.
@@ -22,7 +22,7 @@ public class PlayButton extends MenuButton {
      * @param spinner
      *  The match count spinner on the new game popup
      */
-    public PlayButton(DifficultySlider difficultySlider, Spinner<Integer> spinner) {
+    public PlayButton(DifficultySlider difficultySlider, MatchCountSpinner spinner) {
         super();
         this.difficultySlider = difficultySlider;
         this.spinner = spinner;

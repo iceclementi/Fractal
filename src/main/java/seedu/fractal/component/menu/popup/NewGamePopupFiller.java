@@ -6,6 +6,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import seedu.fractal.component.menu.DifficultySlider;
+import seedu.fractal.component.menu.MatchCountSpinner;
 import seedu.fractal.component.menu.button.PlayButton;
 
 public class NewGamePopupFiller extends PopupFiller {
@@ -20,7 +21,7 @@ public class NewGamePopupFiller extends PopupFiller {
     private VBox playBox;
 
     private DifficultySlider difficultySlider;
-    private Spinner<Integer> spinner;
+    private MatchCountSpinner matchCountSpinner;
 
     public NewGamePopupFiller(GridPane menuPane, GridPane newGamePopupPane,
           HBox closeNewGameBox, VBox difficultySliderBox, Label difficultyHeader, VBox spinnerBox,
@@ -56,8 +57,8 @@ public class NewGamePopupFiller extends PopupFiller {
 
     private void fillMatchCountSection() {
         setHeader(matchCountHeader, "NUMBER OF MATCHES");
-        spinner = new Spinner<>(2, 11, 4);
-        spinnerBox.getChildren().add(spinner);
+        matchCountSpinner = new MatchCountSpinner(difficultySlider);
+        spinnerBox.getChildren().add(matchCountSpinner);
     }
 
     private void fillAdvancedOptionsSection() {
@@ -66,7 +67,7 @@ public class NewGamePopupFiller extends PopupFiller {
     }
 
     private void fillPlaySection() {
-        PlayButton playButton = new PlayButton(difficultySlider, spinner);
+        PlayButton playButton = new PlayButton(difficultySlider, matchCountSpinner);
         playBox.getChildren().add(playButton);
     }
 }

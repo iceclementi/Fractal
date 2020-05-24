@@ -55,7 +55,6 @@ public class MenuController implements Initializable {
     @FXML
     private VBox playBox;
 
-
     @FXML
     private GridPane helpPopupPane;
     @FXML

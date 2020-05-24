@@ -1,10 +1,24 @@
-0 ||| 0 ||| 0
-0 ||| 5-7_part.png ||| 5-7 ||| /images/cards/genius/5-7/part.png ||| MATCHED
-1 ||| 1-6_percentage.png ||| 1-6 ||| /images/cards/advanced/1-6/percentage.png ||| MATCHED
-2 ||| 5-7_decimal.png ||| 5-7 ||| /images/cards/genius/5-7/decimal.png ||| MATCHED
-3 ||| 7-9_ratio.png ||| 7-9 ||| /images/cards/advanced/7-9/ratio.png ||| MATCHED
-4 ||| 8-9_part.png ||| 8-9 ||| /images/cards/advanced/8-9/part.png ||| MATCHED
-5 ||| 7-9_fraction.png ||| 7-9 ||| /images/cards/advanced/7-9/fraction.png ||| MATCHED
-6 ||| 1-6_decimal.png ||| 1-6 ||| /images/cards/advanced/1-6/decimal.png ||| MATCHED
-7 ||| 8-9_percentage.png ||| 8-9 ||| /images/cards/advanced/8-9/percentage.png ||| MATCHED
+0 ||| 1 ||| 1
+0 ||| 4-9_percentage.png ||| 4-9 ||| /images/cards/advanced/4-9/percentage.png ||| DEFAULT
+1 ||| 5-6_percentage.png ||| 5-6 ||| /images/cards/advanced/5-6/percentage.png ||| DEFAULT
+2 ||| 7-9_decimal.png ||| 7-9 ||| /images/cards/advanced/7-9/decimal.png ||| DEFAULT
+3 ||| 7-10_part.png ||| 7-10 ||| /images/cards/easy/7-10/part.png ||| DEFAULT
+4 ||| 7-10_ratio.png ||| 7-10 ||| /images/cards/easy/7-10/ratio.png ||| DEFAULT
+5 ||| 7-9_ratio.png ||| 7-9 ||| /images/cards/advanced/7-9/ratio.png ||| DEFAULT
+6 ||| 7-8_percentage.png ||| 7-8 ||| /images/cards/intermediate/7-8/percentage.png ||| DEFAULT
+7 ||| 3-5_fraction.png ||| 3-5 ||| /images/cards/easy/3-5/fraction.png ||| DEFAULT
+8 ||| 1-9_decimal.png ||| 1-9 ||| /images/cards/advanced/1-9/decimal.png ||| DEFAULT
+9 ||| 1-6_percentage.png ||| 1-6 ||| /images/cards/advanced/1-6/percentage.png ||| SELECTED
+10 ||| 5-6_ratio.png ||| 5-6 ||| /images/cards/advanced/5-6/ratio.png ||| DEFAULT
+11 ||| 2-5_ratio.png ||| 2-5 ||| /images/cards/easy/2-5/ratio.png ||| DEFAULT
+12 ||| 1-4_fraction.png ||| 1-4 ||| /images/cards/easy/1-4/fraction.png ||| DEFAULT
+13 ||| 3-5_part.png ||| 3-5 ||| /images/cards/easy/3-5/part.png ||| DEFAULT
+14 ||| 2-5_decimal.png ||| 2-5 ||| /images/cards/easy/2-5/decimal.png ||| DEFAULT
+15 ||| 8-9_percentage.png ||| 8-9 ||| /images/cards/advanced/8-9/percentage.png ||| DEFAULT
+16 ||| 7-8_ratio.png ||| 7-8 ||| /images/cards/intermediate/7-8/ratio.png ||| DEFAULT
+17 ||| 1-4_part.png ||| 1-4 ||| /images/cards/easy/1-4/part.png ||| DEFAULT
+18 ||| 1-9_fraction.png ||| 1-9 ||| /images/cards/advanced/1-9/fraction.png ||| DEFAULT
+19 ||| 4-9_decimal.png ||| 4-9 ||| /images/cards/advanced/4-9/decimal.png ||| DEFAULT
+20 ||| 1-6_part.png ||| 1-6 ||| /images/cards/advanced/1-6/part.png ||| DEFAULT
+21 ||| 8-9_fraction.png ||| 8-9 ||| /images/cards/advanced/8-9/fraction.png ||| DEFAULT
 --- END ---

@@ -2,6 +2,7 @@ package seedu.fractal.component.menu;
 
 import javafx.scene.control.Slider;
 import javafx.util.StringConverter;
+import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.logic.Difficulty;
 import seedu.fractal.storage.FilePath;
 
@@ -28,6 +29,7 @@ public class DifficultySlider extends Slider {
         case 3:
             return Difficulty.GENIUS;
         default:
+            System.out.println("DifficultySlider: Unknown difficulty... Selecting EASY instead.");
             return Difficulty.EASY;
         }
     }
@@ -59,7 +61,7 @@ public class DifficultySlider extends Slider {
         /* Set range */
         setMin(0);
         setMax(3);
-        setValue(0);
+        setDifficulty(GameBoard.getInstance().getDifficulty());
 
         setMinorTickCount(0);
         setMajorTickUnit(1);
