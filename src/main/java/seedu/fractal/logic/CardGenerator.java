@@ -13,6 +13,10 @@ public class CardGenerator {
             "1-2", "1-4", "3-4", "1-5", "2-5", "3-5", "4-5", "1-10", "3-10", "7-10", "9-10"};
     private static final String[] INTERMEDIATE_CARD_VALUES = {
             "1-3", "2-3", "1-8", "3-8", "5-8", "7-8"};
+    private static final String[] ADVANCED_CARD_VALUES = {
+            "1-6", "5-6", "1-9", "2-9", "4-9", "5-9", "7-9", "8-9"};
+    private static final String[] GENIUS_CARD_VALUES = {
+            "1-7", "2-7", "3-7", "4-7", "5-7", "6-7"};
 
     private int matchCount;
     private Difficulty difficulty;
@@ -42,65 +46,150 @@ public class CardGenerator {
      *  A list of cards to be used for the game
      */
     public ArrayList<Card> generateCards() {
+        ArrayList<Card> cards;
+
         switch (difficulty) {
         case EASY:
-            return generateEasyCards();
+            cards = generateEasyCards(matchCount);
+            break;
         case INTERMEDIATE:
-            return generateIntermediateCards();
+            cards = generateIntermediateCards(matchCount, true);
+            break;
+        case ADVANCED:
+            cards = generateAdvancedCards(matchCount, true);
+            break;
+        case GENIUS:
+            cards = generateGeniusCards(matchCount);
+            break;
         default:
             System.out.println("CardGenerator: Unable to generate cards of specified difficulty.\n"
                     + "Generating easy cards instead...");
-            return generateEasyCards();
+            cards = generateEasyCards(matchCount);
         }
+
+        Collections.shuffle(cards);
+
+        return cards;
     }
 
     /**
      * Generates the required number of cards as a list for Easy difficulty.
      *
+     * @param numberOfMatches
+     *  The number of matches for easy cards
      * @return
      *  A list of cards to be used for the game
      */
-    private ArrayList<Card> generateEasyCards() {
-        ArrayList<String> easyCardValues = selectRandomCardValues(EASY_CARD_VALUES, matchCount);
-        ArrayList<Card> selectedCards = generateCardList(easyCardValues, FilePath.CARD_EASY_PATH);
-
-        Collections.shuffle(selectedCards);
-
-        return selectedCards;
+    private ArrayList<Card> generateEasyCards(int numberOfMatches) {
+        return generatePreferredCardList(EASY_CARD_VALUES, numberOfMatches, numberOfMatches, FilePath.CARD_EASY_PATH);
     }
 
     /**
      * Generates the required number of cards as a list for Intermediate difficulty.
      *
+     * @param numberOfMatches
+     *  The number of matches for easy and intermediate cards
+     * @param isNotZero
+     *  Indicates if the number of intermediate cards can be zero
      * @return
      *  A list of cards to be used for the game
      */
-    private ArrayList<Card> generateIntermediateCards() {
-        // At least one-third of cards should be of intermediate level if possible and greater than 0
-        int intermediateCardsLowerLimit =
-                Math.min((int) Math.ceil(matchCount / 3.0), INTERMEDIATE_CARD_VALUES.length);
-        int intermediateCardsUpperLimit = Math.min(matchCount, INTERMEDIATE_CARD_VALUES.length);
+    private ArrayList<Card> generateIntermediateCards(int numberOfMatches, boolean isNotZero) {
+        // At least one-third of cards should be of intermediate level if possible
+        int lowerLimit = (numberOfMatches / 3 == 0 && isNotZero) ? 1 : numberOfMatches / 3;
 
-        int intermediateCardsCount = selectRandomNumber(intermediateCardsLowerLimit, intermediateCardsUpperLimit);
-        int easyCardsCount = matchCount - intermediateCardsCount;
+        ArrayList<Card> selectedIntermediateCards = generatePreferredCardList(INTERMEDIATE_CARD_VALUES,
+                lowerLimit, numberOfMatches, FilePath.CARD_INTERMEDIATE_PATH);
+
+        int easyCardsCount = numberOfMatches - selectedIntermediateCards.size() / 2;
+        assert easyCardsCount >= 0 : "CardGenerator: Card count has become negative.";
 
         ArrayList<Card> selectedCards = new ArrayList<>();
-        ArrayList<String> intermediateCardValues =
-                selectRandomCardValues(INTERMEDIATE_CARD_VALUES, intermediateCardsCount);
-        ArrayList<String> easyCardValues = selectRandomCardValues(EASY_CARD_VALUES, easyCardsCount);
-        selectedCards.addAll(generateCardList(intermediateCardValues, FilePath.CARD_INTERMEDIATE_PATH));
-        selectedCards.addAll(generateCardList(easyCardValues, FilePath.CARD_EASY_PATH));
-
-        Collections.shuffle(selectedCards);
+        selectedCards.addAll(selectedIntermediateCards);
+        selectedCards.addAll(generateEasyCards(easyCardsCount));
 
         return selectedCards;
+    }
+
+    /**
+     * Generates the required number of cards as a list for Advanced difficulty.
+     *
+     * @param numberOfMatches
+     *  The number of matches for easy, intermediate and advanced cards
+     * @param isNotZero
+     *  Indicates if the number of advanced cards can be zero
+     * @return
+     *  A list of cards to be used for the game
+     */
+    private ArrayList<Card> generateAdvancedCards(int numberOfMatches, boolean isNotZero) {
+        // At least one-fourth of cards should be of advanced level if possible and greater than 0
+        int lowerLimit = (numberOfMatches / 4 == 0 && isNotZero) ? 1 : numberOfMatches / 4;
+
+        ArrayList<Card> selectedAdvancedCards = generatePreferredCardList(ADVANCED_CARD_VALUES,
+                lowerLimit, numberOfMatches, FilePath.CARD_ADVANCED_PATH);
+
+        int intermediateCardsCount = numberOfMatches - selectedAdvancedCards.size() / 2;
+        assert intermediateCardsCount >= 0 : "CardGenerator: Card count has become negative.";
+
+        ArrayList<Card> selectedCards = new ArrayList<>();
+        selectedCards.addAll(selectedAdvancedCards);
+        selectedCards.addAll(generateIntermediateCards(intermediateCardsCount, false));
+
+        return selectedCards;
+    }
+
+    /**
+     * Generates the required number of cards as a list for Genius difficulty.
+     *
+     * @param numberOfMatches
+     *  The number of matches for easy, intermediate, advanced and genius cards
+     * @return
+     *  A list of cards to be used for the game
+     */
+    private ArrayList<Card> generateGeniusCards(int numberOfMatches) {
+        // At least one-fifth of cards should be of advanced level if possible and greater than 0
+        int lowerLimit = (numberOfMatches / 5 == 0) ? 1 : numberOfMatches / 5;
+
+        ArrayList<Card> selectedGeniusCards = generatePreferredCardList(GENIUS_CARD_VALUES,
+                lowerLimit, numberOfMatches, FilePath.CARD_GENIUS_PATH);
+
+        int advancedCardsCount = numberOfMatches - selectedGeniusCards.size() / 2;
+        assert advancedCardsCount >= 0 : "CardGenerator: Card count has become negative.";
+
+        ArrayList<Card> selectedCards = new ArrayList<>();
+        selectedCards.addAll(selectedGeniusCards);
+        selectedCards.addAll(generateAdvancedCards(advancedCardsCount, false));
+
+        return selectedCards;
+    }
+
+    /**
+     * Generates a list of a random number of cards within the given range and the card values given.
+     *
+     * @param cardValues
+     *  The list of card values to be randomly selected
+     * @param preferredLowerLimit
+     *  The preferred lower limit of the range
+     * @param upperLimit
+     *  The upper limit of the range
+     * @param difficultyPath
+     *  The directory patht ot the difficulty level of the card
+     * @return
+     *  A list of constructed cards with a size that is preferably within the range
+     */
+    private ArrayList<Card> generatePreferredCardList(
+            String[] cardValues, int preferredLowerLimit, int upperLimit, String difficultyPath) {
+        int cardCount = selectBestRandomNumber(preferredLowerLimit, upperLimit, cardValues.length);
+        ArrayList<String> selectedCardValues = selectRandomCardValues(cardValues, cardCount);
+
+        return generateCardList(selectedCardValues, difficultyPath);
     }
 
     /**
      * Generates a list of cards from the card values given.
      *
      * @param cardValues
-     *  The value of the card
+     *  The list of card values to be randomly selected
      * @param difficultyPath
      *  The directory path to the difficulty level of the card
      * @return
@@ -125,7 +214,7 @@ public class CardGenerator {
      * Selects a given number of random card values from a list.
      *
      * @param cardValues
-     *  The list of card values to be selected randomly
+     *  The list of card values to be randomly selected
      * @param count
      *  The number of card values to be selected
      * @return
@@ -163,6 +252,27 @@ public class CardGenerator {
         randomNumbers.subList(n, upperLimit).clear();
 
         return randomNumbers;
+    }
+
+    /**
+     * Selects a random number within the given preferred range if possible, otherwise selects the next best number.
+     *
+     * @param preferredLowerLimit
+     *  The preferred lower limit of the range
+     * @param upperLimit
+     *  The upper limit of the range
+     * @param numberOfCardValues
+     *  The number of possible card values available
+     * @return
+     *  A random integer within the given preferred range if possible, or the next best number otherwise
+     */
+    private int selectBestRandomNumber(int preferredLowerLimit, int upperLimit, int numberOfCardValues) {
+        assert preferredLowerLimit < upperLimit : "CardGenerator: Minimum is greater than upper limit.";
+
+        int cardsLowerLimit = Math.min(preferredLowerLimit, numberOfCardValues);
+        int cardsUpperLimit = Math.min(numberOfCardValues, upperLimit);
+
+        return selectRandomNumber(cardsLowerLimit, cardsUpperLimit);
     }
 
     /**
