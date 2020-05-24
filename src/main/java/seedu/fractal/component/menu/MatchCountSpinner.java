@@ -6,11 +6,11 @@ import seedu.fractal.component.game.GameBoard;
 
 public class MatchCountSpinner extends Spinner<Integer> {
 
-    private final static int EASY_MAX = 11;
-    private final static int INTERMEDIATE_MAX = 17;
-    private final static int ADVANCED_MAX = 20;
-    private final static int GENIUS_MAX = 20;
-    private final static int DEFAULT_MAX = 11;
+    private static final int EASY_MAX = 11;
+    private static final int INTERMEDIATE_MAX = 17;
+    private static final int ADVANCED_MAX = 20;
+    private static final int GENIUS_MAX = 20;
+    private static final int DEFAULT_MAX = 11;
 
     private DifficultySlider difficultySlider;
 
@@ -27,7 +27,6 @@ public class MatchCountSpinner extends Spinner<Integer> {
         initialiseStyle();
     }
 
-
     private void initialiseStyle() {
         SpinnerValueFactory.IntegerSpinnerValueFactory spinnerValueFactory =
                 (SpinnerValueFactory.IntegerSpinnerValueFactory) getValueFactory();
@@ -42,7 +41,7 @@ public class MatchCountSpinner extends Spinner<Integer> {
     }
 
     private void setMaxValue(SpinnerValueFactory.IntegerSpinnerValueFactory spinnerValueFactory) {
-        switch(difficultySlider.getDifficulty()) {
+        switch (difficultySlider.getDifficulty()) {
         case EASY:
             spinnerValueFactory.setMax(EASY_MAX);
             break;
