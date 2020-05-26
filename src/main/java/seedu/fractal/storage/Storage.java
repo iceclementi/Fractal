@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -21,12 +22,28 @@ public class Storage {
     private static final String DIVIDER = " ||| ";
     private static final String NEWLINE = "\n";
     private static final String END = "--- END ---";
+    private static final String[] ADVANCED_OPTIONS = {
+            "fraction", "decimal", "percentage", "ratio", "parts", "simplified", "proper"
+    };
 
     private static final GameBoard gameBoard = GameBoard.getInstance();
 
-    public static void saveGameDetails(Difficulty difficulty, int numberOfMatches, boolean isOngoing) {
+    /**
+     * Saves the game details into a storage file.
+     *
+     * @param difficulty
+     *  The difficulty of the game
+     * @param numberOfMatches
+     *  The number of matches in the game
+     * @param isSelected
+     *  The advanced options selected in the game
+     * @param isOngoing
+     *  Checks if the game is ongoing
+     */
+    public static void saveGameDetails(Difficulty difficulty, int numberOfMatches,
+           HashMap<String, Boolean> isSelected, boolean isOngoing) {
         saveToFile(FilePath.GAME_DETAILS_STORAGE_PATH,
-                generateGameDetailsContent(difficulty, numberOfMatches, isOngoing));
+                generateGameDetailsContent(difficulty, numberOfMatches, isSelected, isOngoing));
     }
 
     public static void saveGame() {
@@ -34,19 +51,28 @@ public class Storage {
         // Save time?
     }
 
-
     public static void loadGameDetails() {
         try {
             String content = loadContentFromFile(FilePath.GAME_DETAILS_STORAGE_PATH);
-            String[] contentLines = splitString(content, NEWLINE, 3, true);
+            String[] contentLines = splitString(content, NEWLINE, 4, true);
 
             String[] gameDetails = splitString(contentLines[0], DIVIDER, 2);
             Difficulty difficulty = Difficulty.valueOf(gameDetails[0]);
             int numberOfMatches = Integer.parseInt(gameDetails[1]);
 
-            gameBoard.setDetails(difficulty, numberOfMatches);
+            String[] advancedOptionsString = splitString(contentLines[1], DIVIDER, 7);
+            HashMap<String, Boolean> advancedOptions = new HashMap<>();
+            advancedOptions.put("fraction", Boolean.parseBoolean(advancedOptionsString[0]));
+            advancedOptions.put("decimal", Boolean.parseBoolean(advancedOptionsString[1]));
+            advancedOptions.put("percentage", Boolean.parseBoolean(advancedOptionsString[2]));
+            advancedOptions.put("ratio", Boolean.parseBoolean(advancedOptionsString[3]));
+            advancedOptions.put("parts", Boolean.parseBoolean(advancedOptionsString[4]));
+            advancedOptions.put("simplified", Boolean.parseBoolean(advancedOptionsString[5]));
+            advancedOptions.put("proper", Boolean.parseBoolean(advancedOptionsString[6]));
 
-            boolean isOngoing = Boolean.parseBoolean(contentLines[1]);
+            gameBoard.setDetails(difficulty, numberOfMatches, advancedOptions);
+
+            boolean isOngoing = Boolean.parseBoolean(contentLines[2]);
             gameBoard.setOngoing(isOngoing);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -100,8 +126,22 @@ public class Storage {
         }
     }
 
-    private static String generateGameDetailsContent(Difficulty difficulty, int numberOfMatches, boolean isOngoing) {
-        return String.format("%s%s%s\n%s\n%s", difficulty.name(), DIVIDER, numberOfMatches, isOngoing, END);
+    private static String generateGameDetailsContent(Difficulty difficulty, int numberOfMatches,
+             HashMap<String, Boolean> isSelected, boolean isOngoing) {
+        StringBuilder gameDetailsContent = new StringBuilder();
+
+        gameDetailsContent.append(String.format("%s%s%s\n", difficulty.name(), DIVIDER, numberOfMatches));
+
+        for (int i = 0; i < ADVANCED_OPTIONS.length; ++i) {
+            if (i != 0) {
+                gameDetailsContent.append(DIVIDER);
+            }
+            gameDetailsContent.append(isSelected.get(ADVANCED_OPTIONS[i]));
+        }
+
+        gameDetailsContent.append(String.format("\n%s\n%s", isOngoing, END));
+
+        return gameDetailsContent.toString();
     }
 
     private static String generateGameBoardContent() {
@@ -137,7 +177,7 @@ public class Storage {
     }
 
     private static void loadDefaultGameDetails() {
-        gameBoard.setDetails(Difficulty.EASY, 4);
+        gameBoard.setDefaultDetails();
         gameBoard.setOngoing(false);
     }
 
@@ -199,12 +239,12 @@ public class Storage {
         String[] lines = string.split(Pattern.quote(delimiter));
 
         if (lines.length != expectedLength) {
-            throw new Exception("Unexpected number of lines in load file.");
+            throw new Exception("Storage: Unexpected number of lines in load file.");
         }
 
         if (isCheckForEnd) {
             if (!lines[lines.length - 1].equals(END)) {
-                throw new Exception("Last line is not END line.");
+                throw new Exception("Storage: Last line is not END line.");
             }
         }
 

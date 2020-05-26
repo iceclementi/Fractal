@@ -69,7 +69,7 @@ public class NewGamePopupFiller extends PopupFiller {
     }
 
     private void fillPlaySection() {
-        PlayButton playButton = new PlayButton(difficultySlider, matchCountSpinner);
+        PlayButton playButton = new PlayButton(difficultySlider, matchCountSpinner, optionCheckBoxGroup);
         playBox.getChildren().add(playButton);
     }
 }

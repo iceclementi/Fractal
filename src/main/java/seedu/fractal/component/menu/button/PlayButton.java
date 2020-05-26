@@ -4,6 +4,7 @@ import javafx.scene.input.MouseEvent;
 import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.component.menu.DifficultySlider;
 import seedu.fractal.component.menu.MatchCountSpinner;
+import seedu.fractal.component.menu.OptionCheckBoxGroup;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.storage.Storage;
 import seedu.fractal.util.ComponentUtil;
@@ -13,6 +14,7 @@ public class PlayButton extends MenuButton {
 
     private DifficultySlider difficultySlider;
     private MatchCountSpinner spinner;
+    private OptionCheckBoxGroup advancedOptions;
 
     /**
      * Constructor of the play button.
@@ -22,10 +24,12 @@ public class PlayButton extends MenuButton {
      * @param spinner
      *  The match count spinner on the new game popup
      */
-    public PlayButton(DifficultySlider difficultySlider, MatchCountSpinner spinner) {
+    public PlayButton(DifficultySlider difficultySlider, MatchCountSpinner spinner,
+          OptionCheckBoxGroup advancedOptions) {
         super();
         this.difficultySlider = difficultySlider;
         this.spinner = spinner;
+        this.advancedOptions = advancedOptions;
 
         initialiseStyle();
         initialiseEvents();
@@ -40,8 +44,10 @@ public class PlayButton extends MenuButton {
     }
 
     private void onRelease(MouseEvent mouseEvent) {
-        GameBoard.getInstance().setDetails(difficultySlider.getDifficulty(), spinner.getValue());
-        Storage.saveGameDetails(difficultySlider.getDifficulty(), spinner.getValue(), false);
+        GameBoard.getInstance().setDetails(difficultySlider.getDifficulty(), spinner.getValue(),
+                advancedOptions.getSelectedOptions());
+        Storage.saveGameDetails(difficultySlider.getDifficulty(), spinner.getValue(),
+                advancedOptions.getSelectedOptions(), false);
 
         SceneUtil.changeScene(this, FilePath.GAME_SCENE_PATH);
     }

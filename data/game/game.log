@@ -1,38 +1,10 @@
-0 ||| 0 ||| 1
-0 ||| 5-6_percentage.png ||| 5-6 ||| /images/cards/advanced/5-6/percentage.png ||| DEFAULT
-1 ||| 1-3_decimal.png ||| 1-3 ||| /images/cards/intermediate/1-3/decimal.png ||| DEFAULT
-2 ||| 4-5_decimal.png ||| 4-5 ||| /images/cards/easy/4-5/decimal.png ||| DEFAULT
-3 ||| 1-8_ratio.png ||| 1-8 ||| /images/cards/intermediate/1-8/ratio.png ||| DEFAULT
-4 ||| 3-4_decimal.png ||| 3-4 ||| /images/cards/easy/3-4/decimal.png ||| DEFAULT
-5 ||| 5-9_ratio.png ||| 5-9 ||| /images/cards/advanced/5-9/ratio.png ||| DEFAULT
-6 ||| 1-8_percentage.png ||| 1-8 ||| /images/cards/intermediate/1-8/percentage.png ||| DEFAULT
-7 ||| 5-9_decimal.png ||| 5-9 ||| /images/cards/advanced/5-9/decimal.png ||| DEFAULT
-8 ||| 4-9_ratio.png ||| 4-9 ||| /images/cards/advanced/4-9/ratio.png ||| DEFAULT
-9 ||| 3-8_fraction.png ||| 3-8 ||| /images/cards/intermediate/3-8/fraction.png ||| DEFAULT
-10 ||| 1-3_fraction.png ||| 1-3 ||| /images/cards/intermediate/1-3/fraction.png ||| DEFAULT
-11 ||| 4-9_decimal.png ||| 4-9 ||| /images/cards/advanced/4-9/decimal.png ||| DEFAULT
-12 ||| 1-5_part.png ||| 1-5 ||| /images/cards/easy/1-5/part.png ||| DEFAULT
-13 ||| 1-9_fraction.png ||| 1-9 ||| /images/cards/advanced/1-9/fraction.png ||| DEFAULT
-14 ||| 3-4_part.png ||| 3-4 ||| /images/cards/easy/3-4/part.png ||| DEFAULT
-15 ||| 3-8_decimal.png ||| 3-8 ||| /images/cards/intermediate/3-8/decimal.png ||| DEFAULT
-16 ||| 8-9_ratio.png ||| 8-9 ||| /images/cards/advanced/8-9/ratio.png ||| DEFAULT
-17 ||| 2-5_ratio.png ||| 2-5 ||| /images/cards/easy/2-5/ratio.png ||| DEFAULT
-18 ||| 3-5_percentage.png ||| 3-5 ||| /images/cards/easy/3-5/percentage.png ||| DEFAULT
-19 ||| 5-6_part.png ||| 5-6 ||| /images/cards/advanced/5-6/part.png ||| DEFAULT
-20 ||| 8-9_decimal.png ||| 8-9 ||| /images/cards/advanced/8-9/decimal.png ||| DEFAULT
-21 ||| 3-5_fraction.png ||| 3-5 ||| /images/cards/easy/3-5/fraction.png ||| DEFAULT
-22 ||| 4-5_ratio.png ||| 4-5 ||| /images/cards/easy/4-5/ratio.png ||| DEFAULT
-23 ||| 2-3_part.png ||| 2-3 ||| /images/cards/intermediate/2-3/part.png ||| DEFAULT
-24 ||| 1-2_part.png ||| 1-2 ||| /images/cards/easy/1-2/part.png ||| DEFAULT
-25 ||| 5-8_ratio.png ||| 5-8 ||| /images/cards/intermediate/5-8/ratio.png ||| DEFAULT
-26 ||| 1-10_fraction.png ||| 1-10 ||| /images/cards/easy/1-10/fraction.png ||| DEFAULT
-27 ||| 1-2_ratio.png ||| 1-2 ||| /images/cards/easy/1-2/ratio.png ||| DEFAULT
-28 ||| 1-9_part.png ||| 1-9 ||| /images/cards/advanced/1-9/part.png ||| DEFAULT
-29 ||| 1-5_ratio.png ||| 1-5 ||| /images/cards/easy/1-5/ratio.png ||| DEFAULT
-30 ||| 1-10_decimal.png ||| 1-10 ||| /images/cards/easy/1-10/decimal.png ||| DEFAULT
-31 ||| 2-5_fraction.png ||| 2-5 ||| /images/cards/easy/2-5/fraction.png ||| DEFAULT
-32 ||| 5-8_decimal.png ||| 5-8 ||| /images/cards/intermediate/5-8/decimal.png ||| DEFAULT
-33 ||| 2-3_decimal.png ||| 2-3 ||| /images/cards/intermediate/2-3/decimal.png ||| DEFAULT
-34 ||| 2-9_ratio.png ||| 2-9 ||| /images/cards/advanced/2-9/ratio.png ||| DEFAULT
-35 ||| 2-9_part.png ||| 2-9 ||| /images/cards/advanced/2-9/part.png ||| DEFAULT
+0 ||| 0 ||| 0
+0 ||| 1-5_percentage.png ||| 1-5 ||| /images/cards/easy/1-5/percentage.png ||| DEFAULT
+1 ||| 3-8_ratio.png ||| 3-8 ||| /images/cards/intermediate/3-8/ratio.png ||| DEFAULT
+2 ||| 7-10_fraction.png ||| 7-10 ||| /images/cards/easy/7-10/fraction.png ||| DEFAULT
+3 ||| 1-5_part.png ||| 1-5 ||| /images/cards/easy/1-5/part.png ||| DEFAULT
+4 ||| 7-10_part.png ||| 7-10 ||| /images/cards/easy/7-10/part.png ||| DEFAULT
+5 ||| 1-4_percentage.png ||| 1-4 ||| /images/cards/easy/1-4/percentage.png ||| DEFAULT
+6 ||| 1-4_fraction.png ||| 1-4 ||| /images/cards/easy/1-4/fraction.png ||| DEFAULT
+7 ||| 3-8_part.png ||| 3-8 ||| /images/cards/intermediate/3-8/part.png ||| DEFAULT
 --- END ---

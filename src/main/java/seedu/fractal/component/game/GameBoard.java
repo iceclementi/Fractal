@@ -5,12 +5,14 @@ import seedu.fractal.logic.Difficulty;
 import seedu.fractal.storage.Storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameBoard {
 
     /* Game details */
     private Difficulty difficulty = Difficulty.EASY;
     private int numberOfMatches = 4;
+    private HashMap<String, Boolean> advancedOptions = new HashMap<>();
 
     /* Current game information */
     private int matchedCardCount = 0;
@@ -46,7 +48,7 @@ public class GameBoard {
         activateSelectionButtons();
         matchCounterLabel.setText(String.valueOf(matchCounter));
         isOngoing = true;
-        Storage.saveGameDetails(difficulty, numberOfMatches, true);
+        Storage.saveGameDetails(difficulty, numberOfMatches, advancedOptions, true);
     }
 
     public Difficulty getDifficulty() {
@@ -57,10 +59,28 @@ public class GameBoard {
         return numberOfMatches;
     }
 
-    public void setDetails(Difficulty difficulty, int numberOfMatches) {
+    public void setDetails(Difficulty difficulty, int numberOfMatches, HashMap<String, Boolean> advancedOptions) {
         this.difficulty = difficulty;
         this.numberOfMatches = numberOfMatches;
+        this.advancedOptions = advancedOptions;
     }
+
+    /**
+     * Set default details if there is an error.
+     */
+    public void setDefaultDetails() {
+        difficulty = Difficulty.EASY;
+        numberOfMatches = 4;
+
+        advancedOptions.put("fraction", true);
+        advancedOptions.put("decimal", true);
+        advancedOptions.put("percentage", true);
+        advancedOptions.put("ratio", true);
+        advancedOptions.put("parts", true);
+        advancedOptions.put("simplified", false);
+        advancedOptions.put("proper", false);
+    }
+
 
     public int getMatchedCardCount() {
         return matchedCardCount;
@@ -168,7 +188,7 @@ public class GameBoard {
         matchCounter = 0;
 
         isOngoing = false;
-        Storage.saveGameDetails(difficulty, numberOfMatches, false);
+        Storage.saveGameDetails(difficulty, numberOfMatches, advancedOptions, false);
         Storage.saveGame();
 
         // Show some ending screen
@@ -180,6 +200,4 @@ public class GameBoard {
             cancelButton.activate();
         }
     }
-
-
 }

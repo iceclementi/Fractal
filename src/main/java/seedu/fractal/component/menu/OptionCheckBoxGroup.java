@@ -46,31 +46,31 @@ public class OptionCheckBoxGroup {
      *  A mapping of the box to its corresponding selected value
      */
     public HashMap<String, Boolean> getSelectedOptions() {
-        HashMap<String, Boolean> hasSelected = initialiseOptions();
+        HashMap<String, Boolean> advancedOptions = initialiseAdvancedOptions();
 
         if (fractionCheckBox.isSelected()) {
-            hasSelected.replace("fraction", true);
+            advancedOptions.replace("fraction", true);
         }
         if (decimalCheckBox.isSelected()) {
-            hasSelected.replace("decimal", true);
+           advancedOptions.replace("decimal", true);
         }
         if (percentageCheckBox.isSelected()) {
-            hasSelected.replace("percentage", true);
+           advancedOptions.replace("percentage", true);
         }
         if (ratioCheckBox.isSelected()) {
-            hasSelected.replace("ratio", true);
+           advancedOptions.replace("ratio", true);
         }
         if (partsCheckBox.isSelected()) {
-            hasSelected.replace("parts", true);
+           advancedOptions.replace("parts", true);
         }
         if (simplifiedCheckBox.isSelected()) {
-            hasSelected.replace("simplified", true);
+           advancedOptions.replace("simplified", true);
         }
         if (properCheckBox.isSelected()) {
-            hasSelected.replace("proper", true);
+           advancedOptions.replace("proper", true);
         }
 
-        return hasSelected;
+        return advancedOptions;
     }
 
     private void initialise() {
@@ -94,18 +94,17 @@ public class OptionCheckBoxGroup {
         rightBox.getChildren().addAll(simplifiedCheckBox, properCheckBox);
     }
 
-    private HashMap<String, Boolean> initialiseOptions() {
-        HashMap<String, Boolean> hasOptions = new HashMap<>();
+    private HashMap<String, Boolean> initialiseAdvancedOptions() {
+        HashMap<String, Boolean> advancedOptions = new HashMap<>();
 
-        hasOptions.put("fraction", false);
-        hasOptions.put("decimal", false);
-        hasOptions.put("percentage", false);
-        hasOptions.put("ratio", false);
-        hasOptions.put("parts", false);
+        advancedOptions.put("fraction", false);
+        advancedOptions.put("decimal", false);
+        advancedOptions.put("percentage", false);
+        advancedOptions.put("ratio", false);
+        advancedOptions.put("parts", false);
+        advancedOptions.put("simplified", false);
+        advancedOptions.put("proper", false);
 
-        hasOptions.put("simplified", false);
-        hasOptions.put("proper", false);
-
-        return hasOptions;
+        return advancedOptions;
     }
 }
