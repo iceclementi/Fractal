@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'seedu.fractal'
-version 'v0.1.1'
+version 'v0.1.1-linux'
 
 repositories {
     mavenCentral()
@@ -15,22 +15,22 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
     String javaFxVersion = '11'
-    compile "org.openjfx:javafx-graphics:11.0.1:win"
-    compile "org.openjfx:javafx-base:11.0.1:win"
-    compile "org.openjfx:javafx-controls:11.0.1:win"
-    compile "org.openjfx:javafx-fxml:11.0.1:win"
-    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
-    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
-    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
-    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
-    compile "org.openjfx:javafx-graphics:11.0.1:mac"
-    compile "org.openjfx:javafx-base:11.0.1:mac"
-    compile "org.openjfx:javafx-controls:11.0.1:mac"
-    compile "org.openjfx:javafx-fxml:11.0.1:mac"
-    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
-    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
-    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
-    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+//    compile "org.openjfx:javafx-graphics:11.0.1:win"
+//    compile "org.openjfx:javafx-base:11.0.1:win"
+//    compile "org.openjfx:javafx-controls:11.0.1:win"
+//    compile "org.openjfx:javafx-fxml:11.0.1:win"
+//    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+//    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+//    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+//    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+//    compile "org.openjfx:javafx-graphics:11.0.1:mac"
+//    compile "org.openjfx:javafx-base:11.0.1:mac"
+//    compile "org.openjfx:javafx-controls:11.0.1:mac"
+//    compile "org.openjfx:javafx-fxml:11.0.1:mac"
+//    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+//    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+//    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+//    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     compile "org.openjfx:javafx-graphics:11.0.1:linux"
     compile "org.openjfx:javafx-base:11.0.1:linux"
     compile "org.openjfx:javafx-controls:11.0.1:linux"

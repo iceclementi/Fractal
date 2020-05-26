@@ -43,9 +43,9 @@ public class GameController implements Initializable {
     private GameBoard gameBoard = GameBoard.getInstance();
     private ArrayList<HBox> cardRows = new ArrayList<>();
 
-    /* Template for card arrangement */
+    /* Hard-coded grid for card arrangement */
     private static final int[] ROWS = {0, 2, 2, 2, 2, 2, 3, 3, 4, 3, 4, 4, 4, 4, 4, 5, 4, 5, 5, 5, 5};
-    private static final int[] COLUMNS = {0, 1, 2, 3, 4, 5, 4, 5, 4, 6, 5, 6, 6, 7, 7, 6, 8, 8, 8, 8, 8};
+    private static final int[] COLUMNS = {0, 1, 2, 3, 4, 5, 4, 5, 4, 6, 5, 6, 6, 7, 7, 6, 8, 7, 8, 8, 8};
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

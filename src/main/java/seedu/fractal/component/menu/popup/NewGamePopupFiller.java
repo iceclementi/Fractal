@@ -1,39 +1,40 @@
 package seedu.fractal.component.menu.popup;
 
 import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import seedu.fractal.component.menu.DifficultySlider;
 import seedu.fractal.component.menu.MatchCountSpinner;
+import seedu.fractal.component.menu.OptionCheckBoxGroup;
 import seedu.fractal.component.menu.button.PlayButton;
 
 public class NewGamePopupFiller extends PopupFiller {
 
     private HBox closeNewGameBox;
-    private VBox difficultySliderBox;
     private Label difficultyHeader;
-    private VBox spinnerBox;
+    private VBox difficultySliderBox;
     private Label matchCountHeader;
-    private VBox advancedOptionsBox;
+    private VBox spinnerBox;
     private Label advancedOptionsHeader;
+    private HBox advancedOptionsBox;
     private VBox playBox;
 
     private DifficultySlider difficultySlider;
     private MatchCountSpinner matchCountSpinner;
+    private OptionCheckBoxGroup optionCheckBoxGroup;
 
     public NewGamePopupFiller(GridPane menuPane, GridPane newGamePopupPane,
-          HBox closeNewGameBox, VBox difficultySliderBox, Label difficultyHeader, VBox spinnerBox,
-          Label matchCountHeader, VBox advancedOptionsBox, Label advancedOptionsHeader, VBox playBox) {
+          HBox closeNewGameBox, Label difficultyHeader, VBox difficultySliderBox,
+          Label matchCountHeader, VBox spinnerBox, Label advancedOptionsHeader, HBox advancedOptionsBox, VBox playBox) {
         super(menuPane, newGamePopupPane);
         this.closeNewGameBox = closeNewGameBox;
-        this.difficultySliderBox = difficultySliderBox;
         this.difficultyHeader = difficultyHeader;
-        this.spinnerBox = spinnerBox;
+        this.difficultySliderBox = difficultySliderBox;
         this.matchCountHeader = matchCountHeader;
-        this.advancedOptionsBox = advancedOptionsBox;
+        this.spinnerBox = spinnerBox;
         this.advancedOptionsHeader = advancedOptionsHeader;
+        this.advancedOptionsBox = advancedOptionsBox;
         this.playBox = playBox;
     }
 
@@ -63,7 +64,8 @@ public class NewGamePopupFiller extends PopupFiller {
 
     private void fillAdvancedOptionsSection() {
         setHeader(advancedOptionsHeader, "ADVANCED OPTIONS");
-        advancedOptionsBox.setDisable(true);
+        optionCheckBoxGroup = new OptionCheckBoxGroup(advancedOptionsBox);
+        optionCheckBoxGroup.fillGroup();
     }
 
     private void fillPlaySection() {

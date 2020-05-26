@@ -51,6 +51,15 @@
 /* Spinner */
 
 
+/* Checkbox */
+.option-checkbox {
+    -fx-text-fill: #446187;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+
 /* Text Flow */
 .text-flow {
     /*-fx-text-fill: #5282b3;*/

@@ -43,15 +43,13 @@ public class MenuController implements Initializable {
     @FXML
     private VBox difficultySliderBox;
     @FXML
-    private VBox matchCountBox;
-    @FXML
     private Label matchCountHeader;
     @FXML
     private VBox spinnerBox;
     @FXML
-    private VBox advancedOptionsBox;
-    @FXML
     private Label advancedOptionsHeader;
+    @FXML
+    private HBox advancedOptionsBox;
     @FXML
     private VBox playBox;
 
@@ -101,8 +99,8 @@ public class MenuController implements Initializable {
 
     private void fillPopupBoxes() {
         new NewGamePopupFiller(menuPane, newGamePopupPane,
-                closeNewGameBox, difficultySliderBox, difficultyHeader, spinnerBox, matchCountHeader,
-                advancedOptionsBox, advancedOptionsHeader, playBox).fillPopup();
+                closeNewGameBox, difficultyHeader, difficultySliderBox, matchCountHeader, spinnerBox,
+                advancedOptionsHeader, advancedOptionsBox, playBox).fillPopup();
         new HelpPopupFiller(menuPane, helpPopupPane, closeHelpBox, helpHeader, helpText, goalHeader, goalText,
                 ruleHeader, ruleText).fillPopup();
         new ContributePopupFiller(menuPane, contributePopupPane, closeContributeBox,
