@@ -1,10 +1,14 @@
 0 ||| 0 ||| 0
-0 ||| 1-5_percentage.png ||| 1-5 ||| /images/cards/easy/1-5/percentage.png ||| DEFAULT
-1 ||| 3-8_ratio.png ||| 3-8 ||| /images/cards/intermediate/3-8/ratio.png ||| DEFAULT
-2 ||| 7-10_fraction.png ||| 7-10 ||| /images/cards/easy/7-10/fraction.png ||| DEFAULT
-3 ||| 1-5_part.png ||| 1-5 ||| /images/cards/easy/1-5/part.png ||| DEFAULT
-4 ||| 7-10_part.png ||| 7-10 ||| /images/cards/easy/7-10/part.png ||| DEFAULT
-5 ||| 1-4_percentage.png ||| 1-4 ||| /images/cards/easy/1-4/percentage.png ||| DEFAULT
-6 ||| 1-4_fraction.png ||| 1-4 ||| /images/cards/easy/1-4/fraction.png ||| DEFAULT
-7 ||| 3-8_part.png ||| 3-8 ||| /images/cards/intermediate/3-8/part.png ||| DEFAULT
+0 ||| 1-4_ratio ||| 1-4 ||| /images/cards/easy/1-4/ratio.png ||| MATCHED
+1 ||| 3-4_fraction ||| 3-4 ||| /images/cards/easy/3-4/fraction.png ||| MATCHED
+2 ||| 3-4_percentage ||| 3-4 ||| /images/cards/easy/3-4/percentage.png ||| MATCHED
+3 ||| 3-10_ratio ||| 3-10 ||| /images/cards/easy/3-10/ratio.png ||| MATCHED
+4 ||| 2-5_percentage ||| 2-5 ||| /images/cards/easy/2-5/percentage.png ||| MATCHED
+5 ||| 7-10_ratio ||| 7-10 ||| /images/cards/easy/7-10/ratio.png ||| MATCHED
+6 ||| 3-5_fraction ||| 3-5 ||| /images/cards/easy/3-5/fraction.png ||| MATCHED
+7 ||| 1-4_fraction ||| 1-4 ||| /images/cards/easy/1-4/fraction.png ||| MATCHED
+8 ||| 3-10_percentage ||| 3-10 ||| /images/cards/easy/3-10/percentage.png ||| MATCHED
+9 ||| 2-5_fraction ||| 2-5 ||| /images/cards/easy/2-5/fraction.png ||| MATCHED
+10 ||| 7-10_fraction ||| 7-10 ||| /images/cards/easy/7-10/fraction.png ||| MATCHED
+11 ||| 3-5_percentage ||| 3-5 ||| /images/cards/easy/3-5/percentage.png ||| MATCHED
 --- END ---

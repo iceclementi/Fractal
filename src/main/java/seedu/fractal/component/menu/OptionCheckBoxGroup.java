@@ -3,6 +3,8 @@ package seedu.fractal.component.menu;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import seedu.fractal.component.game.GameBoard;
+import seedu.fractal.logic.CardType;
 
 import java.util.HashMap;
 
@@ -29,7 +31,36 @@ public class OptionCheckBoxGroup {
     public OptionCheckBoxGroup(HBox advancedOptionsBox) {
         this.advancedOptionsBox = advancedOptionsBox;
 
-        initialise();
+        initialiseStyle();
+        initialiseAdvancedOptions();
+    }
+
+    /**
+     * Gets the total number of selected options from the checkboxes.
+     *
+     * @return
+     *  The total number of selected options from the checkboxes
+     */
+    public int getNumberOfSelectedOptions() {
+        int numberOfSelectedOptions = 0;
+
+        if (fractionCheckBox.isSelected()) {
+            ++numberOfSelectedOptions;
+        }
+        if (decimalCheckBox.isSelected()) {
+            ++numberOfSelectedOptions;
+        }
+        if (percentageCheckBox.isSelected()) {
+            ++numberOfSelectedOptions;
+        }
+        if (ratioCheckBox.isSelected()) {
+            ++numberOfSelectedOptions;
+        }
+        if (partsCheckBox.isSelected()) {
+            ++numberOfSelectedOptions;
+        }
+
+        return numberOfSelectedOptions;
     }
 
     /**
@@ -45,35 +76,21 @@ public class OptionCheckBoxGroup {
      * @return
      *  A mapping of the box to its corresponding selected value
      */
-    public HashMap<String, Boolean> getSelectedOptions() {
-        HashMap<String, Boolean> advancedOptions = initialiseAdvancedOptions();
+    public HashMap<CardType, Boolean> getSelectedOptions() {
+        HashMap<CardType, Boolean> advancedOptions = new HashMap<>();
 
-        if (fractionCheckBox.isSelected()) {
-            advancedOptions.replace("fraction", true);
-        }
-        if (decimalCheckBox.isSelected()) {
-           advancedOptions.replace("decimal", true);
-        }
-        if (percentageCheckBox.isSelected()) {
-           advancedOptions.replace("percentage", true);
-        }
-        if (ratioCheckBox.isSelected()) {
-           advancedOptions.replace("ratio", true);
-        }
-        if (partsCheckBox.isSelected()) {
-           advancedOptions.replace("parts", true);
-        }
-        if (simplifiedCheckBox.isSelected()) {
-           advancedOptions.replace("simplified", true);
-        }
-        if (properCheckBox.isSelected()) {
-           advancedOptions.replace("proper", true);
-        }
+        advancedOptions.put(CardType.FRACTION, fractionCheckBox.isSelected());
+        advancedOptions.put(CardType.DECIMAL, decimalCheckBox.isSelected());
+        advancedOptions.put(CardType.PERCENTAGE, percentageCheckBox.isSelected());
+        advancedOptions.put(CardType.RATIO, ratioCheckBox.isSelected());
+        advancedOptions.put(CardType.PARTS, partsCheckBox.isSelected());
+        advancedOptions.put(CardType.SIMPLIFIED, simplifiedCheckBox.isSelected());
+        advancedOptions.put(CardType.PROPER, properCheckBox.isSelected());
 
         return advancedOptions;
     }
 
-    private void initialise() {
+    private void initialiseStyle() {
         leftBox = new VBox();
         rightBox = new VBox();
         leftBox.setAlignment(Pos.CENTER_LEFT);
@@ -81,30 +98,30 @@ public class OptionCheckBoxGroup {
         leftBox.setSpacing(5);
         rightBox.setSpacing(5);
 
-        fractionCheckBox = new OptionCheckBox("Fraction");
-        decimalCheckBox = new OptionCheckBox("Decimal");
-        percentageCheckBox = new OptionCheckBox("Percentage");
-        ratioCheckBox = new OptionCheckBox("Ratio");
-        partsCheckBox = new OptionCheckBox("Parts");
+        fractionCheckBox = new OptionCheckBox("Fraction", this);
+        decimalCheckBox = new OptionCheckBox("Decimal", this);
+        percentageCheckBox = new OptionCheckBox("Percentage", this);
+        ratioCheckBox = new OptionCheckBox("Ratio", this);
+        partsCheckBox = new OptionCheckBox("Parts", this);
         leftBox.getChildren().addAll(fractionCheckBox, decimalCheckBox, percentageCheckBox,
                 ratioCheckBox, partsCheckBox);
 
-        simplifiedCheckBox = new OptionCheckBox("Simplified");
-        properCheckBox = new OptionCheckBox("Proper");
+        simplifiedCheckBox = new OptionCheckBox("Simplified", this);
+        properCheckBox = new OptionCheckBox("Proper", this);
+        simplifiedCheckBox.setDisable(true);
+        properCheckBox.setDisable(true);
         rightBox.getChildren().addAll(simplifiedCheckBox, properCheckBox);
     }
 
-    private HashMap<String, Boolean> initialiseAdvancedOptions() {
-        HashMap<String, Boolean> advancedOptions = new HashMap<>();
+    private void initialiseAdvancedOptions() {
+        HashMap<CardType, Boolean> advancedOptions = GameBoard.getInstance().getAdvancedOptions();
 
-        advancedOptions.put("fraction", false);
-        advancedOptions.put("decimal", false);
-        advancedOptions.put("percentage", false);
-        advancedOptions.put("ratio", false);
-        advancedOptions.put("parts", false);
-        advancedOptions.put("simplified", false);
-        advancedOptions.put("proper", false);
-
-        return advancedOptions;
+        fractionCheckBox.setSelected(advancedOptions.get(CardType.FRACTION));
+        decimalCheckBox.setSelected(advancedOptions.get(CardType.DECIMAL));
+        percentageCheckBox.setSelected(advancedOptions.get(CardType.PERCENTAGE));
+        ratioCheckBox.setSelected(advancedOptions.get(CardType.RATIO));
+        partsCheckBox.setSelected(advancedOptions.get(CardType.PARTS));
+        simplifiedCheckBox.setSelected(advancedOptions.get(CardType.SIMPLIFIED));
+        properCheckBox.setSelected(advancedOptions.get(CardType.PROPER));
     }
 }

@@ -1,15 +1,15 @@
 package seedu.fractal.logic;
 
 import seedu.fractal.storage.FilePath;
+import seedu.fractal.util.CardUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Random;
 
 public class CardGenerator {
 
-    private static final String[] CARD_TYPES = {
-        "fraction.png", "percentage.png", "decimal.png", "part.png", "ratio.png"};
     private static final String[] EASY_CARD_VALUES = {
         "1-2", "1-4", "3-4", "1-5", "2-5", "3-5", "4-5", "1-10", "3-10", "7-10", "9-10"};
     private static final String[] INTERMEDIATE_CARD_VALUES = {
@@ -19,25 +19,28 @@ public class CardGenerator {
     private static final String[] GENIUS_CARD_VALUES = {
         "1-7", "2-7", "3-7", "4-7", "5-7", "6-7"};
 
-    private int matchCount;
+    private ArrayList<String> cardTypes = new ArrayList<>();
+
     private Difficulty difficulty;
-    private boolean hasFraction = true;
-    private boolean hasPercentage = true;
-    private boolean hasDecimal = true;
-    private boolean hasPart = true;
-    private boolean hasRatio = true;
+    private int numberOfMatches;
+    private HashMap<CardType, Boolean> advancedOptions;
 
     /**
      * Constructor for the card generator.
      *
-     * @param matchCount
-     *  The number of card matches
      * @param difficulty
      *  The difficulty of the game
+     * @param numberOfMatches
+     *  The number of card matches
+     * @param advancedOptions
+     *  The advanced options to determine the type of cards to generate
      */
-    public CardGenerator(int matchCount, Difficulty difficulty) {
-        this.matchCount = matchCount;
+    public CardGenerator(Difficulty difficulty, int numberOfMatches, HashMap<CardType, Boolean> advancedOptions) {
         this.difficulty = difficulty;
+        this.numberOfMatches = numberOfMatches;
+        this.advancedOptions = advancedOptions;
+
+        initialiseCardTypes();
     }
 
     /**
@@ -51,26 +54,39 @@ public class CardGenerator {
 
         switch (difficulty) {
         case EASY:
-            cards = generateEasyCards(matchCount);
+            cards = generateEasyCards(numberOfMatches);
             break;
         case INTERMEDIATE:
-            cards = generateIntermediateCards(matchCount, true);
+            cards = generateIntermediateCards(numberOfMatches, true);
             break;
         case ADVANCED:
-            cards = generateAdvancedCards(matchCount, true);
+            cards = generateAdvancedCards(numberOfMatches, true);
             break;
         case GENIUS:
-            cards = generateGeniusCards(matchCount);
+            cards = generateGeniusCards(numberOfMatches);
             break;
         default:
             System.out.println("CardGenerator: Unable to generate cards of specified difficulty.\n"
                     + "Generating easy cards instead...");
-            cards = generateEasyCards(matchCount);
+            cards = generateEasyCards(numberOfMatches);
         }
 
         Collections.shuffle(cards);
 
         return cards;
+    }
+
+    /**
+     * Initialises the list of card types to choose from for the game.
+     */
+    private void initialiseCardTypes() {
+        for (CardType cardType : CardUtil.NORMAL_CARD_TYPES) {
+            if (advancedOptions.get(cardType)) {
+                cardTypes.add(cardType.name().toLowerCase());
+            }
+        }
+
+        assert cardTypes.size() >= 2 : "CardGenerator: Insufficient types of cards.";
     }
 
     /**
@@ -200,9 +216,9 @@ public class CardGenerator {
         ArrayList<Card> cardList = new ArrayList<>();
 
         for (String cardValue : cardValues) {
-            for (Integer index : selectRandom(CARD_TYPES.length, 2)) {
-                String cardName = String.format("%s_%s", cardValue, CARD_TYPES[index]);
-                String imagePath = String.format("%s/%s/%s", difficultyPath, cardValue, CARD_TYPES[index]);
+            for (Integer index : selectRandom(cardTypes.size(), 2)) {
+                String cardName = String.format("%s_%s", cardValue, cardTypes.get(index));
+                String imagePath = String.format("%s/%s/%s.png", difficultyPath, cardValue, cardTypes.get(index));
 
                 cardList.add(new Card(cardName, cardValue, imagePath));
             }

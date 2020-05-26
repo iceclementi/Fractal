@@ -84,8 +84,8 @@ public class MenuController implements Initializable {
         /* Load game */
         Storage.loadGameDetails();
 
-        logoBox.getChildren().add(new LogoButton());
         menuPane.setBackground(SceneUtil.generateBackground(FilePath.BACKGROUND_IMAGE_PATH));
+        logoBox.getChildren().add(new LogoButton());
 
         MenuButton newGameButton = new NewGameButton(menuPane, newGamePopupPane);
         MenuButton continueButton = new ContinueButton();

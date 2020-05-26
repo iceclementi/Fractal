@@ -3,6 +3,7 @@ package seedu.fractal.component.menu;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import seedu.fractal.component.game.GameBoard;
+import seedu.fractal.storage.FilePath;
 
 public class MatchCountSpinner extends Spinner<Integer> {
 
@@ -25,9 +26,16 @@ public class MatchCountSpinner extends Spinner<Integer> {
         this.difficultySlider = difficultySlider;
 
         initialiseStyle();
+        initialiseEvents();
     }
 
     private void initialiseStyle() {
+        getStylesheets().add(getClass().getResource(FilePath.MENU_STYLE_PATH).toExternalForm());
+        getStyleClass().add("match-count-spinner");
+        getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
+    }
+
+    private void initialiseEvents() {
         SpinnerValueFactory.IntegerSpinnerValueFactory spinnerValueFactory =
                 (SpinnerValueFactory.IntegerSpinnerValueFactory) getValueFactory();
 

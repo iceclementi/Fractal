@@ -98,6 +98,7 @@ public class CardButton extends Button {
         /* Set dimensions */
         setPrefHeight(160);
         setPrefWidth(120);
+        prefWidthProperty().bind(heightProperty().multiply(0.75));
 
         /* Set card back image */
         if (cardBack == null) {

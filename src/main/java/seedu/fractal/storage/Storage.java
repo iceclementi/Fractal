@@ -4,6 +4,7 @@ import seedu.fractal.component.game.CardButton;
 import seedu.fractal.component.game.CardStatus;
 import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.logic.Card;
+import seedu.fractal.logic.CardType;
 import seedu.fractal.logic.Difficulty;
 
 import java.io.BufferedReader;
@@ -22,9 +23,6 @@ public class Storage {
     private static final String DIVIDER = " ||| ";
     private static final String NEWLINE = "\n";
     private static final String END = "--- END ---";
-    private static final String[] ADVANCED_OPTIONS = {
-            "fraction", "decimal", "percentage", "ratio", "parts", "simplified", "proper"
-    };
 
     private static final GameBoard gameBoard = GameBoard.getInstance();
 
@@ -41,7 +39,7 @@ public class Storage {
      *  Checks if the game is ongoing
      */
     public static void saveGameDetails(Difficulty difficulty, int numberOfMatches,
-           HashMap<String, Boolean> isSelected, boolean isOngoing) {
+            HashMap<CardType, Boolean> isSelected, boolean isOngoing) {
         saveToFile(FilePath.GAME_DETAILS_STORAGE_PATH,
                 generateGameDetailsContent(difficulty, numberOfMatches, isSelected, isOngoing));
     }
@@ -60,15 +58,13 @@ public class Storage {
             Difficulty difficulty = Difficulty.valueOf(gameDetails[0]);
             int numberOfMatches = Integer.parseInt(gameDetails[1]);
 
-            String[] advancedOptionsString = splitString(contentLines[1], DIVIDER, 7);
-            HashMap<String, Boolean> advancedOptions = new HashMap<>();
-            advancedOptions.put("fraction", Boolean.parseBoolean(advancedOptionsString[0]));
-            advancedOptions.put("decimal", Boolean.parseBoolean(advancedOptionsString[1]));
-            advancedOptions.put("percentage", Boolean.parseBoolean(advancedOptionsString[2]));
-            advancedOptions.put("ratio", Boolean.parseBoolean(advancedOptionsString[3]));
-            advancedOptions.put("parts", Boolean.parseBoolean(advancedOptionsString[4]));
-            advancedOptions.put("simplified", Boolean.parseBoolean(advancedOptionsString[5]));
-            advancedOptions.put("proper", Boolean.parseBoolean(advancedOptionsString[6]));
+            CardType[] cardTypes = CardType.values();
+            String[] advancedOptionsString = splitString(contentLines[1], DIVIDER, cardTypes.length);
+
+            HashMap<CardType, Boolean> advancedOptions = new HashMap<>();
+            for (int i = 0; i < cardTypes.length; ++i) {
+                advancedOptions.put(cardTypes[i], Boolean.parseBoolean(advancedOptionsString[i]));
+            }
 
             gameBoard.setDetails(difficulty, numberOfMatches, advancedOptions);
 
@@ -127,16 +123,17 @@ public class Storage {
     }
 
     private static String generateGameDetailsContent(Difficulty difficulty, int numberOfMatches,
-             HashMap<String, Boolean> isSelected, boolean isOngoing) {
+             HashMap<CardType, Boolean> isSelected, boolean isOngoing) {
         StringBuilder gameDetailsContent = new StringBuilder();
 
         gameDetailsContent.append(String.format("%s%s%s\n", difficulty.name(), DIVIDER, numberOfMatches));
 
-        for (int i = 0; i < ADVANCED_OPTIONS.length; ++i) {
+        CardType[] cardTypes = CardType.values();
+        for (int i = 0; i < cardTypes.length; ++i) {
             if (i != 0) {
                 gameDetailsContent.append(DIVIDER);
             }
-            gameDetailsContent.append(isSelected.get(ADVANCED_OPTIONS[i]));
+            gameDetailsContent.append(isSelected.get(cardTypes[i]));
         }
 
         gameDetailsContent.append(String.format("\n%s\n%s", isOngoing, END));

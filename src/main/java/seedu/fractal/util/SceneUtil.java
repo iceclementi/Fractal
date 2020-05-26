@@ -29,12 +29,12 @@ public class SceneUtil {
             double previousWidth = stage.getWidth();
             double previousHeight = stage.getHeight();
 
-            stage.setWidth(Math.max(nextScene.getWidth(), previousWidth));
-            stage.setHeight(Math.max(nextScene.getHeight(), previousHeight));
             stage.setScene(nextScene);
 
             stage.show();
 
+            stage.setWidth(Math.max(nextScene.getWidth(), previousWidth));
+            stage.setHeight(Math.max(nextScene.getHeight(), previousHeight));
             centreScene(stage);
         } catch (IOException e) {
             System.out.println("Error changing scene!");

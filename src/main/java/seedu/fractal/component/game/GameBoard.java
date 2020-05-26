@@ -1,6 +1,7 @@
 package seedu.fractal.component.game;
 
 import javafx.scene.control.Label;
+import seedu.fractal.logic.CardType;
 import seedu.fractal.logic.Difficulty;
 import seedu.fractal.storage.Storage;
 
@@ -12,7 +13,7 @@ public class GameBoard {
     /* Game details */
     private Difficulty difficulty = Difficulty.EASY;
     private int numberOfMatches = 4;
-    private HashMap<String, Boolean> advancedOptions = new HashMap<>();
+    private HashMap<CardType, Boolean> advancedOptions = new HashMap<>();
 
     /* Current game information */
     private int matchedCardCount = 0;
@@ -59,7 +60,11 @@ public class GameBoard {
         return numberOfMatches;
     }
 
-    public void setDetails(Difficulty difficulty, int numberOfMatches, HashMap<String, Boolean> advancedOptions) {
+    public HashMap<CardType, Boolean> getAdvancedOptions() {
+        return advancedOptions;
+    }
+
+    public void setDetails(Difficulty difficulty, int numberOfMatches, HashMap<CardType, Boolean> advancedOptions) {
         this.difficulty = difficulty;
         this.numberOfMatches = numberOfMatches;
         this.advancedOptions = advancedOptions;
@@ -72,13 +77,13 @@ public class GameBoard {
         difficulty = Difficulty.EASY;
         numberOfMatches = 4;
 
-        advancedOptions.put("fraction", true);
-        advancedOptions.put("decimal", true);
-        advancedOptions.put("percentage", true);
-        advancedOptions.put("ratio", true);
-        advancedOptions.put("parts", true);
-        advancedOptions.put("simplified", false);
-        advancedOptions.put("proper", false);
+        advancedOptions.put(CardType.FRACTION, true);
+        advancedOptions.put(CardType.DECIMAL, true);
+        advancedOptions.put(CardType.PERCENTAGE, true);
+        advancedOptions.put(CardType.RATIO, true);
+        advancedOptions.put(CardType.PARTS, true);
+        advancedOptions.put(CardType.SIMPLIFIED, false);
+        advancedOptions.put(CardType.PROPER, false);
     }
 
 

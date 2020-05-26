@@ -1,0 +1,11 @@
+package seedu.fractal.logic;
+
+public enum CardType {
+    FRACTION,
+    DECIMAL,
+    PERCENTAGE,
+    RATIO,
+    PARTS,
+    SIMPLIFIED,
+    PROPER
+}
