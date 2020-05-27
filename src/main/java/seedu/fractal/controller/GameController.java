@@ -8,6 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 import seedu.fractal.component.game.BackButton;
 import seedu.fractal.component.game.CancelButton;
 import seedu.fractal.component.game.CardButton;
@@ -40,6 +44,15 @@ public class GameController implements Initializable {
     @FXML
     private Label matchCounter;
 
+    @FXML
+    private GridPane errorPane;
+    @FXML
+    private Label errorHeader;
+    @FXML
+    private VBox errorBox;
+    @FXML
+    private TextFlow errorText;
+
     private GameBoard gameBoard = GameBoard.getInstance();
     private ArrayList<HBox> cardRows = new ArrayList<>();
 
@@ -50,9 +63,15 @@ public class GameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         gamePane.setBackground(SceneUtil.generateBackground(FilePath.BACKGROUND_IMAGE_PATH));
+        initialiseError();
 
         Storage.loadGameDetails();
-        Storage.loadGame();
+        try {
+            Storage.loadGame();
+        } catch (Exception e) {
+            errorPane.setVisible(true);
+            return;
+        }
 
         BackButton backButton = new BackButton();
         controlBox.getChildren().addAll(backButton);
@@ -111,5 +130,24 @@ public class GameController implements Initializable {
         }
 
         return cardButtons;
+    }
+
+    private void initialiseError() {
+        errorHeader.getStylesheets().add(getClass().getResource(FilePath.MENU_STYLE_PATH).toExternalForm());
+        errorHeader.getStyleClass().add("popup-header");
+        errorHeader.setText("ERROR!");
+
+        Text text = new Text("There was an error when loading the game. Please return and start a new game.");
+        text.setFill(Color.LIGHTSLATEGREY);
+        errorText.getStylesheets().add(getClass().getResource(FilePath.MENU_STYLE_PATH).toExternalForm());
+        errorText.getStyleClass().add("text-flow");
+
+        errorText.setTextAlignment(TextAlignment.CENTER);
+        errorText.getChildren().clear();
+        errorText.getChildren().add(text);
+
+        BackButton backButton = new BackButton();
+        backButton.setMaxHeight(20);
+        errorBox.getChildren().add(backButton);
     }
 }

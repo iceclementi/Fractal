@@ -79,7 +79,7 @@ public class Storage {
         }
     }
 
-    public static void loadGame() {
+    public static void loadGame() throws Exception {
         // No game is ongoing
         if (!gameBoard.isOngoing()) {
             return;
@@ -107,7 +107,7 @@ public class Storage {
             gameBoard.setOngoing(true);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            // loadDefaultGameDetails();
+            throw new Exception();
         }
     }
 

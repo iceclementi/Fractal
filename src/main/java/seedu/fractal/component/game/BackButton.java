@@ -34,7 +34,6 @@ public class BackButton extends MenuButton {
 
     private void onRelease(MouseEvent mouseEvent) {
         reset();
-        Storage.saveGame();
         SceneUtil.changeScene(this, FilePath.MENU_SCENE_PATH);
     }
 }
