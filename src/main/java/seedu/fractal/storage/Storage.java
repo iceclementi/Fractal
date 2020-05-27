@@ -24,6 +24,9 @@ public class Storage {
     private static final String NEWLINE = "\n";
     private static final String END = "--- END ---";
 
+    private static final String SECRET_KEY = "TYASRG_Frac/Tal_Game";
+    private static final CryptoUtil crypto = new CryptoUtil(SECRET_KEY);
+
     private static final GameBoard gameBoard = GameBoard.getInstance();
 
     /**
@@ -40,12 +43,12 @@ public class Storage {
      */
     public static void saveGameDetails(Difficulty difficulty, int numberOfMatches,
             HashMap<CardType, Boolean> isSelected, boolean isOngoing) {
-        saveToFile(FilePath.GAME_DETAILS_STORAGE_PATH,
-                generateGameDetailsContent(difficulty, numberOfMatches, isSelected, isOngoing));
+        saveToFile(generateGameDetailsContent(difficulty, numberOfMatches, isSelected, isOngoing),
+                FilePath.GAME_DETAILS_STORAGE_PATH);
     }
 
     public static void saveGame() {
-        saveToFile(FilePath.GAME_STORAGE_PATH, generateGameBoardContent());
+        saveToFile(generateGameBoardContent(), FilePath.GAME_STORAGE_PATH);
         // Save time?
     }
 
@@ -77,7 +80,6 @@ public class Storage {
     }
 
     public static void loadGame() {
-
         // No game is ongoing
         if (!gameBoard.isOngoing()) {
             return;
@@ -109,12 +111,15 @@ public class Storage {
         }
     }
 
-    private static void saveToFile(String filePath, String content) {
+    private static void saveToFile(String content, String filePath) {
         try {
             File saveFile = new File(filePath);
             saveFile.getParentFile().mkdirs();
             FileWriter fileWriter = new FileWriter(saveFile);
+
+            fileWriter.write(String.format("%s\n", crypto.generateHash(content)));
             fileWriter.write(content);
+
             fileWriter.flush();
             fileWriter.close();
         } catch (Exception e) {
@@ -165,12 +170,18 @@ public class Storage {
         FileReader fileReader = new FileReader(filePath);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
+        String hash = bufferedReader.readLine();
         String content = bufferedReader.lines().collect(Collectors.joining(NEWLINE));
 
         bufferedReader.close();
         fileReader.close();
 
-        return content;
+        if (crypto.isNotCorrupted(content, hash)) {
+            return content;
+        } else {
+            System.out.println("Storage: Storage file is corrupted.");
+            throw new Exception("Storage: Storage file is corrupted.");
+        }
     }
 
     private static void loadDefaultGameDetails() {
