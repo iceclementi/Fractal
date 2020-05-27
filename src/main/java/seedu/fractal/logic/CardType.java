@@ -5,7 +5,7 @@ public enum CardType {
     DECIMAL,
     PERCENTAGE,
     RATIO,
-    PARTS,
+    PART,
     SIMPLIFIED,
     PROPER
 }

@@ -83,7 +83,7 @@ public class OptionCheckBoxGroup {
         advancedOptions.put(CardType.DECIMAL, decimalCheckBox.isSelected());
         advancedOptions.put(CardType.PERCENTAGE, percentageCheckBox.isSelected());
         advancedOptions.put(CardType.RATIO, ratioCheckBox.isSelected());
-        advancedOptions.put(CardType.PARTS, partsCheckBox.isSelected());
+        advancedOptions.put(CardType.PART, partsCheckBox.isSelected());
         advancedOptions.put(CardType.SIMPLIFIED, simplifiedCheckBox.isSelected());
         advancedOptions.put(CardType.PROPER, properCheckBox.isSelected());
 
@@ -108,7 +108,6 @@ public class OptionCheckBoxGroup {
 
         simplifiedCheckBox = new OptionCheckBox("Simplified", this);
         properCheckBox = new OptionCheckBox("Proper", this);
-        simplifiedCheckBox.setDisable(true);
         properCheckBox.setDisable(true);
         rightBox.getChildren().addAll(simplifiedCheckBox, properCheckBox);
     }
@@ -120,8 +119,9 @@ public class OptionCheckBoxGroup {
         decimalCheckBox.setSelected(advancedOptions.get(CardType.DECIMAL));
         percentageCheckBox.setSelected(advancedOptions.get(CardType.PERCENTAGE));
         ratioCheckBox.setSelected(advancedOptions.get(CardType.RATIO));
-        partsCheckBox.setSelected(advancedOptions.get(CardType.PARTS));
+        partsCheckBox.setSelected(advancedOptions.get(CardType.PART));
         simplifiedCheckBox.setSelected(advancedOptions.get(CardType.SIMPLIFIED));
-        properCheckBox.setSelected(advancedOptions.get(CardType.PROPER));
+        // properCheckBox.setSelected(advancedOptions.get(CardType.PROPER));
+        properCheckBox.setSelected(true);
     }
 }

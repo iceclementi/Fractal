@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 public class CardGenerator {
 
@@ -216,15 +217,85 @@ public class CardGenerator {
         ArrayList<Card> cardList = new ArrayList<>();
 
         for (String cardValue : cardValues) {
-            for (Integer index : selectRandom(cardTypes.size(), 2)) {
-                String cardName = String.format("%s_%s", cardValue, cardTypes.get(index));
-                String imagePath = String.format("%s/%s/%s.png", difficultyPath, cardValue, cardTypes.get(index));
+            for (Integer index : selectRandomNumberList(cardTypes.size(), 2)) {
+                if (advancedOptions.get(CardType.SIMPLIFIED)) {
+                    String cardName = String.format("%s_%s", cardValue, cardTypes.get(index));
+                    String imagePath = String.format("%s/%s/%s.png", difficultyPath, cardValue, cardTypes.get(index));
 
-                cardList.add(new Card(cardName, cardValue, imagePath));
+                    cardList.add(new Card(cardName, cardValue, imagePath));
+                } else {
+                    String unsimplifiedCardValue = selectUnsimplified(cardValue, cardTypes.get(index));
+                    String cardName = String.format("%s_%s", cardValue, unsimplifiedCardValue);
+                    String imagePath = String.format("%s/%s/%s.png", difficultyPath, cardValue, unsimplifiedCardValue);
+
+                    cardList.add(new Card(cardName, cardValue, imagePath));
+                }
             }
         }
 
         return cardList;
+    }
+
+    /**
+     * Selects the unsimplified version of the card value if possible.
+     *
+     * @param cardValue
+     *  The value of the card to be selected
+     * @param cardType
+     *  The type of card to be selected
+     * @return
+     *  The unsimplified version of the card value if possible, otherwise the simplified card value
+     */
+    private String selectUnsimplified(String cardValue, String cardType) {
+        switch (CardType.valueOf(cardType.toUpperCase())) {
+        case FRACTION:
+        case RATIO:
+        case PART:
+            return selectRandomUnsimplified(cardValue, cardType);
+
+        case DECIMAL:
+        case PERCENTAGE:
+            return cardType;
+
+        default:
+            System.out.println("CardGenerator: Unknown card type... Using original card type.");
+            return cardType;
+        }
+    }
+
+    /**
+     * Selects a random unsimplified version of the card value at 80% probability.
+     *
+     * @param cardValue
+     *  The value of the card to be selected
+     * @param cardType
+     *  The type of card to be selected
+     * @return
+     *  A random unsimplified version of the card value, otherwise the simplified card value
+     */
+    private String selectRandomUnsimplified(String cardValue, String cardType) {
+        /* 25% chance of being simplified */
+        if (selectRandomNumber(0, 4) == 0) {
+            return cardType;
+        }
+
+        String[] splitValue = cardValue.split(Pattern.quote("-"));
+        assert splitValue.length == 2 : "CardGenerator: Length of split card value must be 2.";
+
+        int numerator = Integer.parseInt(splitValue[0]);
+        int denominator = Integer.parseInt(splitValue[1]);
+
+        if (denominator > 5) {
+            return cardType;
+        } else {
+            int multiplier = selectRandomNumber(1, 10 / denominator);
+
+            if (multiplier == 1) {
+                return cardType;
+            } else {
+                return String.format("%s_%d-%d", cardType, numerator * multiplier, denominator * multiplier);
+            }
+        }
     }
 
     /**
@@ -240,7 +311,7 @@ public class CardGenerator {
     private ArrayList<String> selectRandomCardValues(String[] cardValues, int count) {
         ArrayList<String> selectedCardValues = new ArrayList<>();
 
-        for (Integer index : selectRandom(cardValues.length, count)) {
+        for (Integer index : selectRandomNumberList(cardValues.length, count)) {
             selectedCardValues.add(cardValues[index]);
         }
 
@@ -257,7 +328,7 @@ public class CardGenerator {
      * @return
      *  A list of n random numbers
      */
-    private ArrayList<Integer> selectRandom(int upperLimit, int n) {
+    private ArrayList<Integer> selectRandomNumberList(int upperLimit, int n) {
         assert n <= upperLimit : "Cannot select sufficient numbers.";
 
         ArrayList<Integer> randomNumbers = new ArrayList<>();

@@ -81,9 +81,9 @@ public class GameBoard {
         advancedOptions.put(CardType.DECIMAL, true);
         advancedOptions.put(CardType.PERCENTAGE, true);
         advancedOptions.put(CardType.RATIO, true);
-        advancedOptions.put(CardType.PARTS, true);
-        advancedOptions.put(CardType.SIMPLIFIED, false);
-        advancedOptions.put(CardType.PROPER, false);
+        advancedOptions.put(CardType.PART, true);
+        advancedOptions.put(CardType.SIMPLIFIED, true);
+        advancedOptions.put(CardType.PROPER, true);
     }
 
 

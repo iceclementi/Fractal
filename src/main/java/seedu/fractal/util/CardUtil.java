@@ -14,7 +14,7 @@ public class CardUtil {
     public static final String PROPER = "proper";
 
     public static final CardType[] NORMAL_CARD_TYPES = {CardType.FRACTION, CardType.DECIMAL,
-            CardType.PERCENTAGE, CardType.RATIO, CardType.PARTS};
+            CardType.PERCENTAGE, CardType.RATIO, CardType.PART};
     public static final CardType[] EXTRA_CARD_TYPES = {CardType.SIMPLIFIED, CardType.PROPER};
 
     public static final HashMap<String, Integer> FROM_CARD_TYPE = new HashMap<>() {
