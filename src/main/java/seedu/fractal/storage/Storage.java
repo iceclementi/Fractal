@@ -24,7 +24,7 @@ public class Storage {
     private static final String NEWLINE = "\n";
     private static final String END = "--- END ---";
 
-    private static final String SECRET_KEY = "TYASRG_Frac/Tal_Game";
+    private static final String SECRET_KEY = "09e02e05884104fde23b971db8c6d6e8e2eccefbaf8c3112113b828a0d4af3e7";
     private static final CryptoUtil crypto = new CryptoUtil(SECRET_KEY);
 
     private static final GameBoard gameBoard = GameBoard.getInstance();
@@ -118,7 +118,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(saveFile);
 
             fileWriter.write(String.format("%s\n", crypto.generateHash(content)));
-            fileWriter.write(content);
+            fileWriter.write(crypto.encrypt(content));
 
             fileWriter.flush();
             fileWriter.close();
@@ -171,10 +171,12 @@ public class Storage {
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
         String hash = bufferedReader.readLine();
-        String content = bufferedReader.lines().collect(Collectors.joining(NEWLINE));
+        String encryptedContent = bufferedReader.lines().collect(Collectors.joining(NEWLINE));
 
         bufferedReader.close();
         fileReader.close();
+
+        String content = crypto.decrypt(encryptedContent);
 
         if (crypto.isNotCorrupted(content, hash)) {
             return content;

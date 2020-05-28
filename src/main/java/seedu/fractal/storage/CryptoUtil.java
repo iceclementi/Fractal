@@ -1,6 +1,12 @@
 package seedu.fractal.storage;
 
-import javax.crypto.*;
+import javax.crypto.Cipher;
+import javax.crypto.CipherInputStream;
+import javax.crypto.CipherOutputStream;
+import javax.crypto.Mac;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -10,18 +16,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Base64;
 import java.util.Formatter;
 import java.util.stream.Collectors;
-
-import static javax.xml.crypto.dsig.DigestMethod.SHA3_256;
 
 public class CryptoUtil {
 
@@ -124,6 +126,34 @@ public class CryptoUtil {
             System.out.println("CryptoUtil: Error reading from file.");
             throw new Exception("CryptoUtil: Error reading from file.");
         }
+    }
+
+    /**
+     * Encrypts the plaintext via a rather bad encryption scheme.
+     *
+     * @param plaintext
+     *  The plaintext to be encrypted
+     * @return
+     *  The encrypted data
+     */
+    public String encrypt(String plaintext) {
+        String encryptedData = plaintext;
+
+        for (int i = 0; i < 5; ++i) {
+            encryptedData = Base64.getEncoder().encodeToString(encryptedData.getBytes());
+        }
+
+        return encryptedData;
+    }
+
+    public String decrypt(String encryptedData) {
+        byte[] plaintext = encryptedData.getBytes();
+
+        for (int i = 0; i < 5; ++i) {
+            plaintext = Base64.getDecoder().decode(plaintext);
+        }
+
+        return new String(plaintext);
     }
 
     /**
