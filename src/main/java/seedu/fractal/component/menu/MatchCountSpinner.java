@@ -7,11 +7,11 @@ import seedu.fractal.storage.FilePath;
 
 public class MatchCountSpinner extends Spinner<Integer> {
 
-    private static final int EASY_MAX = 11;
-    private static final int INTERMEDIATE_MAX = 17;
+    private static final int EASY_MAX = 10;
+    private static final int INTERMEDIATE_MAX = 15;
     private static final int ADVANCED_MAX = 20;
     private static final int GENIUS_MAX = 20;
-    private static final int DEFAULT_MAX = 11;
+    private static final int DEFAULT_MAX = 10;
 
     private DifficultySlider difficultySlider;
 
@@ -22,7 +22,7 @@ public class MatchCountSpinner extends Spinner<Integer> {
      *  The difficulty slider in the new game popup
      */
     public MatchCountSpinner(DifficultySlider difficultySlider) {
-        super(2, 11, 4);
+        super(2, DEFAULT_MAX, 4);
         this.difficultySlider = difficultySlider;
 
         initialiseStyle();

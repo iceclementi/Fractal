@@ -3,10 +3,7 @@ package seedu.fractal.logic;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.CardUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class CardGenerator {
@@ -20,7 +17,14 @@ public class CardGenerator {
     private static final String[] GENIUS_CARD_VALUES = {
         "1-7", "2-7", "3-7", "4-7", "5-7", "6-7"};
 
+    private static final String[] INTERMEDIATE_BIG_CARD_VALUES = {
+        "1-20", "3-20", "7-20", "9-20", "11-20", "13-20", "17-20", "19-20"};
+
     private ArrayList<String> cardTypes = new ArrayList<>();
+    private ArrayList<String> easyCardValues = new ArrayList<>();
+    private ArrayList<String> intermediateCardValues = new ArrayList<>();
+    private ArrayList<String> advancedCardValues = new ArrayList<>();
+    private ArrayList<String> geniusCardValues = new ArrayList<>();
 
     private Difficulty difficulty;
     private int numberOfMatches;
@@ -42,6 +46,7 @@ public class CardGenerator {
         this.advancedOptions = advancedOptions;
 
         initialiseCardTypes();
+        initialiseCardValues();
     }
 
     /**
@@ -91,6 +96,31 @@ public class CardGenerator {
     }
 
     /**
+     * Initialises the list of card values to choose from for the game.
+     */
+    private void initialiseCardValues() {
+        easyCardValues.addAll(Arrays.asList(EASY_CARD_VALUES));
+        intermediateCardValues.addAll(Arrays.asList(INTERMEDIATE_CARD_VALUES));
+        advancedCardValues.addAll(Arrays.asList(ADVANCED_CARD_VALUES));
+        geniusCardValues.addAll(Arrays.asList(GENIUS_CARD_VALUES));
+
+        if (isBigNumberPossible()) {
+            intermediateCardValues.addAll(Arrays.asList(INTERMEDIATE_BIG_CARD_VALUES));
+        }
+    }
+
+    /**
+     * Checks if a card value with denominator greater than 10 is possible.
+     *
+     * @return
+     *  True if a card value with denominator greater than 10 is possible, or false otherwise
+     */
+    private boolean isBigNumberPossible() {
+        // No cards with part card type for big card values
+        return !(cardTypes.size() == 2 && cardTypes.contains(CardType.PART.name().toLowerCase()));
+    }
+
+    /**
      * Generates the required number of cards as a list for Easy difficulty.
      *
      * @param numberOfMatches
@@ -99,7 +129,7 @@ public class CardGenerator {
      *  A list of cards to be used for the game
      */
     private ArrayList<Card> generateEasyCards(int numberOfMatches) {
-        return generatePreferredCardList(EASY_CARD_VALUES, numberOfMatches, numberOfMatches, FilePath.CARD_EASY_PATH);
+        return generatePreferredCardList(easyCardValues, numberOfMatches, numberOfMatches, FilePath.CARD_EASY_PATH);
     }
 
     /**
@@ -116,7 +146,7 @@ public class CardGenerator {
         // At least one-third of cards should be of intermediate level if possible
         int lowerLimit = (numberOfMatches / 3 == 0 && isNotZero) ? 1 : numberOfMatches / 3;
 
-        ArrayList<Card> selectedIntermediateCards = generatePreferredCardList(INTERMEDIATE_CARD_VALUES,
+        ArrayList<Card> selectedIntermediateCards = generatePreferredCardList(intermediateCardValues,
                 lowerLimit, numberOfMatches, FilePath.CARD_INTERMEDIATE_PATH);
 
         int easyCardsCount = numberOfMatches - selectedIntermediateCards.size() / 2;
@@ -143,7 +173,7 @@ public class CardGenerator {
         // At least one-fourth of cards should be of advanced level if possible and greater than 0
         int lowerLimit = (numberOfMatches / 4 == 0 && isNotZero) ? 1 : numberOfMatches / 4;
 
-        ArrayList<Card> selectedAdvancedCards = generatePreferredCardList(ADVANCED_CARD_VALUES,
+        ArrayList<Card> selectedAdvancedCards = generatePreferredCardList(advancedCardValues,
                 lowerLimit, numberOfMatches, FilePath.CARD_ADVANCED_PATH);
 
         int intermediateCardsCount = numberOfMatches - selectedAdvancedCards.size() / 2;
@@ -168,7 +198,7 @@ public class CardGenerator {
         // At least one-fifth of cards should be of advanced level if possible and greater than 0
         int lowerLimit = (numberOfMatches / 5 == 0) ? 1 : numberOfMatches / 5;
 
-        ArrayList<Card> selectedGeniusCards = generatePreferredCardList(GENIUS_CARD_VALUES,
+        ArrayList<Card> selectedGeniusCards = generatePreferredCardList(geniusCardValues,
                 lowerLimit, numberOfMatches, FilePath.CARD_GENIUS_PATH);
 
         int advancedCardsCount = numberOfMatches - selectedGeniusCards.size() / 2;
@@ -196,8 +226,8 @@ public class CardGenerator {
      *  A list of constructed cards with a size that is preferably within the range
      */
     private ArrayList<Card> generatePreferredCardList(
-            String[] cardValues, int preferredLowerLimit, int upperLimit, String difficultyPath) {
-        int cardCount = selectBestRandomNumber(preferredLowerLimit, upperLimit, cardValues.length);
+            ArrayList<String> cardValues, int preferredLowerLimit, int upperLimit, String difficultyPath) {
+        int cardCount = selectBestRandomNumber(preferredLowerLimit, upperLimit, cardValues.size());
         ArrayList<String> selectedCardValues = selectRandomCardValues(cardValues, cardCount);
 
         return generateCardList(selectedCardValues, difficultyPath);
@@ -217,14 +247,16 @@ public class CardGenerator {
         ArrayList<Card> cardList = new ArrayList<>();
 
         for (String cardValue : cardValues) {
-            for (Integer index : selectRandomNumberList(cardTypes.size(), 2)) {
+            ArrayList<String> supportedCardTypes = generateSupportedCardTypeList(cardValue);
+            for (Integer index : selectRandomNumberList(supportedCardTypes.size(), 2)) {
                 if (advancedOptions.get(CardType.SIMPLIFIED)) {
-                    String cardName = String.format("%s_%s", cardValue, cardTypes.get(index));
-                    String imagePath = String.format("%s/%s/%s.png", difficultyPath, cardValue, cardTypes.get(index));
+                    String cardName = String.format("%s_%s", cardValue, supportedCardTypes.get(index));
+                    String imagePath = String.format("%s/%s/%s.png",
+                            difficultyPath, cardValue, supportedCardTypes.get(index));
 
                     cardList.add(new Card(cardName, cardValue, imagePath));
                 } else {
-                    String unsimplifiedCardValue = selectUnsimplified(cardValue, cardTypes.get(index));
+                    String unsimplifiedCardValue = selectUnsimplified(cardValue, supportedCardTypes.get(index));
                     String cardName = String.format("%s_%s", cardValue, unsimplifiedCardValue);
                     String imagePath = String.format("%s/%s/%s.png", difficultyPath, cardValue, unsimplifiedCardValue);
 
@@ -234,6 +266,62 @@ public class CardGenerator {
         }
 
         return cardList;
+    }
+
+    /**
+     * Selects a given number of random card values from a list.
+     *
+     * @param cardValues
+     *  The list of card values to be randomly selected
+     * @param count
+     *  The number of card values to be selected
+     * @return
+     *  A list of the given number of random card values
+     */
+    private ArrayList<String> selectRandomCardValues(ArrayList<String> cardValues, int count) {
+        ArrayList<String> selectedCardValues = new ArrayList<>();
+
+        for (Integer index : selectRandomNumberList(cardValues.size(), count)) {
+            selectedCardValues.add(cardValues.get(index));
+        }
+
+        return selectedCardValues;
+    }
+
+    /**
+     * Generates the list of card types supported based on the card value.
+     *
+     * @param cardValue
+     *  The value of the card
+     * @return
+     *  The correct list of card types that the card value supports
+     */
+    private ArrayList<String> generateSupportedCardTypeList(String cardValue) {
+        if (isBigNumber(cardValue)) {
+            ArrayList<String> correctCardTypeList = cardTypes;
+            correctCardTypeList.remove(CardType.PART.name().toLowerCase());
+
+            return correctCardTypeList;
+        } else {
+            return cardTypes;
+        }
+    }
+
+    /**
+     * Checks if a given card value has a denominator greater than 10.
+     *
+     * @param cardValue
+     *  The value of the card to be checked
+     * @return
+     *  True if its denominator is greater than 10, or false otherwise
+     */
+    private boolean isBigNumber(String cardValue) {
+        String[] splitValue = cardValue.split(Pattern.quote("-"));
+        assert splitValue.length == 2 : "CardGenerator: Length of split card value must be 2.";
+
+        int denominator = Integer.parseInt(splitValue[1]);
+
+        return denominator > 10;
     }
 
     /**
@@ -296,26 +384,6 @@ public class CardGenerator {
                 return String.format("%s_%d-%d", cardType, numerator * multiplier, denominator * multiplier);
             }
         }
-    }
-
-    /**
-     * Selects a given number of random card values from a list.
-     *
-     * @param cardValues
-     *  The list of card values to be randomly selected
-     * @param count
-     *  The number of card values to be selected
-     * @return
-     *  A list of the given number of random card values
-     */
-    private ArrayList<String> selectRandomCardValues(String[] cardValues, int count) {
-        ArrayList<String> selectedCardValues = new ArrayList<>();
-
-        for (Integer index : selectRandomNumberList(cardValues.length, count)) {
-            selectedCardValues.add(cardValues[index]);
-        }
-
-        return selectedCardValues;
     }
 
     /**

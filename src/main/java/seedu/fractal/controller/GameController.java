@@ -132,6 +132,7 @@ public class GameController implements Initializable {
         return cardButtons;
     }
 
+    /* To be refactored */
     private void initialiseError() {
         errorHeader.getStylesheets().add(getClass().getResource(FilePath.MENU_STYLE_PATH).toExternalForm());
         errorHeader.getStyleClass().add("popup-header");
