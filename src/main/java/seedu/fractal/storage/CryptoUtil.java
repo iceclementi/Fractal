@@ -61,12 +61,12 @@ public class CryptoUtil {
             SecretKey aesSecretKey = generateSecretKey(secretKey.toCharArray(), "abc123".getBytes());
             cipher.init(Cipher.ENCRYPT_MODE, aesSecretKey);
 
-            byte[] iV = cipher.getIV();
+            byte[] iv = cipher.getIV();
 
             FileOutputStream fileOutput = new FileOutputStream(filePath);
             CipherOutputStream cipherOutput = new CipherOutputStream(fileOutput, cipher);
 
-            fileOutput.write(iV);
+            fileOutput.write(iv);
             cipherOutput.write(plaintext.getBytes());
 
             cipherOutput.close();
@@ -97,12 +97,12 @@ public class CryptoUtil {
     public String decryptFromFile(String filePath) throws Exception {
         try {
             FileInputStream fileInput = new FileInputStream(filePath);
-            byte[] iV = new byte[16];
-            fileInput.read(iV);
+            byte[] iv = new byte[16];
+            fileInput.read(iv);
 
             Cipher cipher = Cipher.getInstance(TRANSFORMATION);
             SecretKey aesSecretKey = generateSecretKey(secretKey.toCharArray(), "abc123".getBytes());
-            cipher.init(Cipher.DECRYPT_MODE, aesSecretKey, new IvParameterSpec(iV));
+            cipher.init(Cipher.DECRYPT_MODE, aesSecretKey, new IvParameterSpec(iv));
 
             CipherInputStream cipherInput = new CipherInputStream(fileInput, cipher);
             InputStreamReader inputReader = new InputStreamReader(cipherInput);
@@ -111,12 +111,10 @@ public class CryptoUtil {
             String plaintext = bufferedReader.lines().collect(Collectors.joining(NEWLINE));
 
             bufferedReader.close();
-            inputReader.close();
-            cipherInput.close();
 
             return plaintext;
-        } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException |
-                InvalidAlgorithmParameterException e) {
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException
+                | InvalidAlgorithmParameterException e) {
             System.out.println("CryptoUtil: Error decrypting encrypted text.");
             throw new Exception("CryptoUtil: Error decrypting encrypted text.");
         } catch (FileNotFoundException e) {
@@ -146,6 +144,14 @@ public class CryptoUtil {
         return encryptedData;
     }
 
+    /**
+     * Decrypts the encrypted data via a similarly bad decryption scheme.
+     *
+     * @param encryptedData
+     *  The encrypted data to be decrypted
+     * @return
+     *  The original plaintext
+     */
     public String decrypt(String encryptedData) {
         byte[] plaintext = encryptedData.getBytes();
 
@@ -169,12 +175,12 @@ public class CryptoUtil {
     public String generateHash(String plaintext) throws Exception {
         try {
             SecretKeySpec secretKeySpec = new SecretKeySpec(secretKey.getBytes(), HMAC);
-            Mac hMac = Mac.getInstance(HMAC);
-            hMac.init(secretKeySpec);
+            Mac hmac = Mac.getInstance(HMAC);
+            hmac.init(secretKeySpec);
 
-            byte[] hMacData = hMac.doFinal(plaintext.getBytes());
+            byte[] hmacData = hmac.doFinal(plaintext.getBytes());
 
-            return Base64.getEncoder().encodeToString(hMacData);
+            return Base64.getEncoder().encodeToString(hmacData);
         } catch (NoSuchAlgorithmException | InvalidKeyException e) {
             System.out.println("CryptoUtil: Unable to generate hash.");
             throw new Exception("CryptoUtil: Unable to generate hash.");

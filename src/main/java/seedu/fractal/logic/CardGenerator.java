@@ -3,7 +3,11 @@ package seedu.fractal.logic;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.CardUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 public class CardGenerator {
@@ -19,6 +23,14 @@ public class CardGenerator {
 
     private static final String[] INTERMEDIATE_BIG_CARD_VALUES = {
         "1-20", "3-20", "7-20", "9-20", "11-20", "13-20", "17-20", "19-20"};
+    private static final String[] ADVANCED_BIG_CARD_VALUES = {
+        "1-50", "3-50", "7-50", "9-50", "11-50", "13-50", "17-50", "19-50", "21-50", "23-50", "27-50", "29-50",
+        "31-50", "33-50", "37-50", "39-50", "41-50", "43-50", "47-50", "49-50"};
+    private static final String[] GENIUS_BIG_CARD_VALUES = {
+        "1-25", "2-25", "3-25", "4-25", "6-25", "7-25", "8-25", "9-25", "11-25", "12-25", "13-25", "14-25",
+        "16-25", "17-25", "18-25", "19-25",   "21-25", "22-25", "23-25", "24-25",
+        "1-40", "3-40", "7-40", "9-40", "11-40", "13-40", "17-40", "19-40", "21-40", "23-40", "27-40", "29-40",
+        "31-40", "33-40", "37-40", "39-40"};
 
     private ArrayList<String> cardTypes = new ArrayList<>();
     private ArrayList<String> easyCardValues = new ArrayList<>();
@@ -106,6 +118,8 @@ public class CardGenerator {
 
         if (isBigNumberPossible()) {
             intermediateCardValues.addAll(Arrays.asList(INTERMEDIATE_BIG_CARD_VALUES));
+            advancedCardValues.addAll(Arrays.asList(ADVANCED_BIG_CARD_VALUES));
+            geniusCardValues.addAll(Arrays.asList(GENIUS_BIG_CARD_VALUES));
         }
     }
 
