@@ -7,12 +7,12 @@ import seedu.fractal.storage.Storage;
 import seedu.fractal.util.ComponentUtil;
 import seedu.fractal.util.SceneUtil;
 
-public class BackButton extends MenuButton {
+public class GameBackButton extends MenuButton {
 
     /**
      * Constructor for the back button.
      */
-    public BackButton() {
+    public GameBackButton() {
 
         initialiseStyle();
         initialiseEvents();
@@ -34,6 +34,7 @@ public class BackButton extends MenuButton {
 
     private void onRelease(MouseEvent mouseEvent) {
         reset();
+        Storage.saveGame();
         SceneUtil.changeScene(this, FilePath.MENU_SCENE_PATH);
     }
 }

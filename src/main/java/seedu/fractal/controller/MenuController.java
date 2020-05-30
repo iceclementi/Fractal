@@ -14,6 +14,7 @@ import seedu.fractal.component.menu.button.LogoButton;
 import seedu.fractal.component.menu.button.MenuButton;
 import seedu.fractal.component.menu.button.NewGameButton;
 import seedu.fractal.component.menu.popup.ContributePopupFiller;
+import seedu.fractal.component.menu.popup.ErrorPopupFiller;
 import seedu.fractal.component.menu.popup.HelpPopupFiller;
 import seedu.fractal.component.menu.popup.NewGamePopupFiller;
 import seedu.fractal.storage.FilePath;
@@ -79,16 +80,31 @@ public class MenuController implements Initializable {
     @FXML
     private TextFlow contributeText;
 
+    @FXML
+    private GridPane errorPopupPane;
+    @FXML
+    private HBox closeErrorBox;
+    @FXML
+    private Label errorHeader;
+    @FXML
+    private VBox errorBox;
+    @FXML
+    private TextFlow errorText;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         /* Load game */
-        Storage.loadGameDetails();
+        try {
+            Storage.loadGameDetails();
+        } catch (Exception e) {
+            Storage.loadDefaultGameDetails();
+        }
 
         menuPane.setBackground(SceneUtil.generateBackground(FilePath.BACKGROUND_IMAGE_PATH));
         logoBox.getChildren().add(new LogoButton());
 
         MenuButton newGameButton = new NewGameButton(menuPane, newGamePopupPane);
-        MenuButton continueButton = new ContinueButton();
+        MenuButton continueButton = new ContinueButton(menuPane, errorPopupPane);
         MenuButton helpButton = new HelpButton(menuPane, helpPopupPane);
         MenuButton aboutButton = new ContributeButton(menuPane, contributePopupPane);
 
@@ -105,6 +121,7 @@ public class MenuController implements Initializable {
                 ruleHeader, ruleText).fillPopup();
         new ContributePopupFiller(menuPane, contributePopupPane, closeContributeBox,
                 contributeHeader, contributeText).fillPopup();
+        new ErrorPopupFiller(menuPane, errorPopupPane, closeErrorBox, errorHeader, errorText).fillPopup();
     }
 
 

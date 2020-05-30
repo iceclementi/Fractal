@@ -47,12 +47,23 @@ public class Storage {
                 FilePath.GAME_DETAILS_STORAGE_PATH);
     }
 
+    /**
+     * Saves the game into a storage file.
+     */
     public static void saveGame() {
         saveToFile(generateGameBoardContent(), FilePath.GAME_STORAGE_PATH);
+        saveGameDetails(gameBoard.getDifficulty(), gameBoard.getNumberOfMatches(),
+                gameBoard.getAdvancedOptions(), gameBoard.isOngoing());
         // Save time?
     }
 
-    public static void loadGameDetails() {
+    /**
+     * Loads the game details from a storage file.
+     *
+     * @throws Exception
+     *  If there is an error when loading the game details from the file
+     */
+    public static void loadGameDetails() throws Exception {
         try {
             String content = loadContentFromFile(FilePath.GAME_DETAILS_STORAGE_PATH);
             String[] contentLines = splitString(content, NEWLINE, 4, true);
@@ -75,10 +86,25 @@ public class Storage {
             gameBoard.setOngoing(isOngoing);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            loadDefaultGameDetails();
+            throw new Exception(String.format("Storage: Error loading game details - %s", e.getMessage()));
         }
     }
 
+    /**
+     * Loads the default game details.
+     */
+    public static void loadDefaultGameDetails() {
+        gameBoard.setDefaultDetails();
+        gameBoard.setOngoing(false);
+    }
+
+
+    /**
+     * Loads the game from a storage file.
+     *
+     * @throws Exception
+     *  If there is an error when loading the game from the file
+     */
     public static void loadGame() throws Exception {
         // No game is ongoing
         if (!gameBoard.isOngoing()) {
@@ -117,8 +143,8 @@ public class Storage {
             saveFile.getParentFile().mkdirs();
             FileWriter fileWriter = new FileWriter(saveFile);
 
-            fileWriter.write(String.format("%s\n", crypto.generateHash(content)));
-            fileWriter.write(crypto.encrypt(content));
+            String hashWithContent = String.format("%s\n%s", crypto.generateHash(content), content);
+            fileWriter.write(crypto.encrypt(hashWithContent));
 
             fileWriter.flush();
             fileWriter.close();
@@ -170,13 +196,17 @@ public class Storage {
         FileReader fileReader = new FileReader(filePath);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-        String hash = bufferedReader.readLine();
         String encryptedContent = bufferedReader.lines().collect(Collectors.joining(NEWLINE));
 
         bufferedReader.close();
         fileReader.close();
 
-        String content = crypto.decrypt(encryptedContent);
+        String hashWithContent = crypto.decrypt(encryptedContent);
+
+        String[] hashAndContent = hashWithContent.split(NEWLINE, 2);
+        assert hashAndContent.length == 2 : "Storage: Error distinguishing hash from content.";
+        String hash = hashAndContent[0];
+        String content = hashAndContent[1];
 
         if (crypto.isNotCorrupted(content, hash)) {
             return content;
@@ -184,11 +214,6 @@ public class Storage {
             System.out.println("Storage: Storage file is corrupted.");
             throw new Exception("Storage: Storage file is corrupted.");
         }
-    }
-
-    private static void loadDefaultGameDetails() {
-        gameBoard.setDefaultDetails();
-        gameBoard.setOngoing(false);
     }
 
     private static void loadCardButtons(String[] contentLines, int matchedCardCount, int selectedCardCount)

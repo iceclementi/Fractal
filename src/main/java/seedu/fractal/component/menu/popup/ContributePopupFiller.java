@@ -20,9 +20,9 @@ public class ContributePopupFiller extends PopupFiller {
     private Label contributeHeader;
     private TextFlow contributeText;
 
-    public ContributePopupFiller(GridPane menuPane, GridPane helpPopupPane, HBox closeContributeBox,
+    public ContributePopupFiller(GridPane menuPane, GridPane contributePopupPane, HBox closeContributeBox,
              Label contributeHeader, TextFlow contributeText) {
-        super(menuPane, helpPopupPane);
+        super(menuPane, contributePopupPane);
         this.closeContributeBox = closeContributeBox;
         this.contributeHeader = contributeHeader;
         this.contributeText = contributeText;
