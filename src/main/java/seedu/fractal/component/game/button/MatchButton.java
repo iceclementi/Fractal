@@ -1,15 +1,16 @@
-package seedu.fractal.component.game;
+package seedu.fractal.component.game.button;
 
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.storage.FilePath;
 
-public class CancelButton extends Button {
+public class MatchButton extends Button {
 
     /**
-     * Constructor for the cancel button.
+     * Constructor for the match button.
      */
-    public CancelButton() {
+    public MatchButton() {
         super();
 
         initialiseStyle();
@@ -17,23 +18,16 @@ public class CancelButton extends Button {
     }
 
     /**
-     * Activates the cancel button.
+     * Activates the match button.
      */
     public void activate() {
         setDisable(false);
     }
 
-    /**
-     * Resets the cancel button to unactivated mode.
-     */
-    public void reset() {
-        setDisable(true);
-    }
-
     private void initialiseStyle() {
-        setText("CANCEL");
+        setText("MATCH!");
         getStylesheets().add(getClass().getResource(FilePath.GAME_STYLE_PATH).toExternalForm());
-        getStyleClass().add("cancel-button");
+        getStyleClass().add("match-button");
         setDisable(true);
     }
 
@@ -42,6 +36,17 @@ public class CancelButton extends Button {
     }
 
     private void onRelease(MouseEvent mouseEvent) {
-        GameBoard.getInstance().reset();
+        if (GameBoard.getInstance().isMatched()) {
+            GameBoard.getInstance().match();
+        } else {
+            GameBoard.getInstance().reset();
+        }
+    }
+
+    /**
+     * Resets the match button to unactivated mode.
+     */
+    public void reset() {
+        setDisable(true);
     }
 }

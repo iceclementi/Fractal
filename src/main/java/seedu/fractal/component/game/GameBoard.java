@@ -1,6 +1,9 @@
 package seedu.fractal.component.game;
 
 import javafx.scene.control.Label;
+import seedu.fractal.component.game.button.CancelButton;
+import seedu.fractal.component.game.button.CardButton;
+import seedu.fractal.component.game.button.MatchButton;
 import seedu.fractal.logic.CardType;
 import seedu.fractal.logic.Difficulty;
 import seedu.fractal.storage.Storage;
@@ -77,15 +80,10 @@ public class GameBoard {
         difficulty = Difficulty.EASY;
         numberOfMatches = 4;
 
-        advancedOptions.put(CardType.FRACTION, true);
-        advancedOptions.put(CardType.DECIMAL, true);
-        advancedOptions.put(CardType.PERCENTAGE, true);
-        advancedOptions.put(CardType.RATIO, true);
-        advancedOptions.put(CardType.PART, true);
-        advancedOptions.put(CardType.SIMPLIFIED, true);
-        advancedOptions.put(CardType.PROPER, true);
+        for (CardType cardType : CardType.values()) {
+            advancedOptions.put(cardType, true);
+        }
     }
-
 
     public int getMatchedCardCount() {
         return matchedCardCount;

@@ -8,11 +8,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import seedu.fractal.component.game.GameBackButton;
-import seedu.fractal.component.game.CancelButton;
-import seedu.fractal.component.game.CardButton;
+import seedu.fractal.component.game.LifeManager;
+import seedu.fractal.component.game.button.GameBackButton;
+import seedu.fractal.component.game.button.CancelButton;
+import seedu.fractal.component.game.button.CardButton;
 import seedu.fractal.component.game.GameBoard;
-import seedu.fractal.component.game.MatchButton;
+import seedu.fractal.component.game.button.MatchButton;
 import seedu.fractal.logic.Card;
 import seedu.fractal.logic.CardGenerator;
 import seedu.fractal.storage.FilePath;
@@ -29,14 +30,15 @@ public class GameController implements Initializable {
     private GridPane gamePane;
 
     @FXML
-    private HBox controlBox;
+    private HBox lifeBox;
 
     @FXML
     private VBox cardBox;
 
     @FXML
+    private HBox controlBox;
+    @FXML
     private HBox selectionBox;
-
     @FXML
     private Label matchCounter;
 
@@ -56,6 +58,9 @@ public class GameController implements Initializable {
         } catch (Exception e) {
             Storage.loadDefaultGameDetails();
         }
+
+        LifeManager lifeManager = new LifeManager(lifeBox);
+        lifeManager.initialise(3, 3);
 
         GameBackButton gameBackButton = new GameBackButton();
         controlBox.getChildren().addAll(gameBackButton);

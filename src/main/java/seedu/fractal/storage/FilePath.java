@@ -18,7 +18,6 @@ public class FilePath {
     public static final String NEW_GAME_BUTTON_IMAGE_PATH = "/images/buttons/new_game_button.png";
     public static final String CONTINUE_BUTTON_IMAGE_PATH = "/images/buttons/continue_button.png";
     public static final String HELP_BUTTON_IMAGE_PATH = "/images/buttons/help_button.png";
-    public static final String ABOUT_BUTTON_IMAGE_PATH = "/images/buttons/about_button.png";
     public static final String CONTRIBUTE_BUTTON_IMAGE_PATH = "/images/buttons/contribute_button.png";
     public static final String PLAY_BUTTON_IMAGE_PATH = "/images/buttons/play_button.png";
     public static final String CLOSE_BUTTON_IMAGE_PATH = "/images/buttons/close_button.png";
@@ -35,6 +34,7 @@ public class FilePath {
     public static final String ICON_IMAGE_PATH = "/images/misc/icon.png";
     public static final String LOGO_IMAGE_PATH = "/images/misc/logo.png";
     public static final String BACKGROUND_IMAGE_PATH = "/images/misc/background.png";
+    public static final String LIFE_IMAGE_PATH = "/images/misc/life.png";
 
     /* Path to Storage */
     public static final String GAME_DETAILS_STORAGE_PATH = "data\\game\\details.log";

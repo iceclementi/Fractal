@@ -1,4 +1,4 @@
-package seedu.fractal.component.game;
+package seedu.fractal.component.game.button;
 
 import javafx.scene.input.MouseEvent;
 import seedu.fractal.component.menu.button.MenuButton;

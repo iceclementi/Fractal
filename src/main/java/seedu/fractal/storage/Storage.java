@@ -1,7 +1,7 @@
 package seedu.fractal.storage;
 
-import seedu.fractal.component.game.CardButton;
-import seedu.fractal.component.game.CardStatus;
+import seedu.fractal.component.game.button.CardButton;
+import seedu.fractal.logic.CardStatus;
 import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.logic.Card;
 import seedu.fractal.logic.CardType;

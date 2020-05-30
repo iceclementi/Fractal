@@ -1,6 +1,6 @@
 .back-button {
-    -fx-pref-width: 400;
-    -fx-pref-height: 400;
+    -fx-pref-width: 75;
+    -fx-pref-height: 75;
     -fx-padding: 10;
 
     -fx-cursor: hand;

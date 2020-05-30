@@ -1,4 +1,4 @@
-package seedu.fractal.component.game;
+package seedu.fractal.logic;
 
 public enum CardStatus {
     DEFAULT,

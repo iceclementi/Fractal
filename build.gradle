@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'seedu.fractal'
-version 'v0.1.2'
+version 'v2.0.1'
 
 repositories {
     mavenCentral()

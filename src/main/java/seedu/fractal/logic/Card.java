@@ -1,7 +1,5 @@
 package seedu.fractal.logic;
 
-import seedu.fractal.component.game.CardStatus;
-
 public class Card {
 
     private String name;
