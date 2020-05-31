@@ -59,7 +59,7 @@ public class GameBoard {
         lifeManager.initialise(numberOfLives, currentNumberOfLives);
         isOngoing = true;
 
-        Storage.saveGameDetails(difficulty, numberOfMatches, advancedOptions, true);
+        Storage.saveGameDetails(difficulty, numberOfMatches, advancedOptions, numberOfLives, true);
     }
 
     public Difficulty getDifficulty() {
@@ -74,14 +74,28 @@ public class GameBoard {
         return advancedOptions;
     }
 
-    public int[] getLives() {
-        return new int[]{numberOfLives, currentNumberOfLives};
+    public int getNumberOfLives() {
+        return numberOfLives;
     }
 
-    public void setDetails(Difficulty difficulty, int numberOfMatches, HashMap<CardType, Boolean> advancedOptions) {
+    /**
+     * Sets the details of the game.
+     *
+     * @param difficulty
+     *  The difficulty of the game
+     * @param numberOfMatches
+     *  The number of matches in the game
+     * @param advancedOptions
+     *  The advanced options selected in the game
+     * @param numberOfLives
+     *  The number of lives in the game
+     */
+    public void setDetails(Difficulty difficulty, int numberOfMatches,
+            HashMap<CardType, Boolean> advancedOptions, int numberOfLives) {
         this.difficulty = difficulty;
         this.numberOfMatches = numberOfMatches;
         this.advancedOptions = advancedOptions;
+        this.numberOfLives = numberOfLives;
     }
 
     /**
@@ -123,6 +137,14 @@ public class GameBoard {
 
     public void setMatchCounter(int counter) {
         matchCounter = counter;
+    }
+
+    public int getCurrentNumberOfLives() {
+        return currentNumberOfLives;
+    }
+
+    public void setCurrentNumberOfLives(int currentNumberOfLives) {
+        this.currentNumberOfLives = currentNumberOfLives;
     }
 
     public ArrayList<CardButton> getCardButtons() {
@@ -228,7 +250,7 @@ public class GameBoard {
         currentNumberOfLives = numberOfLives;
 
         isOngoing = false;
-        Storage.saveGameDetails(difficulty, numberOfMatches, advancedOptions, false);
+        Storage.saveGameDetails(difficulty, numberOfMatches, advancedOptions, numberOfLives, false);
         Storage.saveGame();
     }
 

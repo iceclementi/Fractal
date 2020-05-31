@@ -38,12 +38,15 @@ public class Storage {
      *  The number of matches in the game
      * @param isSelected
      *  The advanced options selected in the game
+     * @param numberOfLives
+     *  The number of lives in the game
      * @param isOngoing
      *  Checks if the game is ongoing
      */
     public static void saveGameDetails(Difficulty difficulty, int numberOfMatches,
-            HashMap<CardType, Boolean> isSelected, boolean isOngoing) {
-        saveToFile(generateGameDetailsContent(difficulty, numberOfMatches, isSelected, isOngoing),
+            HashMap<CardType, Boolean> isSelected, int numberOfLives, boolean isOngoing) {
+        // numberOfLives
+        saveToFile(generateGameDetailsContent(difficulty, numberOfMatches, isSelected, numberOfLives, isOngoing),
                 FilePath.GAME_DETAILS_STORAGE_PATH);
     }
 
@@ -53,7 +56,7 @@ public class Storage {
     public static void saveGame() {
         saveToFile(generateGameBoardContent(), FilePath.GAME_STORAGE_PATH);
         saveGameDetails(gameBoard.getDifficulty(), gameBoard.getNumberOfMatches(),
-                gameBoard.getAdvancedOptions(), gameBoard.isOngoing());
+                gameBoard.getAdvancedOptions(), gameBoard.getNumberOfLives(), gameBoard.isOngoing());
         // Save time?
     }
 
@@ -66,7 +69,7 @@ public class Storage {
     public static void loadGameDetails() throws Exception {
         try {
             String content = loadContentFromFile(FilePath.GAME_DETAILS_STORAGE_PATH);
-            String[] contentLines = splitString(content, NEWLINE, 4, true);
+            String[] contentLines = splitString(content, NEWLINE, 5, true);
 
             String[] gameDetails = splitString(contentLines[0], DIVIDER, 2);
             Difficulty difficulty = Difficulty.valueOf(gameDetails[0]);
@@ -80,9 +83,11 @@ public class Storage {
                 advancedOptions.put(cardTypes[i], Boolean.parseBoolean(advancedOptionsString[i]));
             }
 
-            gameBoard.setDetails(difficulty, numberOfMatches, advancedOptions);
+            int numberOfLives = Integer.parseInt(contentLines[2]);
 
-            boolean isOngoing = Boolean.parseBoolean(contentLines[2]);
+            gameBoard.setDetails(difficulty, numberOfMatches, advancedOptions, numberOfLives);
+
+            boolean isOngoing = Boolean.parseBoolean(contentLines[3]);
             gameBoard.setOngoing(isOngoing);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -115,11 +120,16 @@ public class Storage {
             String content = loadContentFromFile(FilePath.GAME_STORAGE_PATH);
 
             int numberOfMatches = gameBoard.getNumberOfMatches();
-            int numberOfLines = (numberOfMatches * 2) + 2;
+            int numberOfLines = (numberOfMatches * 2) + 3;
 
             String[] contentLines = splitString(content, NEWLINE, numberOfLines, true);
 
-            String[] countInformation = splitString(contentLines[0], DIVIDER, 3);
+            int currentNumberOfLives = Integer.parseInt(contentLines[0]);
+            gameBoard.setCurrentNumberOfLives(currentNumberOfLives);
+            assert gameBoard.getCurrentNumberOfLives() <= gameBoard.getNumberOfLives() :
+                    "Storage: Current number of lives exceed number of lives";
+
+            String[] countInformation = splitString(contentLines[1], DIVIDER, 3);
             int matchedCardCount = Integer.parseInt(countInformation[0]);
             int selectedCardCount = Integer.parseInt(countInformation[1]);
             int matchCounter = Integer.parseInt(countInformation[2]);
@@ -127,7 +137,7 @@ public class Storage {
             gameBoard.setCountInformation(matchedCardCount, selectedCardCount);
             gameBoard.setMatchCounter(matchCounter);
 
-            String[] cardButtonsContent = Arrays.copyOfRange(contentLines, 1, numberOfLines - 1);
+            String[] cardButtonsContent = Arrays.copyOfRange(contentLines, 2, numberOfLines - 1);
             loadCardButtons(cardButtonsContent, matchedCardCount, selectedCardCount);
 
             gameBoard.setOngoing(true);
@@ -154,7 +164,7 @@ public class Storage {
     }
 
     private static String generateGameDetailsContent(Difficulty difficulty, int numberOfMatches,
-             HashMap<CardType, Boolean> isSelected, boolean isOngoing) {
+             HashMap<CardType, Boolean> isSelected, int numberOfLives, boolean isOngoing) {
         StringBuilder gameDetailsContent = new StringBuilder();
 
         gameDetailsContent.append(String.format("%s%s%s\n", difficulty.name(), DIVIDER, numberOfMatches));
@@ -167,13 +177,15 @@ public class Storage {
             gameDetailsContent.append(isSelected.get(cardTypes[i]));
         }
 
-        gameDetailsContent.append(String.format("\n%s\n%s", isOngoing, END));
+        gameDetailsContent.append(String.format("\n%s\n%s\n%s", numberOfLives, isOngoing, END));
 
         return gameDetailsContent.toString();
     }
 
     private static String generateGameBoardContent() {
         StringBuilder gameBoardContent = new StringBuilder();
+
+        gameBoardContent.append(String.format("%s\n", gameBoard.getCurrentNumberOfLives()));
 
         gameBoardContent.append(String.format("%s%s%s%s%s\n",
                 gameBoard.getMatchedCardCount(), DIVIDER, gameBoard.getSelectedCardCount(), DIVIDER,
