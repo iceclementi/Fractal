@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import seedu.fractal.component.game.GameOverPopup;
 import seedu.fractal.component.game.LifeManager;
 import seedu.fractal.component.game.button.GameBackButton;
 import seedu.fractal.component.game.button.CancelButton;
@@ -42,6 +43,22 @@ public class GameController implements Initializable {
     @FXML
     private Label matchCounter;
 
+    @FXML
+    private VBox gameOverParentBox;
+    @FXML
+    private VBox gameOverBox;
+    @FXML
+    private Label gameOverMatchedText;
+    @FXML
+    private Label gameOverMatchedPercent;
+    @FXML
+    private Label gameOverScore;
+    @FXML
+    private Label gameOverScoreText;
+    @FXML
+    private VBox gameOverButtonBox;
+
+
     private GameBoard gameBoard = GameBoard.getInstance();
     private ArrayList<HBox> cardRows = new ArrayList<>();
 
@@ -59,8 +76,10 @@ public class GameController implements Initializable {
             Storage.loadDefaultGameDetails();
         }
 
-        LifeManager lifeManager = new LifeManager(lifeBox);
-        lifeManager.initialise(3, 3);
+        if (!gameBoard.isOngoing()) {
+            gameBoard.resetGame();
+            gameBoard.setCardButtons(generateCards());
+        }
 
         GameBackButton gameBackButton = new GameBackButton();
         controlBox.getChildren().addAll(gameBackButton);
@@ -68,16 +87,15 @@ public class GameController implements Initializable {
         MatchButton matchButton = new MatchButton();
         CancelButton cancelButton = new CancelButton();
 
-        if (!gameBoard.isOngoing()) {
-            gameBoard.resetGame();
-            gameBoard.setCardButtons(generateCards());
-        }
+        LifeManager lifeManager = new LifeManager(lifeBox);
 
-        gameBoard.initialise(matchButton, cancelButton, matchCounter);
+        gameBoard.initialise(matchButton, cancelButton, matchCounter, lifeManager);
 
         arrangeCards();
 
         selectionBox.getChildren().addAll(matchButton, cancelButton);
+
+        preparePopupBoxes();
 
         Storage.saveGame();
     }
@@ -119,5 +137,10 @@ public class GameController implements Initializable {
         }
 
         return cardButtons;
+    }
+
+    private void preparePopupBoxes() {
+        GameOverPopup.getInstance().initialise(gamePane, gameOverParentBox, gameOverBox,
+                gameOverMatchedText, gameOverMatchedPercent, gameOverScore, gameOverScoreText, gameOverButtonBox);
     }
 }

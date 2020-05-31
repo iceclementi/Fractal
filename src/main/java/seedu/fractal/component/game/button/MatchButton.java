@@ -36,10 +36,13 @@ public class MatchButton extends Button {
     }
 
     private void onRelease(MouseEvent mouseEvent) {
-        if (GameBoard.getInstance().isMatched()) {
-            GameBoard.getInstance().match();
+        GameBoard gameBoard = GameBoard.getInstance();
+
+        if (gameBoard.isMatched()) {
+            gameBoard.match();
         } else {
-            GameBoard.getInstance().reset();
+            gameBoard.loseLife();
+            gameBoard.reset();
         }
     }
 

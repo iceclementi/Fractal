@@ -21,7 +21,7 @@ public class LogoButton extends Button {
     }
 
     private void initialiseStyle() {
-        ComponentUtil.setButtonBackground(this, FilePath.LOGO_IMAGE_PATH);
+        ComponentUtil.setBackground(this, FilePath.LOGO_IMAGE_PATH);
 
         setPrefWidth(600);
         setPrefHeight(200);

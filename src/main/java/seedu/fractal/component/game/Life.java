@@ -21,7 +21,7 @@ public class Life extends Button {
     }
 
     private void initialiseStyle() {
-        ComponentUtil.setButtonBackground(this, FilePath.LIFE_IMAGE_PATH);
+        ComponentUtil.setBackground(this, FilePath.LIFE_IMAGE_PATH);
         setPrefSize(57.41, 50);
         prefWidthProperty().bind(heightProperty().multiply(1.148));
     }

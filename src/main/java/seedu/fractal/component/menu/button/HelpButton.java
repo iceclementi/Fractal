@@ -29,7 +29,7 @@ public class HelpButton extends MenuButton {
     }
 
     private void initialiseStyle() {
-        ComponentUtil.setButtonBackground(this, FilePath.HELP_BUTTON_IMAGE_PATH);
+        ComponentUtil.setBackground(this, FilePath.HELP_BUTTON_IMAGE_PATH);
     }
 
     private void initialiseEvents() {

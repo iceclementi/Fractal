@@ -17,6 +17,8 @@ public class GameBoard {
     private Difficulty difficulty = Difficulty.EASY;
     private int numberOfMatches = 4;
     private HashMap<CardType, Boolean> advancedOptions = new HashMap<>();
+    private int numberOfLives = 3;
+    private int currentNumberOfLives = 3;
 
     /* Current game information */
     private int matchedCardCount = 0;
@@ -27,6 +29,7 @@ public class GameBoard {
     private boolean isOngoing = false;
 
     private ArrayList<CardButton> cardButtons = new ArrayList<>();
+    private LifeManager lifeManager;
     private MatchButton matchButton;
     private CancelButton cancelButton;
     private Label matchCounterLabel;
@@ -44,14 +47,18 @@ public class GameBoard {
         return gameBoard;
     }
 
-    public void initialise(MatchButton matchButton, CancelButton cancelButton, Label matchCounterLabel) {
+    public void initialise(MatchButton matchButton, CancelButton cancelButton, Label matchCounterLabel,
+           LifeManager lifeManager) {
         this.matchButton = matchButton;
         this.cancelButton = cancelButton;
         this.matchCounterLabel = matchCounterLabel;
+        this.lifeManager = lifeManager;
 
         activateSelectionButtons();
         matchCounterLabel.setText(String.valueOf(matchCounter));
+        lifeManager.initialise(numberOfLives, currentNumberOfLives);
         isOngoing = true;
+
         Storage.saveGameDetails(difficulty, numberOfMatches, advancedOptions, true);
     }
 
@@ -65,6 +72,10 @@ public class GameBoard {
 
     public HashMap<CardType, Boolean> getAdvancedOptions() {
         return advancedOptions;
+    }
+
+    public int[] getLives() {
+        return new int[]{numberOfLives, currentNumberOfLives};
     }
 
     public void setDetails(Difficulty difficulty, int numberOfMatches, HashMap<CardType, Boolean> advancedOptions) {
@@ -83,6 +94,9 @@ public class GameBoard {
         for (CardType cardType : CardType.values()) {
             advancedOptions.put(cardType, true);
         }
+
+        numberOfLives = 3;
+        // currentNumberOfLives = 3;
     }
 
     public int getMatchedCardCount() {
@@ -127,6 +141,29 @@ public class GameBoard {
         isOngoing = ongoing;
     }
 
+
+    /**
+     * Selects and flip the card face-up.
+     *
+     * @param card
+     *  The card to be selected
+     */
+    public void selectCard(CardButton card) {
+        if (selectedCardCount >= 2) {
+            return;
+        }
+
+        selectedCards[selectedCardCount++] = card;
+        card.select();
+
+        if (selectedCardCount == 2) {
+            activateSelectionButtons();
+            matchCounterLabel.setText(String.valueOf(++matchCounter));
+        }
+
+        Storage.saveGame();
+    }
+
     /**
      * Resets all faced-up cards back to face-down.
      */
@@ -162,24 +199,19 @@ public class GameBoard {
         }
     }
 
-    public void selectCard(CardButton card) {
-        if (selectedCardCount >= 2) {
-            return;
-        }
-
-        selectedCards[selectedCardCount++] = card;
-        card.select();
-
-        if (selectedCardCount == 2) {
-            activateSelectionButtons();
-            matchCounterLabel.setText(String.valueOf(++matchCounter));
-        }
-
-        Storage.saveGame();
-    }
-
     public boolean isMatched() {
         return selectedCards[0].getCard().isSameValue(selectedCards[1].getCard());
+    }
+
+    public void loseLife() {
+        lifeManager.loseLife();
+    }
+
+    public void gameOver() {
+        String matchedPercent = String.format("%.1f%%", 100.0 * matchedCardCount /  numberOfMatches / 2);
+        String score = "-";
+
+        GameOverPopup.getInstance().show(matchedPercent, score);
     }
 
     /**

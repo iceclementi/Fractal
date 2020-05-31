@@ -18,23 +18,23 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" percentHeight="13.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" percentHeight="12.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <GridPane GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
               <columnConstraints>
-                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <HBox fx:id="lifeBox" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.halignment="LEFT" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                  <HBox fx:id="lifeBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                      <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </HBox>
                </children>
@@ -68,7 +68,7 @@
                      <children>
                         <HBox fx:id="controlBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                            <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </padding>
                         </HBox>
                         <HBox fx:id="selectionBox" alignment="CENTER" spacing="10.0" GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES" GridPane.vgrow="SOMETIMES">
@@ -102,5 +102,50 @@
             </HBox>
          </children>
       </GridPane>
+      <VBox fx:id="gameOverParentBox" alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" visible="false" StackPane.alignment="CENTER">
+         <children>
+            <VBox fx:id="gameOverBox" alignment="CENTER" prefHeight="500.0" prefWidth="400.0" VBox.vgrow="NEVER">
+               <children>
+                  <GridPane VBox.vgrow="SOMETIMES">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" percentHeight="11.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" percentHeight="34.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <GridPane alignment="CENTER" hgap="10.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="55.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label fx:id="gameOverMatchedText" text="Label" />
+                              <Label fx:id="gameOverMatchedPercent" text="Label" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                           <children>
+                              <Label fx:id="gameOverScore" text="Label" />
+                              <Label fx:id="gameOverScoreText" text="Label" />
+                           </children>
+                        </VBox>
+                        <VBox fx:id="gameOverButtonBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </GridPane>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
    </children>
 </StackPane>

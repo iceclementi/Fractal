@@ -23,6 +23,8 @@ public class MenuButton extends Button {
     private void initialiseStyle() {
         getStylesheets().add(getClass().getResource(FilePath.MENU_STYLE_PATH).toExternalForm());
         getStyleClass().add("menu-button");
+
+        setPrefSize(400, 67);
     }
 
     private void initialiseEvents() {

@@ -29,7 +29,7 @@ public class NewGameButton extends MenuButton {
     }
 
     private void initialiseStyle() {
-        ComponentUtil.setButtonBackground(this, FilePath.NEW_GAME_BUTTON_IMAGE_PATH);
+        ComponentUtil.setBackground(this, FilePath.NEW_GAME_BUTTON_IMAGE_PATH);
     }
 
     private void initialiseEvents() {

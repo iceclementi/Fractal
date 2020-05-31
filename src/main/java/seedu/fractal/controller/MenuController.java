@@ -108,12 +108,12 @@ public class MenuController implements Initializable {
         MenuButton helpButton = new HelpButton(menuPane, helpPopupPane);
         MenuButton aboutButton = new ContributeButton(menuPane, contributePopupPane);
 
-        fillPopupBoxes();
+        preparePopupBoxes();
 
         menuButtonBox.getChildren().addAll(newGameButton, continueButton, helpButton, aboutButton);
     }
 
-    private void fillPopupBoxes() {
+    private void preparePopupBoxes() {
         new NewGamePopupFiller(menuPane, newGamePopupPane,
                 closeNewGameBox, difficultyHeader, difficultySliderBox, matchCountHeader, spinnerBox,
                 advancedOptionsHeader, advancedOptionsBox, playBox).fillPopup();

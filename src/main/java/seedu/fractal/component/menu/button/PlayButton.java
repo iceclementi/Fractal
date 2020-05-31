@@ -36,7 +36,7 @@ public class PlayButton extends MenuButton {
     }
 
     private void initialiseStyle() {
-        ComponentUtil.setButtonBackground(this, FilePath.PLAY_BUTTON_IMAGE_PATH);
+        ComponentUtil.setBackground(this, FilePath.PLAY_BUTTON_IMAGE_PATH);
     }
 
     private void initialiseEvents() {

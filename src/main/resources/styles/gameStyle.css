@@ -1,3 +1,7 @@
+@font-face {
+    src: url("Bahnschrift.ttf");
+}
+
 .back-button {
     -fx-pref-width: 75;
     -fx-pref-height: 75;
@@ -10,7 +14,7 @@
     -fx-background-color: #7eabdb;
     -fx-background-radius: 10;
     -fx-border-radius: 10;
-    -fx-min-width: 50;
+    -fx-min-width: 100;
     -fx-padding: 10;
 
     -fx-font-family: "Arial Black";
@@ -31,7 +35,7 @@
     -fx-background-color: #b1b5b5;
     -fx-background-radius: 10;
     -fx-border-radius: 10;
-    -fx-min-width: 50;
+    -fx-min-width: 100;
     -fx-padding: 10;
 
     -fx-font-family: "Arial Black";
@@ -45,4 +49,31 @@
 
 .cancel-button:pressed {
     -fx-background-color: #848888;
+}
+
+
+/* Ending Popup */
+
+.matched-text {
+    -fx-font-family: Bahnschrift;
+    -fx-text-fill: #203864;
+    -fx-font-size: 16pt;
+}
+
+.matched-percent {
+    -fx-font-family: Bahnschrift;
+    -fx-text-fill: #203864;
+    -fx-font-size: 16pt;
+}
+
+.score {
+    -fx-font-family: Bahnschrift;
+    -fx-text-fill: #203864;
+    -fx-font-size: 54pt;
+}
+
+.score-text {
+    -fx-font-family: Bahnschrift;
+    -fx-text-fill: #203864;
+    -fx-font-size: 16pt;
 }
