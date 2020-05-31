@@ -38,7 +38,7 @@ public class LifeManager {
     }
 
     /**
-     * Lose a single life
+     * Lose a single life.
      */
     public void loseLife() {
         if (currentNumberOfLives <= 0) {

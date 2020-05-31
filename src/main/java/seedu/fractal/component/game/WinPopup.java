@@ -8,7 +8,7 @@ import seedu.fractal.component.game.button.BackToMainButton;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.ComponentUtil;
 
-public class WinPopup extends EndPopup {
+public class WinPopup extends EndGamePopup {
 
     private GridPane gamePane;
     private VBox winParentBox;
@@ -27,6 +27,12 @@ public class WinPopup extends EndPopup {
     private WinPopup() {
     }
 
+    /**
+     * Gets the singleton instance of the win popup.
+     *
+     * @return
+     *  The win popup
+     */
     public static WinPopup getInstance() {
         if (winPopup == null) {
             winPopup = new WinPopup();
@@ -35,8 +41,32 @@ public class WinPopup extends EndPopup {
         return winPopup;
     }
 
+    /**
+     * Initialises the win popup with its various components.
+     *
+     * @param gamePane
+     *  The grid pane of the game
+     * @param winParentBox
+     *  The parent VBox of the win popup
+     * @param winBox
+     *  The main VBox of the win popup
+     * @param matchedText
+     *  The label for the matched text
+     * @param matchedPercent
+     *  The label for the percentage of cards matched in the game
+     * @param timeText
+     *  The label for the time text
+     * @param time
+     *  The label for the time taken to win the game
+     * @param score
+     *  The label for the score of the game
+     * @param scoreText
+     *  The label for the score text
+     * @param buttonBox
+     *  The HBox for the continue and back to main buttons
+     */
     public void initialise(GridPane gamePane, VBox winParentBox, VBox winBox, Label matchedText, Label matchedPercent,
-           Label timeText, Label time, Label winScore, Label scoreText, VBox buttonBox) {
+           Label timeText, Label time, Label score, Label scoreText, VBox buttonBox) {
         this.gamePane = gamePane;
         this.winParentBox = winParentBox;
 
@@ -45,13 +75,23 @@ public class WinPopup extends EndPopup {
         this.matchedPercent = matchedPercent;
         this.timeText = timeText;
         this.time = time;
-        this.score = winScore;
+        this.score = score;
         this.scoreText = scoreText;
         this.buttonBox = buttonBox;
 
         initialiseStyle();
     }
 
+    /**
+     * Shows the win popup.
+     *
+     * @param matchedPercent
+     *  The percentage of the cards that are matched in the game
+     * @param time
+     *  The time taken to win the game
+     * @param score
+     *  The score of the game
+     */
     public void show(String matchedPercent, String time, String score) {
         this.matchedPercent.setText(matchedPercent);
         this.time.setText(time);

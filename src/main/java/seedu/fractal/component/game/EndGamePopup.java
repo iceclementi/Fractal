@@ -3,9 +3,12 @@ package seedu.fractal.component.game;
 import javafx.scene.control.Label;
 import seedu.fractal.storage.FilePath;
 
-public abstract class EndPopup {
+public abstract class EndGamePopup {
 
-    public EndPopup() {
+    /**
+     * An empty constructor for the end game popup.
+     */
+    public EndGamePopup() {
     }
 
     protected void setCommonLabels(Label matchedText, Label matchedPercent, Label score, Label scoreText) {
@@ -23,7 +26,7 @@ public abstract class EndPopup {
     }
 
     protected void setLabelText(Label label, String text) {
-         label.getStylesheets().add(getClass().getResource(FilePath.GAME_STYLE_PATH).toExternalForm());
-         label.setText(text);
+        label.getStylesheets().add(getClass().getResource(FilePath.GAME_STYLE_PATH).toExternalForm());
+        label.setText(text);
     }
 }

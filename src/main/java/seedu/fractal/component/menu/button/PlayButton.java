@@ -1,7 +1,6 @@
 package seedu.fractal.component.menu.button;
 
 import javafx.scene.input.MouseEvent;
-import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.component.menu.DifficultySlider;
 import seedu.fractal.component.menu.MatchCountSpinner;
 import seedu.fractal.component.menu.OptionCheckBoxGroup;

@@ -140,7 +140,7 @@
                               </VBox>
                            </children>
                         </GridPane>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                            <children>
                               <Label fx:id="winScore" text="Label" />
                               <Label fx:id="winScoreText" text="Label" />
@@ -185,7 +185,7 @@
                               <Label fx:id="gameOverMatchedPercent" text="Label" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="2" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES">
                            <children>
                               <Label fx:id="gameOverScore" text="Label" />
                               <Label fx:id="gameOverScoreText" text="Label" />
