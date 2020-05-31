@@ -18,13 +18,13 @@ public class GameBoard {
     private int numberOfMatches = 4;
     private HashMap<CardType, Boolean> advancedOptions = new HashMap<>();
     private int numberOfLives = 3;
-    private int currentNumberOfLives = 3;
 
     /* Current game information */
     private int matchedCardCount = 0;
     private int selectedCardCount = 0;
     private CardButton[] selectedCards = new CardButton[2];
     private int matchCounter = 0;
+    private int currentNumberOfLives = 3;
 
     private boolean isOngoing = false;
 
@@ -195,6 +195,7 @@ public class GameBoard {
         Storage.saveGame();
 
         if (matchedCardCount == numberOfMatches * 2) {
+            endGame();
             resetGame();
         }
     }
@@ -205,6 +206,9 @@ public class GameBoard {
 
     public void loseLife() {
         lifeManager.loseLife();
+        --currentNumberOfLives;
+
+        assert currentNumberOfLives >= 0 : "GameBoard: Current number of lives must be at least 0.";
     }
 
     public void gameOver() {
@@ -221,18 +225,29 @@ public class GameBoard {
         matchedCardCount = 0;
         selectedCardCount = 0;
         matchCounter = 0;
+        currentNumberOfLives = numberOfLives;
 
         isOngoing = false;
         Storage.saveGameDetails(difficulty, numberOfMatches, advancedOptions, false);
         Storage.saveGame();
-
-        // Show some ending screen
     }
 
     private void activateSelectionButtons() {
         if (selectedCardCount == 2) {
             matchButton.activate();
             cancelButton.activate();
+        }
+    }
+
+    private void endGame() {
+        String matchedPercent = String.format("%.1f%%", 100.0 * matchedCardCount /  numberOfMatches / 2);
+        String time = "-";
+        String score = "-";
+
+        if (currentNumberOfLives > 0) {
+            WinPopup.getInstance().show(matchedPercent, time, score);
+        } else {
+            GameOverPopup.getInstance().showClear(matchedPercent, score);
         }
     }
 }

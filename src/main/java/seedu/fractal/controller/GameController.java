@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import seedu.fractal.component.game.GameOverPopup;
 import seedu.fractal.component.game.LifeManager;
+import seedu.fractal.component.game.WinPopup;
 import seedu.fractal.component.game.button.GameBackButton;
 import seedu.fractal.component.game.button.CancelButton;
 import seedu.fractal.component.game.button.CardButton;
@@ -42,6 +43,26 @@ public class GameController implements Initializable {
     private HBox selectionBox;
     @FXML
     private Label matchCounter;
+
+    @FXML
+    private VBox winParentBox;
+    @FXML
+    private VBox winBox;
+    @FXML
+    private Label winMatchedText;
+    @FXML
+    private Label winMatchedPercent;
+    @FXML
+    private Label winTimeText;
+    @FXML
+    private Label winTime;
+    @FXML
+    private Label winScore;
+    @FXML
+    private Label winScoreText;
+    @FXML
+    private VBox winButtonBox;
+
 
     @FXML
     private VBox gameOverParentBox;
@@ -142,5 +163,7 @@ public class GameController implements Initializable {
     private void preparePopupBoxes() {
         GameOverPopup.getInstance().initialise(gamePane, gameOverParentBox, gameOverBox,
                 gameOverMatchedText, gameOverMatchedPercent, gameOverScore, gameOverScoreText, gameOverButtonBox);
+        WinPopup.getInstance().initialise(gamePane, winParentBox, winBox,
+                winMatchedText, winMatchedPercent, winTimeText, winTime, winScore, winScoreText, winButtonBox);
     }
 }

@@ -37,7 +37,9 @@ public class FilePath {
     public static final String LOGO_IMAGE_PATH = "/images/misc/logo.png";
     public static final String BACKGROUND_IMAGE_PATH = "/images/misc/background.png";
     public static final String LIFE_IMAGE_PATH = "/images/misc/life.png";
-    public static final String GAME_OVER_FRAME_IMAGE_PATH = "/images/misc/game_over.png";
+    public static final String WIN_FRAME_IMAGE_PATH = "/images/misc/win_frame.png";
+    public static final String GAME_OVER_FRAME_IMAGE_PATH = "/images/misc/game_over_frame.png";
+    public static final String CLEARED_FRAME_IMAGE_PATH = "/images/misc/cleared_frame.png";
 
 
     /* Path to Storage */

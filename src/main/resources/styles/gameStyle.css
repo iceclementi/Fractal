@@ -54,13 +54,13 @@
 
 /* Ending Popup */
 
-.matched-text {
+.statistics-text {
     -fx-font-family: Bahnschrift;
     -fx-text-fill: #203864;
     -fx-font-size: 16pt;
 }
 
-.matched-percent {
+.statistics {
     -fx-font-family: Bahnschrift;
     -fx-text-fill: #203864;
     -fx-font-size: 16pt;
