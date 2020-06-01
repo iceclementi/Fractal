@@ -9,7 +9,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import seedu.fractal.component.game.GameOverPopup;
-import seedu.fractal.component.game.LifeManager;
 import seedu.fractal.component.game.WinPopup;
 import seedu.fractal.component.game.button.GameBackButton;
 import seedu.fractal.component.game.button.CancelButton;
@@ -20,6 +19,7 @@ import seedu.fractal.logic.Card;
 import seedu.fractal.logic.CardGenerator;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.storage.Storage;
+import seedu.fractal.util.ComponentUtil;
 import seedu.fractal.util.SceneUtil;
 
 import java.net.URL;
@@ -30,6 +30,9 @@ public class GameController implements Initializable {
 
     @FXML
     private GridPane gamePane;
+
+    @FXML
+    private Label gameMode;
 
     @FXML
     private HBox lifeBox;
@@ -99,6 +102,9 @@ public class GameController implements Initializable {
             Storage.loadDefaultGameDetails();
         }
 
+        setGameMode();
+        preparePopupBoxes();
+
         if (!gameBoard.isOngoing()) {
             gameBoard.resetGame();
             gameBoard.setCardButtons(generateCards());
@@ -110,17 +116,39 @@ public class GameController implements Initializable {
         MatchButton matchButton = new MatchButton();
         CancelButton cancelButton = new CancelButton();
 
-        LifeManager lifeManager = new LifeManager(lifeBox);
-
-        gameBoard.initialise(matchButton, cancelButton, matchCounter, lifeManager);
+        gameBoard.initialise(matchButton, cancelButton, matchCounter, lifeBox);
 
         arrangeCards();
 
         selectionBox.getChildren().addAll(matchButton, cancelButton);
 
-        preparePopupBoxes();
 
         Storage.saveGame();
+    }
+
+    // To be changed to image?
+    private void setGameMode() {
+        ComponentUtil.setStyleClass(gameMode, FilePath.GAME_STYLE_PATH, "game-mode");
+        gameMode.setText(gameBoard.getDifficulty().name());
+    }
+
+    private void preparePopupBoxes() {
+        GameOverPopup.getInstance().initialise(gamePane, gameOverParentBox, gameOverBox,
+                gameOverMatchedText, gameOverMatchedPercent, gameOverScore, gameOverScoreText, gameOverButtonBox);
+        WinPopup.getInstance().initialise(gamePane, winParentBox, winBox, winMatchedText, winMatchedPercent,
+                winTimeText, winTime, winBonusScore, winScore, winScoreText, winButtonBox);
+    }
+
+    private ArrayList<CardButton> generateCards() {
+        ArrayList<Card> cards = new CardGenerator(gameBoard.getDifficulty(), gameBoard.getNumberOfMatches(),
+                gameBoard.getAdvancedOptions()).generateCards();
+
+        ArrayList<CardButton> cardButtons = new ArrayList<>();
+        for (int i = 0; i < cards.size(); ++i) {
+            cardButtons.add(new CardButton(i, cards.get(i)));
+        }
+
+        return cardButtons;
     }
 
     private void arrangeCards() {
@@ -148,24 +176,5 @@ public class GameController implements Initializable {
             }
             cardBox.getChildren().add(cardRows.get(i));
         }
-    }
-
-    private ArrayList<CardButton> generateCards() {
-        ArrayList<Card> cards = new CardGenerator(gameBoard.getDifficulty(), gameBoard.getNumberOfMatches(),
-                gameBoard.getAdvancedOptions()).generateCards();
-
-        ArrayList<CardButton> cardButtons = new ArrayList<>();
-        for (int i = 0; i < cards.size(); ++i) {
-            cardButtons.add(new CardButton(i, cards.get(i)));
-        }
-
-        return cardButtons;
-    }
-
-    private void preparePopupBoxes() {
-        GameOverPopup.getInstance().initialise(gamePane, gameOverParentBox, gameOverBox,
-                gameOverMatchedText, gameOverMatchedPercent, gameOverScore, gameOverScoreText, gameOverButtonBox);
-        WinPopup.getInstance().initialise(gamePane, winParentBox, winBox, winMatchedText, winMatchedPercent,
-                winTimeText, winTime, winBonusScore, winScore, winScoreText, winButtonBox);
     }
 }

@@ -33,6 +33,6 @@ public abstract class EndGamePopup {
         ComponentUtil.setStyleClass(score, FilePath.GAME_STYLE_PATH, "score");
 
         ComponentUtil.setStyleClass(scoreText, FilePath.GAME_STYLE_PATH, "score-text");
-        matchedText.setText("YOUR SCORE");
+        scoreText.setText("YOUR SCORE");
     }
 }

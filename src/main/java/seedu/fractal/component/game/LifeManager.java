@@ -14,25 +14,34 @@ public class LifeManager {
 
     /**
      * Constructor for the life manager that manages operations with the lives in the game.
-     *
-     * @param lifeBox
-     *  The HBox containing the lives
      */
-    public LifeManager(HBox lifeBox) {
-        this.lifeBox = lifeBox;
+    public LifeManager() {
+    }
+
+    public int getNumberOfLives() {
+        return numberOfLives;
+    }
+
+    public void setNumberOfLives(int numberOfLives) {
+        this.numberOfLives = numberOfLives;
+    }
+
+    public int getCurrentNumberOfLives() {
+        return currentNumberOfLives;
+    }
+
+    public void setCurrentNumberOfLives(int currentNumberOfLives) {
+        this.currentNumberOfLives = currentNumberOfLives;
     }
 
     /**
      * Initialises the number of lives and current number of lives in the game.
      *
-     * @param numberOfLives
-     *  The total number of lives in the game
-     * @param currentNumberOfLives
-     *  The current number of lives
+     * @param lifeBox
+     *  The HBox containing the lives
      */
-    public void initialise(int numberOfLives, int currentNumberOfLives) {
-        this.numberOfLives = numberOfLives;
-        this.currentNumberOfLives = currentNumberOfLives;
+    public void initialise(HBox lifeBox) {
+        this.lifeBox = lifeBox;
 
         initialiseLives();
     }
@@ -53,7 +62,17 @@ public class LifeManager {
         }
     }
 
+    /**
+     * Resets the life information.
+     */
+    public void reset() {
+        currentNumberOfLives = numberOfLives;
+    }
+
     private void initialiseLives() {
+        lifeBox.getChildren().clear();
+        lives.clear();
+
         for (int i = 0; i < numberOfLives; ++i) {
             Life life = new Life();
             lives.add(life);

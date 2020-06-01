@@ -103,7 +103,6 @@ public class Storage {
         gameBoard.setOngoing(false);
     }
 
-
     /**
      * Loads the game from a storage file.
      *
@@ -124,8 +123,14 @@ public class Storage {
 
             String[] contentLines = splitString(content, NEWLINE, numberOfLines, true);
 
-            int currentNumberOfLives = Integer.parseInt(contentLines[0]);
+            String[] statusInformation = splitString(contentLines[0], DIVIDER, 3);
+            int currentNumberOfLives = Integer.parseInt(statusInformation[0]);
+            int score = Integer.parseInt(statusInformation[1]);
+            int streak = Integer.parseInt(statusInformation[2]);
+
             gameBoard.setCurrentNumberOfLives(currentNumberOfLives);
+            gameBoard.setScore(score);
+            gameBoard.setStreak(streak);
             assert gameBoard.getCurrentNumberOfLives() <= gameBoard.getNumberOfLives() :
                     "Storage: Current number of lives exceed number of lives";
 
@@ -185,7 +190,9 @@ public class Storage {
     private static String generateGameBoardContent() {
         StringBuilder gameBoardContent = new StringBuilder();
 
-        gameBoardContent.append(String.format("%s\n", gameBoard.getCurrentNumberOfLives()));
+        gameBoardContent.append(String.format("%s%s%s%s%s\n",
+                gameBoard.getCurrentNumberOfLives(), DIVIDER,
+                gameBoard.getScore(), DIVIDER, gameBoard.getStreak()));
 
         gameBoardContent.append(String.format("%s%s%s%s%s\n",
                 gameBoard.getMatchedCardCount(), DIVIDER, gameBoard.getSelectedCardCount(), DIVIDER,

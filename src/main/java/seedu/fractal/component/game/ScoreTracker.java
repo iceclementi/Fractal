@@ -21,23 +21,10 @@ public class ScoreTracker {
                 put(Difficulty.GENIUS, 300);
             }};
 
-    private static ScoreTracker scoreTracker = null;
-
-    private ScoreTracker() {
-    }
-
     /**
-     * Gets a singleton instance of the score tracker.
-     *
-     * @return
-     *  The point tracker
+     * Constructor for the score tracker.
      */
-    public static ScoreTracker getInstance() {
-        if (scoreTracker == null) {
-            scoreTracker = new ScoreTracker();
-        }
-
-        return scoreTracker;
+    public ScoreTracker() {
     }
 
     public int getScore() {
@@ -61,18 +48,9 @@ public class ScoreTracker {
     }
 
     /**
-     * Initialises the score tracker.
-     *
-     * @param score
-     *  The current score of the game
-     * @param streak
-     *  The current streak of the game
+     * Starts tracking the score of the game.
      */
-    public void start(int score, int streak) {
-        this.score = score;
-        this.streak = streak;
-
-        bonusScore = 0;
+    public void start() {
         isStart = true;
     }
 
@@ -126,6 +104,15 @@ public class ScoreTracker {
         if (isStart) {
             streak = 1;
         }
+    }
+
+    /**
+     * Resets the score tracker.
+     */
+    public void reset() {
+        score = 0;
+        bonusScore = 0;
+        streak = 1;
     }
 
     private int findExtraMovesLimit(int numberOfMatches) {
