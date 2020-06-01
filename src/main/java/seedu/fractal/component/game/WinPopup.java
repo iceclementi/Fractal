@@ -18,6 +18,7 @@ public class WinPopup extends EndGamePopup {
     private Label matchedPercent;
     private Label timeText;
     private Label time;
+    private Label bonusScore;
     private Label score;
     private Label scoreText;
     private VBox buttonBox;
@@ -58,6 +59,8 @@ public class WinPopup extends EndGamePopup {
      *  The label for the time text
      * @param time
      *  The label for the time taken to win the game
+     * @param bonusScore
+     *  The label for the bonus move score of the game
      * @param score
      *  The label for the score of the game
      * @param scoreText
@@ -66,7 +69,7 @@ public class WinPopup extends EndGamePopup {
      *  The HBox for the continue and back to main buttons
      */
     public void initialise(GridPane gamePane, VBox winParentBox, VBox winBox, Label matchedText, Label matchedPercent,
-           Label timeText, Label time, Label score, Label scoreText, VBox buttonBox) {
+           Label timeText, Label time, Label bonusScore, Label score, Label scoreText, VBox buttonBox) {
         this.gamePane = gamePane;
         this.winParentBox = winParentBox;
 
@@ -75,6 +78,7 @@ public class WinPopup extends EndGamePopup {
         this.matchedPercent = matchedPercent;
         this.timeText = timeText;
         this.time = time;
+        this.bonusScore = bonusScore;
         this.score = score;
         this.scoreText = scoreText;
         this.buttonBox = buttonBox;
@@ -91,11 +95,14 @@ public class WinPopup extends EndGamePopup {
      *  The time taken to win the game
      * @param score
      *  The score of the game
+     * @param bonusScore
+     *  The bonus score of the game
      */
-    public void show(String matchedPercent, String time, String score) {
+    public void show(String matchedPercent, String time, String score, String bonusScore) {
         this.matchedPercent.setText(matchedPercent);
         this.time.setText(time);
         this.score.setText(score);
+        this.bonusScore.setText(bonusScore);
 
         winParentBox.setVisible(true);
         gamePane.setEffect(new BoxBlur(5, 5, 3));
@@ -107,12 +114,12 @@ public class WinPopup extends EndGamePopup {
 
         setCommonLabels(matchedText, matchedPercent, score, scoreText);
 
-        timeText.getStylesheets().add(getClass().getResource(FilePath.GAME_STYLE_PATH).toExternalForm());
-        timeText.getStyleClass().add("statistics-text");
+        ComponentUtil.setStyleClass(bonusScore, FilePath.GAME_STYLE_PATH, "bonus-score");
+
+        ComponentUtil.setStyleClass(timeText, FilePath.GAME_STYLE_PATH, "statistics-text");
         timeText.setText("TIME:");
 
-        time.getStylesheets().add(getClass().getResource(FilePath.GAME_STYLE_PATH).toExternalForm());
-        time.getStyleClass().add("statistics");
+        ComponentUtil.setStyleClass(time, FilePath.GAME_STYLE_PATH, "statistics");
 
         buttonBox.getChildren().addAll(new BackToMainButton());
     }

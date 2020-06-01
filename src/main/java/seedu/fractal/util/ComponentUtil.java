@@ -1,22 +1,23 @@
 package seedu.fractal.util;
 
-import javafx.scene.control.Button;
+import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Region;
 
 public class ComponentUtil {
 
-    public static void setBackground(Button button, String backgroundPath) {
-        button.setBackground(generateBackground(button.getWidth(), button.getHeight(), backgroundPath));
+    public static void setBackground(Region component, String backgroundPath) {
+        component.setBackground(generateBackground(component.getWidth(), component.getHeight(), backgroundPath));
     }
 
-    public static void setBackground(VBox box, String backgroundPath) {
-        box.setBackground(generateBackground(box.getWidth(), box.getHeight(), backgroundPath));
+    public static void setStyleClass(Parent component, String cssStylePath, String styleClass) {
+        component.getStylesheets().add(ComponentUtil.class.getResource(cssStylePath).toExternalForm());
+        component.getStyleClass().add(styleClass);
     }
 
     private static Background generateBackground(double width, double height, String backgroundPath) {

@@ -132,10 +132,10 @@ public class Storage {
             String[] countInformation = splitString(contentLines[1], DIVIDER, 3);
             int matchedCardCount = Integer.parseInt(countInformation[0]);
             int selectedCardCount = Integer.parseInt(countInformation[1]);
-            int matchCounter = Integer.parseInt(countInformation[2]);
+            int numberOfMoves = Integer.parseInt(countInformation[2]);
 
             gameBoard.setCountInformation(matchedCardCount, selectedCardCount);
-            gameBoard.setMatchCounter(matchCounter);
+            gameBoard.setNumberOfMoves(numberOfMoves);
 
             String[] cardButtonsContent = Arrays.copyOfRange(contentLines, 2, numberOfLines - 1);
             loadCardButtons(cardButtonsContent, matchedCardCount, selectedCardCount);
@@ -189,7 +189,7 @@ public class Storage {
 
         gameBoardContent.append(String.format("%s%s%s%s%s\n",
                 gameBoard.getMatchedCardCount(), DIVIDER, gameBoard.getSelectedCardCount(), DIVIDER,
-                gameBoard.getMatchCounter()));
+                gameBoard.getNumberOfMoves()));
 
         ArrayList<CardButton> cardButtons = gameBoard.getCardButtons();
         for (CardButton cardButton : cardButtons) {

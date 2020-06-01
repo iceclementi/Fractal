@@ -57,6 +57,8 @@ public class GameController implements Initializable {
     @FXML
     private Label winTime;
     @FXML
+    private Label winBonusScore;
+    @FXML
     private Label winScore;
     @FXML
     private Label winScoreText;
@@ -163,7 +165,7 @@ public class GameController implements Initializable {
     private void preparePopupBoxes() {
         GameOverPopup.getInstance().initialise(gamePane, gameOverParentBox, gameOverBox,
                 gameOverMatchedText, gameOverMatchedPercent, gameOverScore, gameOverScoreText, gameOverButtonBox);
-        WinPopup.getInstance().initialise(gamePane, winParentBox, winBox,
-                winMatchedText, winMatchedPercent, winTimeText, winTime, winScore, winScoreText, winButtonBox);
+        WinPopup.getInstance().initialise(gamePane, winParentBox, winBox, winMatchedText, winMatchedPercent,
+                winTimeText, winTime, winBonusScore, winScore, winScoreText, winButtonBox);
     }
 }

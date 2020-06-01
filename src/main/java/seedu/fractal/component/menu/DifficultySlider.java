@@ -5,6 +5,7 @@ import javafx.util.StringConverter;
 import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.logic.Difficulty;
 import seedu.fractal.storage.FilePath;
+import seedu.fractal.util.ComponentUtil;
 
 public class DifficultySlider extends Slider {
 
@@ -55,8 +56,7 @@ public class DifficultySlider extends Slider {
 
     private void initialiseStyle() {
         /* Set CSS */
-        getStylesheets().add(getClass().getResource(FilePath.MENU_STYLE_PATH).toExternalForm());
-        getStyleClass().add("difficulty-slider");
+        ComponentUtil.setStyleClass(this, FilePath.MENU_STYLE_PATH, "difficulty-slider");
 
         /* Set range */
         setMin(0);

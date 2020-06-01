@@ -19,10 +19,9 @@ public class GameBackButton extends MenuButton {
     }
 
     private void initialiseStyle() {
-        getStylesheets().add(getClass().getResource(FilePath.GAME_STYLE_PATH).toExternalForm());
-        getStyleClass().add("back-button");
-
+        ComponentUtil.setStyleClass(this, FilePath.GAME_STYLE_PATH, "back-button");
         ComponentUtil.setBackground(this, FilePath.BACK_BUTTON_IMAGE_PATH);
+
         prefWidthProperty().bind(heightProperty());
     }
 

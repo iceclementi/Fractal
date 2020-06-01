@@ -2,6 +2,7 @@ package seedu.fractal.component.menu;
 
 import javafx.scene.control.CheckBox;
 import seedu.fractal.storage.FilePath;
+import seedu.fractal.util.ComponentUtil;
 
 public class OptionCheckBox extends CheckBox {
 
@@ -24,8 +25,7 @@ public class OptionCheckBox extends CheckBox {
     }
 
     private void initialiseStyle() {
-        getStylesheets().add(getClass().getResource(FilePath.MENU_STYLE_PATH).toExternalForm());
-        getStyleClass().add("option-checkbox");
+        ComponentUtil.setStyleClass(this, FilePath.MENU_STYLE_PATH, "option-checkbox");
         setIndeterminate(false);
 
         selectedProperty().addListener((observable, oldValue, newValue) -> {

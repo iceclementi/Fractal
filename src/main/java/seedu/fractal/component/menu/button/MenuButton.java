@@ -7,8 +7,9 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import seedu.fractal.storage.FilePath;
+import seedu.fractal.util.ComponentUtil;
 
-public class MenuButton extends Button {
+public abstract class MenuButton extends Button {
 
     /**
      * Constructor for a custom menu button.
@@ -21,8 +22,7 @@ public class MenuButton extends Button {
     }
 
     private void initialiseStyle() {
-        getStylesheets().add(getClass().getResource(FilePath.MENU_STYLE_PATH).toExternalForm());
-        getStyleClass().add("menu-button");
+        ComponentUtil.setStyleClass(this, FilePath.MENU_STYLE_PATH, "menu-button");
 
         setPrefSize(400, 67);
     }

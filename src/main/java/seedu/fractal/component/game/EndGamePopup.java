@@ -2,6 +2,7 @@ package seedu.fractal.component.game;
 
 import javafx.scene.control.Label;
 import seedu.fractal.storage.FilePath;
+import seedu.fractal.util.ComponentUtil;
 
 public abstract class EndGamePopup {
 
@@ -11,22 +12,27 @@ public abstract class EndGamePopup {
     public EndGamePopup() {
     }
 
+    /**
+     * Sets some of the common labels for the end game popup.
+     *
+     * @param matchedText
+     *  The label for the matched text
+     * @param matchedPercent
+     *  The label for the percentage of cards matched in the game
+     * @param score
+     *  The label for the score of the game
+     * @param scoreText
+     *  The label for the score text
+     */
     protected void setCommonLabels(Label matchedText, Label matchedPercent, Label score, Label scoreText) {
-        setLabelText(matchedText, "MATCHED:");
-        matchedText.getStyleClass().add("statistics-text");
+        ComponentUtil.setStyleClass(matchedText, FilePath.GAME_STYLE_PATH, "statistics-text");
+        matchedText.setText("MATCHED:");
 
-        setLabelText(matchedPercent, "");
-        matchedPercent.getStyleClass().add("statistics");
+        ComponentUtil.setStyleClass(matchedPercent, FilePath.GAME_STYLE_PATH, "statistics");
 
-        setLabelText(score, "");
-        score.getStyleClass().add("score");
+        ComponentUtil.setStyleClass(score, FilePath.GAME_STYLE_PATH, "score");
 
-        setLabelText(scoreText, "YOUR SCORE");
-        scoreText.getStyleClass().add("score-text");
-    }
-
-    protected void setLabelText(Label label, String text) {
-        label.getStylesheets().add(getClass().getResource(FilePath.GAME_STYLE_PATH).toExternalForm());
-        label.setText(text);
+        ComponentUtil.setStyleClass(scoreText, FilePath.GAME_STYLE_PATH, "score-text");
+        matchedText.setText("YOUR SCORE");
     }
 }
