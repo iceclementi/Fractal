@@ -119,11 +119,14 @@ public class Storage {
             String content = loadContentFromFile(FilePath.GAME_STORAGE_PATH);
 
             int numberOfMatches = gameBoard.getNumberOfMatches();
-            int numberOfLines = (numberOfMatches * 2) + 3;
+            int numberOfLines = (numberOfMatches * 2) + 4;
 
             String[] contentLines = splitString(content, NEWLINE, numberOfLines, true);
 
-            String[] statusInformation = splitString(contentLines[0], DIVIDER, 3);
+            boolean isGameEnd = Boolean.parseBoolean(contentLines[0]);
+            gameBoard.setGameEnd(isGameEnd);
+
+            String[] statusInformation = splitString(contentLines[1], DIVIDER, 3);
             int currentNumberOfLives = Integer.parseInt(statusInformation[0]);
             int score = Integer.parseInt(statusInformation[1]);
             int streak = Integer.parseInt(statusInformation[2]);
@@ -134,7 +137,7 @@ public class Storage {
             assert gameBoard.getCurrentNumberOfLives() <= gameBoard.getNumberOfLives() :
                     "Storage: Current number of lives exceed number of lives";
 
-            String[] countInformation = splitString(contentLines[1], DIVIDER, 3);
+            String[] countInformation = splitString(contentLines[2], DIVIDER, 3);
             int matchedCardCount = Integer.parseInt(countInformation[0]);
             int selectedCardCount = Integer.parseInt(countInformation[1]);
             int numberOfMoves = Integer.parseInt(countInformation[2]);
@@ -142,7 +145,7 @@ public class Storage {
             gameBoard.setCountInformation(matchedCardCount, selectedCardCount);
             gameBoard.setNumberOfMoves(numberOfMoves);
 
-            String[] cardButtonsContent = Arrays.copyOfRange(contentLines, 2, numberOfLines - 1);
+            String[] cardButtonsContent = Arrays.copyOfRange(contentLines, 3, numberOfLines - 1);
             loadCardButtons(cardButtonsContent, matchedCardCount, selectedCardCount);
 
             gameBoard.setOngoing(true);
@@ -189,6 +192,8 @@ public class Storage {
 
     private static String generateGameBoardContent() {
         StringBuilder gameBoardContent = new StringBuilder();
+
+        gameBoardContent.append(String.format("%s\n", gameBoard.isGameEnd()));
 
         gameBoardContent.append(String.format("%s%s%s%s%s\n",
                 gameBoard.getCurrentNumberOfLives(), DIVIDER,

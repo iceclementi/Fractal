@@ -45,7 +45,9 @@ public class GameController implements Initializable {
     @FXML
     private HBox selectionBox;
     @FXML
-    private Label matchCounter;
+    private Label gameScoreText;
+    @FXML
+    private Label gameScore;
 
     @FXML
     private VBox winParentBox;
@@ -102,7 +104,7 @@ public class GameController implements Initializable {
             Storage.loadDefaultGameDetails();
         }
 
-        setGameMode();
+        setComponentStyles();
         preparePopupBoxes();
 
         if (!gameBoard.isOngoing()) {
@@ -116,7 +118,7 @@ public class GameController implements Initializable {
         MatchButton matchButton = new MatchButton();
         CancelButton cancelButton = new CancelButton();
 
-        gameBoard.initialise(matchButton, cancelButton, matchCounter, lifeBox);
+        gameBoard.initialise(matchButton, cancelButton, gameScore, lifeBox);
 
         arrangeCards();
 
@@ -127,9 +129,14 @@ public class GameController implements Initializable {
     }
 
     // To be changed to image?
-    private void setGameMode() {
+    private void setComponentStyles() {
         ComponentUtil.setStyleClass(gameMode, FilePath.GAME_STYLE_PATH, "game-mode");
         gameMode.setText(gameBoard.getDifficulty().name());
+
+        ComponentUtil.setStyleClass(gameScoreText, FilePath.GAME_STYLE_PATH, "game-score");
+        gameScoreText.setText("SCORE:");
+
+        ComponentUtil.setStyleClass(gameScore, FilePath.GAME_STYLE_PATH, "game-score");
     }
 
     private void preparePopupBoxes() {

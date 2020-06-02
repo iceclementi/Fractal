@@ -19,18 +19,20 @@ public class GameBoard {
     private int numberOfMatches = 4;
     private HashMap<CardType, Boolean> advancedOptions = new HashMap<>();
 
+    private boolean isOngoing = false;
+
     /* Current game information */
     private int matchedCardCount = 0;
     private int selectedCardCount = 0;
     private CardButton[] selectedCards = new CardButton[2];
     private int numberOfMoves = 0;
 
-    private boolean isOngoing = false;
+    private boolean isGameEnd = false;
 
     private ArrayList<CardButton> cardButtons = new ArrayList<>();
     private MatchButton matchButton;
     private CancelButton cancelButton;
-    private Label matchCounterLabel;
+    private Label gameScore;
 
     private LifeManager lifeManager = new LifeManager();
     private ScoreTracker scoreTracker = new ScoreTracker();
@@ -48,16 +50,21 @@ public class GameBoard {
         return gameBoard;
     }
 
-    public void initialise(MatchButton matchButton, CancelButton cancelButton, Label matchCounterLabel, HBox lifeBox) {
+    public void initialise(MatchButton matchButton, CancelButton cancelButton, Label gameScore, HBox lifeBox) {
         this.matchButton = matchButton;
         this.cancelButton = cancelButton;
-        this.matchCounterLabel = matchCounterLabel;
+        this.gameScore = gameScore;
 
         activateSelectionButtons();
-        matchCounterLabel.setText(String.valueOf(numberOfMoves));
+        gameScore.setText(String.valueOf(getScore()));
 
         lifeManager.initialise(lifeBox);
-        scoreTracker.start();
+
+        if (isGameEnd) {
+            scoreTracker.stop();
+        } else {
+            scoreTracker.start();
+        }
 
         isOngoing = true;
 
@@ -181,6 +188,13 @@ public class GameBoard {
         isOngoing = ongoing;
     }
 
+    public boolean isGameEnd() {
+        return isGameEnd;
+    }
+
+    public void setGameEnd(boolean gameEnd) {
+        isGameEnd = gameEnd;
+    }
 
     /**
      * Selects and flip the card face-up.
@@ -197,8 +211,8 @@ public class GameBoard {
         card.select();
 
         if (selectedCardCount == 2) {
+            ++numberOfMoves;
             activateSelectionButtons();
-            matchCounterLabel.setText(String.valueOf(++numberOfMoves));
         }
 
         Storage.saveGame();
@@ -235,6 +249,7 @@ public class GameBoard {
         cancelButton.reset();
 
         scoreTracker.addScore();
+        gameScore.setText(String.valueOf(getScore()));
 
         Storage.saveGame();
 
@@ -258,6 +273,7 @@ public class GameBoard {
 
         GameOverPopup.getInstance().show(matchedPercent, score);
 
+        isGameEnd = true;
         scoreTracker.stop();
     }
 
@@ -273,6 +289,7 @@ public class GameBoard {
         scoreTracker.reset();
 
         isOngoing = false;
+        isGameEnd = false;
         Storage.saveGameDetails(difficulty, numberOfMatches, advancedOptions, lifeManager.getNumberOfLives(), false);
         Storage.saveGame();
     }
@@ -298,6 +315,7 @@ public class GameBoard {
             GameOverPopup.getInstance().showClear(matchedPercent, score);
         }
 
+        isGameEnd = true;
         scoreTracker.stop();
     }
 }
