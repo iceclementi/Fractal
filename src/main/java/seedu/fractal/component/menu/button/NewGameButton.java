@@ -18,7 +18,7 @@ public class NewGameButton extends CustomButton {
      * @param menuPane
      *  The grid pane of the menu screen
      * @param newGamePopupParentBox
-     *  The grid pane of the new game popup
+     *  The parent VBox of the new game popup
      */
     public NewGameButton(GridPane menuPane, VBox newGamePopupParentBox) {
         super();

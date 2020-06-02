@@ -1,38 +1,42 @@
 package seedu.fractal.component.menu.popup;
 
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.TextFlow;
+import javafx.scene.layout.VBox;
+import seedu.fractal.storage.FilePath;
+import seedu.fractal.util.ComponentUtil;
 
 public class ErrorPopupFiller extends PopupFiller {
 
-    private static final String CORRUPTED_FILE_ERROR_TEXT =
-        "There was an error when loading the game. Please start a new game instead.";
+    private VBox errorPopupBox;
 
-    private HBox closeErrorBox;
-    private Label errorHeader;
-    private TextFlow errorText;
-
-    public ErrorPopupFiller(GridPane menuPane, GridPane errorPopupPane, HBox closeErrorBox,
-            Label errorHeader, TextFlow errorText) {
-        super(menuPane, errorPopupPane);
-        this.closeErrorBox = closeErrorBox;
-        this.errorHeader = errorHeader;
-        this.errorText = errorText;
+    /**
+     * Constructor for the error popup filler.
+     *
+     * @param menuPane
+     *  The main menu grid pane
+     * @param errorPopupParentBox
+     *  The parent VBox of the error popup
+     * @param errorPopupBox
+     *  The VBox of the error popup
+     */
+    public ErrorPopupFiller(GridPane menuPane, VBox errorPopupParentBox, VBox errorPopupBox) {
+        super(menuPane, errorPopupParentBox);
+        this.errorPopupBox = errorPopupBox;
+        initialiseStyle();
     }
 
+    /**
+     * Fills the error popup.
+     */
     public void fillPopup() {
         fillCloseSection();
-        fillContributeSection();
+    }
+
+    private void initialiseStyle() {
+        ComponentUtil.setBackground(errorPopupBox, FilePath.ERROR_FRAME_IMAGE_PATH);
     }
 
     private void fillCloseSection() {
-        closeErrorBox.getChildren().add(generateCloseButton());
-    }
-
-    private void fillContributeSection() {
-        setHeader(errorHeader, "ERROR!");
-        setTextFlow(errorText, CORRUPTED_FILE_ERROR_TEXT);
+        errorPopupBox.getChildren().add(generateCloseButton());
     }
 }

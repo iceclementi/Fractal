@@ -4,7 +4,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import seedu.fractal.component.menu.*;
+import seedu.fractal.component.menu.DifficultySlider;
+import seedu.fractal.component.menu.GameModeToggle;
+import seedu.fractal.component.menu.LifeCountSpinner;
+import seedu.fractal.component.menu.MatchCountSpinner;
+import seedu.fractal.component.menu.OptionCheckBoxGroup;
 import seedu.fractal.component.menu.button.PlayButton;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.ComponentUtil;
@@ -49,6 +53,9 @@ public class NewGamePopupFiller extends PopupFiller {
         initialiseStyle();
     }
 
+    /**
+     * Fills the new game popup.
+     */
     public void fillPopup() {
         fillCloseSection();
         fillDifficultySection();

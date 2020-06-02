@@ -3,6 +3,7 @@ package seedu.fractal.component.menu.button;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.storage.Storage;
@@ -12,20 +13,20 @@ import seedu.fractal.util.SceneUtil;
 public class ContinueButton extends CustomButton {
 
     private GridPane menuPane;
-    private GridPane errorPopupPane;
+    private VBox errorPopupParentBox;
 
     /**
      * Constructor for the continue button.
      *
      * @param menuPane
      *  The grid pane of the menu screen
-     * @param errorPopupPane
-     *  The grid pane of error popup
+     * @param errorPopupParentBox
+     *  The parent VBox of the error popup
      */
-    public ContinueButton(GridPane menuPane, GridPane errorPopupPane) {
+    public ContinueButton(GridPane menuPane, VBox errorPopupParentBox) {
         super();
         this.menuPane = menuPane;
-        this.errorPopupPane = errorPopupPane;
+        this.errorPopupParentBox = errorPopupParentBox;
 
         initialiseStyle();
         initialiseEvents();
@@ -50,7 +51,7 @@ public class ContinueButton extends CustomButton {
             SceneUtil.changeScene(this, FilePath.GAME_SCENE_PATH);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            errorPopupPane.setVisible(true);
+            errorPopupParentBox.setVisible(true);
             menuPane.setEffect(new BoxBlur(5, 5, 3));
         }
     }

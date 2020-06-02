@@ -14,7 +14,6 @@ public class FilePath {
     public static final String GAME_STYLE_PATH = "/styles/gameStyle.css";
 
     /* Path to Button Images */
-    public static final String MENU_BUTTON_IMAGE_PATH = "/images/buttons/menu_button.png";
     public static final String NEW_GAME_BUTTON_IMAGE_PATH = "/images/buttons/new_game_button.png";
     public static final String CONTINUE_BUTTON_IMAGE_PATH = "/images/buttons/continue_button.png";
     public static final String HELP_BUTTON_IMAGE_PATH = "/images/buttons/help_button.png";
@@ -34,6 +33,9 @@ public class FilePath {
 
     /* Path to Popup Images */
     public static final String NEW_GAME_FRAME_IMAGE_PATH = "/images/popup/new_game_frame.png";
+    public static final String HELP_FRAME_IMAGE_PATH = "/images/popup/help_frame.png";
+    public static final String CONTRIBUTE_FRAME_IMAGE_PATH = "/images/popup/contribute_frame.png";
+    public static final String ERROR_FRAME_IMAGE_PATH = "/images/popup/error_frame.png";
     public static final String WIN_FRAME_IMAGE_PATH = "/images/popup/win_frame.png";
     public static final String GAME_OVER_FRAME_IMAGE_PATH = "/images/popup/game_over_frame.png";
     public static final String CLEARED_FRAME_IMAGE_PATH = "/images/popup/cleared_frame.png";

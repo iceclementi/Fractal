@@ -3,26 +3,27 @@ package seedu.fractal.component.menu.button;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.ComponentUtil;
 
 public class HelpButton extends CustomButton {
 
     private GridPane menuPane;
-    private GridPane helpPopupPane;
+    private VBox helpPopupParentBox;
 
     /**
      * Constructor of the help button.
      *
      * @param menuPane
      *  The grid pane of the menu screen
-     * @param helpPopupPane
-     *  The grid pane of the help popup
+     * @param helpPopupParentBox
+     *  The parent VBox of the help popup
      */
-    public HelpButton(GridPane menuPane, GridPane helpPopupPane) {
+    public HelpButton(GridPane menuPane, VBox helpPopupParentBox) {
         super();
         this.menuPane = menuPane;
-        this.helpPopupPane = helpPopupPane;
+        this.helpPopupParentBox = helpPopupParentBox;
 
         initialiseStyle();
         initialiseEvents();
@@ -38,7 +39,7 @@ public class HelpButton extends CustomButton {
 
     private void onRelease(MouseEvent mouseEvent) {
         reset();
-        helpPopupPane.setVisible(true);
+        helpPopupParentBox.setVisible(true);
         menuPane.setEffect(new BoxBlur(5, 5, 3));
     }
 }

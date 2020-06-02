@@ -1,44 +1,43 @@
 package seedu.fractal.component.menu.popup;
 
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.TextFlow;
+import javafx.scene.layout.VBox;
+import seedu.fractal.storage.FilePath;
+import seedu.fractal.util.ComponentUtil;
 
 public class ContributePopupFiller extends PopupFiller {
 
-    private static final String CONTRIBUTE_TEXT =
-            "Frac/Tal is merely at its beta phase and is still under development. "
-            + "As such, there are some areas in the application that can be improved even further.\n\n"
-            + "You can be a contributor of Frac/Tal too!\n\n"
-            + "Send your ideas, thoughts on the application, and even bugs that you found.\n"
-            + "Any feedback is most welcomed.\n\n"
-            + "You can contact me, the developer, at:\n"
-            + "iclemonti@gmail.com\n";
+    private VBox contributePopupBox;
 
-    private HBox closeContributeBox;
-    private Label contributeHeader;
-    private TextFlow contributeText;
+    /**
+     * Constructor for the contribute popup filler.
+     *
+     * @param menuPane
+     *  The main menu grid pane
+     * @param contributePopupParentBox
+     *  The parent VBox of the contribute popup
+     * @param contributePopupBox
+     *  The VBox of the contribute popup
+     */
+    public ContributePopupFiller(GridPane menuPane, VBox contributePopupParentBox, VBox contributePopupBox) {
+        super(menuPane, contributePopupParentBox);
+        this.contributePopupBox = contributePopupBox;
 
-    public ContributePopupFiller(GridPane menuPane, GridPane contributePopupPane, HBox closeContributeBox,
-             Label contributeHeader, TextFlow contributeText) {
-        super(menuPane, contributePopupPane);
-        this.closeContributeBox = closeContributeBox;
-        this.contributeHeader = contributeHeader;
-        this.contributeText = contributeText;
+        initialiseStyle();
     }
 
+    /**
+     * Fills the contribute popup.
+     */
     public void fillPopup() {
         fillCloseSection();
-        fillContributeSection();
+    }
+
+    private void initialiseStyle() {
+        ComponentUtil.setBackground(contributePopupBox, FilePath.CONTRIBUTE_FRAME_IMAGE_PATH);
     }
 
     private void fillCloseSection() {
-        closeContributeBox.getChildren().add(generateCloseButton());
-    }
-
-    private void fillContributeSection() {
-        setHeader(contributeHeader, "CONTRIBUTE");
-        setTextFlow(contributeText, CONTRIBUTE_TEXT);
+        contributePopupBox.getChildren().add(generateCloseButton());
     }
 }

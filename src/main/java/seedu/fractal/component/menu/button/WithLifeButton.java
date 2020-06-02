@@ -7,7 +7,7 @@ import seedu.fractal.util.ComponentUtil;
 public class WithLifeButton extends Button {
 
     /**
-     * Constructor for the with life "button"
+     * Constructor for the with life "button".
      */
     public WithLifeButton() {
         super();
@@ -23,7 +23,7 @@ public class WithLifeButton extends Button {
     }
 
     /**
-     * Deactivates the button
+     * Deactivates the button.
      */
     public void deactivate() {
         setDisable(true);

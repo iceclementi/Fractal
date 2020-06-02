@@ -3,26 +3,27 @@ package seedu.fractal.component.menu.button;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.ComponentUtil;
 
 public class ContributeButton extends CustomButton {
 
     private GridPane menuPane;
-    private GridPane contributePopupPane;
+    private VBox contributePopupParentBox;
 
     /**
      * Constructor for the contribute button.
      *
      * @param menuPane
      *  The grid pane of the menu screen
-     * @param contributePopupPane
-     *  The grid pane of contribute popup
+     * @param contributePopupParentBox
+     *  The parent VBox of the contribute popup
      */
-    public ContributeButton(GridPane menuPane, GridPane contributePopupPane) {
+    public ContributeButton(GridPane menuPane, VBox contributePopupParentBox) {
         super();
         this.menuPane = menuPane;
-        this.contributePopupPane = contributePopupPane;
+        this.contributePopupParentBox = contributePopupParentBox;
 
         initialiseStyle();
         initialiseEvents();
@@ -38,7 +39,7 @@ public class ContributeButton extends CustomButton {
 
     private void onRelease(MouseEvent mouseEvent) {
         reset();
-        contributePopupPane.setVisible(true);
+        contributePopupParentBox.setVisible(true);
         menuPane.setEffect(new BoxBlur(5, 5, 3));
     }
 }

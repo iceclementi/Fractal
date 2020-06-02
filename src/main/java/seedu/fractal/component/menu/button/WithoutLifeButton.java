@@ -29,7 +29,7 @@ public class WithoutLifeButton extends Button {
     }
 
     /**
-     * Deactivates the button
+     * Deactivates the button.
      */
     public void deactivate() {
         setOpacity(0.5);

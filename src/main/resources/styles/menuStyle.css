@@ -12,8 +12,8 @@
 }
 
 .close-button {
-    -fx-pref-width: 50;
-    -fx-pref-height: 50;
+    -fx-pref-width: 20;
+    -fx-pref-height: 20;
     -fx-padding: 5;
 
     -fx-cursor: hand;
