@@ -9,7 +9,7 @@ import seedu.fractal.storage.Storage;
 import seedu.fractal.util.ComponentUtil;
 import seedu.fractal.util.SceneUtil;
 
-public class ContinueButton extends MenuButton {
+public class ContinueButton extends CustomButton {
 
     private GridPane menuPane;
     private GridPane errorPopupPane;

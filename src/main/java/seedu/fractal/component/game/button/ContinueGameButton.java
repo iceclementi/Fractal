@@ -3,11 +3,11 @@ package seedu.fractal.component.game.button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import seedu.fractal.component.menu.button.MenuButton;
+import seedu.fractal.component.menu.button.CustomButton;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.ComponentUtil;
 
-public class ContinueGameButton extends MenuButton {
+public class ContinueGameButton extends CustomButton {
 
     private GridPane gamePane;
     private VBox gameOverParentBox;

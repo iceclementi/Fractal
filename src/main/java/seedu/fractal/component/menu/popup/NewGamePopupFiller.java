@@ -4,38 +4,49 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import seedu.fractal.component.menu.DifficultySlider;
-import seedu.fractal.component.menu.MatchCountSpinner;
-import seedu.fractal.component.menu.OptionCheckBoxGroup;
+import seedu.fractal.component.menu.*;
 import seedu.fractal.component.menu.button.PlayButton;
+import seedu.fractal.storage.FilePath;
+import seedu.fractal.util.ComponentUtil;
 
 public class NewGamePopupFiller extends PopupFiller {
 
+    private VBox newGamePopupBox;
     private HBox closeNewGameBox;
-    private Label difficultyHeader;
     private VBox difficultySliderBox;
-    private Label matchCountHeader;
     private VBox spinnerBox;
-    private Label advancedOptionsHeader;
-    private HBox advancedOptionsBox;
+    private VBox gameModeToggleBox;
+    private Label normalGameMode;
+    private Label practiceGameMode;
+    private HBox cardTypeOptionBox;
+    private VBox lifeCountSpinnerBox;
+    private VBox withLifeBox;
+    private VBox withoutLifeBox;
     private VBox playBox;
 
     private DifficultySlider difficultySlider;
     private MatchCountSpinner matchCountSpinner;
     private OptionCheckBoxGroup optionCheckBoxGroup;
 
-    public NewGamePopupFiller(GridPane menuPane, GridPane newGamePopupPane,
-          HBox closeNewGameBox, Label difficultyHeader, VBox difficultySliderBox,
-          Label matchCountHeader, VBox spinnerBox, Label advancedOptionsHeader, HBox advancedOptionsBox, VBox playBox) {
-        super(menuPane, newGamePopupPane);
+    public NewGamePopupFiller(GridPane menuPane, VBox newGamePopupParentBox, VBox newGamePopupBox,
+            HBox closeNewGameBox, VBox difficultySliderBox, VBox spinnerBox, VBox gameModeToggleBox,
+            Label normalGameMode, Label practiceGameMode, HBox cardTypeOptionBox,
+            VBox lifeCountSpinnerBox, VBox withLifeBox, VBox withoutLifeBox, VBox playBox) {
+        super(menuPane, newGamePopupParentBox);
+        this.newGamePopupBox = newGamePopupBox;
         this.closeNewGameBox = closeNewGameBox;
-        this.difficultyHeader = difficultyHeader;
         this.difficultySliderBox = difficultySliderBox;
-        this.matchCountHeader = matchCountHeader;
         this.spinnerBox = spinnerBox;
-        this.advancedOptionsHeader = advancedOptionsHeader;
-        this.advancedOptionsBox = advancedOptionsBox;
+        this.gameModeToggleBox = gameModeToggleBox;
+        this.normalGameMode = normalGameMode;
+        this.practiceGameMode = practiceGameMode;
+        this.cardTypeOptionBox = cardTypeOptionBox;
+        this.lifeCountSpinnerBox = lifeCountSpinnerBox;
+        this.withLifeBox = withLifeBox;
+        this.withoutLifeBox = withoutLifeBox;
         this.playBox = playBox;
+
+        initialiseStyle();
     }
 
     public void fillPopup() {
@@ -46,26 +57,33 @@ public class NewGamePopupFiller extends PopupFiller {
         fillPlaySection();
     }
 
+    private void initialiseStyle() {
+        ComponentUtil.setBackground(newGamePopupBox, FilePath.NEW_GAME_FRAME_IMAGE_PATH);
+    }
+
     private void fillCloseSection() {
         closeNewGameBox.getChildren().add(generateCloseButton());
     }
 
     private void fillDifficultySection() {
-        setHeader(difficultyHeader, "DIFFICULTY");
         difficultySlider = new DifficultySlider();
         difficultySliderBox.getChildren().add(difficultySlider);
     }
 
     private void fillMatchCountSection() {
-        setHeader(matchCountHeader, "NUMBER OF MATCHES");
         matchCountSpinner = new MatchCountSpinner(difficultySlider);
         spinnerBox.getChildren().add(matchCountSpinner);
     }
 
     private void fillAdvancedOptionsSection() {
-        setHeader(advancedOptionsHeader, "ADVANCED OPTIONS");
-        optionCheckBoxGroup = new OptionCheckBoxGroup(advancedOptionsBox);
+        GameModeToggle gameModeToggle = new GameModeToggle(normalGameMode, practiceGameMode);
+        gameModeToggleBox.getChildren().add(gameModeToggle);
+
+        optionCheckBoxGroup = new OptionCheckBoxGroup(cardTypeOptionBox);
         optionCheckBoxGroup.fillGroup();
+
+        LifeCountSpinner lifeCountSpinner = new LifeCountSpinner(withLifeBox, withoutLifeBox);
+        lifeCountSpinnerBox.getChildren().add(lifeCountSpinner);
     }
 
     private void fillPlaySection() {

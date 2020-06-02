@@ -1,6 +1,13 @@
-.menu-button {
-    -fx-padding: 10;
+@font-face {
+    src: url("D-DIN.otf");
+}
 
+@font-face {
+    src: url("D-DIN-Bold.otf");
+}
+
+.custom-button {
+    -fx-padding: 10;
     -fx-cursor: hand;
 }
 
@@ -23,6 +30,15 @@
 
 
 /* Difficulty Slider */
+.difficulty-slider .track {
+    -fx-background-color: #446187;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-pref-width: 400;
+    -fx-pref-height: 15;
+    -fx-cursor: hand;
+}
+
 .difficulty-slider .thumb {
     -fx-background-color: #cdcdcd;
     -fx-background-radius: 12;
@@ -33,23 +49,14 @@
     -fx-effect: dropshadow(gaussian, rgb(68, 68, 68), 7, 0, 0, 3);
 }
 
-.difficulty-slider .track {
-    -fx-background-color: #446187;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-    -fx-pref-width: 800;
-    -fx-pref-height: 15;
-    -fx-cursor: hand;
-}
-
 .difficulty-slider .axis {
     -fx-tick-label-fill: #446187;
-    -fx-tick-label-font: bold 14px "Arial Narrow";
+    -fx-tick-label-font: bold 14px D-DIN;
 }
 
 
 /* Spinner */
-.match-count-spinner {
+.count-spinner {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
 
@@ -60,9 +67,9 @@
     -fx-border-width: 0.5
 }
 
-.match-count-spinner .text-field {
+.count-spinner .text-field {
     -fx-text-fill: #446187;
-    -fx-font-family: "Arial Narrow";
+    -fx-font-family: D-DIN;
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-alignment: center;
@@ -73,29 +80,86 @@
     -fx-cursor: default;
 }
 
-.match-count-spinner .increment-arrow-button,
-.match-count-spinner .decrement-arrow-button {
+.count-spinner .increment-arrow-button,
+.count-spinner .decrement-arrow-button {
     -fx-background-color: #5d7ba8;
     -fx-border-color: #5876a2;
 
     -fx-cursor: hand;
 }
 
-.match-count-spinner .increment-arrow-button:hover,
-.match-count-spinner .decrement-arrow-button:hover {
+.count-spinner .increment-arrow-button:hover,
+.count-spinner .decrement-arrow-button:hover {
     -fx-background-color: #6181b8;
 }
 
-.match-count-spinner .increment-arrow,
-.match-count-spinner .decrement-arrow {
+.count-spinner .increment-arrow,
+.count-spinner .decrement-arrow {
     -fx-background-color: #fbfbfb;
+}
+
+
+/* Game Mode Toggle */
+.game-mode-toggle {
+    -fx-pref-width: 30;
+}
+
+.game-mode-toggle .track {
+    -fx-background-color: #446187;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-pref-width: 30;
+    -fx-pref-height: 25;
+    -fx-cursor: hand;
+}
+
+.game-mode-toggle .thumb {
+    -fx-background-color: #e8e8e8;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgb(68, 68, 68), 7, 0, 0, 3);
+}
+
+.game-mode-label {
+    -fx-font-family: D-DIN;
+    -fx-text-fill: #446187;
+    -fx-font-size: 12pt;
+    -fx-font-weight: bold;
+}
+
+/* Life Count Spinner Icon */
+.life-count-spinner-heart {
+    -fx-pref-width: 25;
+    -fx-pref-height: 21;
+}
+
+.life-count-spinner-heart:hover {
+    -fx-effect: dropshadow(three-pass-box, rgb(99, 133, 171), 5, 0, 0, 0);
+}
+
+.life-count-spinner-cross {
+    -fx-pref-width: 19;
+    -fx-pref-height: 21;
+
+    -fx-cursor: hand;
+}
+
+.life-count-spinner-cross:hover {
+    -fx-effect: dropshadow(three-pass-box, rgb(99, 133, 171), 5, 0, 0, 0);
+}
+
+.life-count-spinner-cross:pressed {
+    -fx-opacity: 0.8;
 }
 
 
 /* Checkbox */
 .option-checkbox {
     -fx-text-fill: #446187;
-    -fx-font-family: "Arial Narrow";
+    -fx-font-family: D-DIN;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
 }

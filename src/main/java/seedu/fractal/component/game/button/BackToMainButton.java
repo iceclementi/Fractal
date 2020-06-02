@@ -1,12 +1,12 @@
 package seedu.fractal.component.game.button;
 
 import javafx.scene.input.MouseEvent;
-import seedu.fractal.component.menu.button.MenuButton;
+import seedu.fractal.component.menu.button.CustomButton;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.ComponentUtil;
 import seedu.fractal.util.SceneUtil;
 
-public class BackToMainButton extends MenuButton {
+public class BackToMainButton extends CustomButton {
 
     public BackToMainButton() {
         super();

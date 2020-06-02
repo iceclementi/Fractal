@@ -2,10 +2,18 @@
     src: url("Bahnschrift.ttf");
 }
 
+@font-face {
+    src: url("D-DIN.otf");
+}
+
+@font-face {
+    src: url("D-DIN-Bold.otf");
+}
+
 .game-mode {
-    -fx-font-family: Bahnschrift;
+    -fx-font-family: D-DIN;
     -fx-text-fill: #203864;
-    -fx-font-size: 16pt;
+    -fx-font-size: 18pt;
     -fx-font-weight: bold;
 }
 

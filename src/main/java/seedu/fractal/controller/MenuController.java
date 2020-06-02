@@ -11,7 +11,7 @@ import seedu.fractal.component.menu.button.ContinueButton;
 import seedu.fractal.component.menu.button.ContributeButton;
 import seedu.fractal.component.menu.button.HelpButton;
 import seedu.fractal.component.menu.button.LogoButton;
-import seedu.fractal.component.menu.button.MenuButton;
+import seedu.fractal.component.menu.button.CustomButton;
 import seedu.fractal.component.menu.button.NewGameButton;
 import seedu.fractal.component.menu.popup.ContributePopupFiller;
 import seedu.fractal.component.menu.popup.ErrorPopupFiller;
@@ -34,23 +34,29 @@ public class MenuController implements Initializable {
     private VBox menuButtonBox;
 
     @FXML
-    private GridPane newGamePopupPane;
+    private VBox newGamePopupParentBox;
+    @FXML
+    private VBox newGamePopupBox;
     @FXML
     private HBox closeNewGameBox;
     @FXML
-    private VBox difficultyBox;
-    @FXML
-    private Label difficultyHeader;
-    @FXML
     private VBox difficultySliderBox;
-    @FXML
-    private Label matchCountHeader;
     @FXML
     private VBox spinnerBox;
     @FXML
-    private Label advancedOptionsHeader;
+    private VBox gameModeToggleBox;
     @FXML
-    private HBox advancedOptionsBox;
+    private Label normalGameMode;
+    @FXML
+    private Label practiceGameMode;
+    @FXML
+    private HBox cardTypeOptionBox;
+    @FXML
+    private VBox lifeCountSpinnerBox;
+    @FXML
+    private VBox withLifeBox;
+    @FXML
+    private VBox withoutLifeBox;
     @FXML
     private VBox playBox;
 
@@ -103,10 +109,10 @@ public class MenuController implements Initializable {
         menuPane.setBackground(SceneUtil.generateBackground(FilePath.BACKGROUND_IMAGE_PATH));
         logoBox.getChildren().add(new LogoButton());
 
-        MenuButton newGameButton = new NewGameButton(menuPane, newGamePopupPane);
-        MenuButton continueButton = new ContinueButton(menuPane, errorPopupPane);
-        MenuButton helpButton = new HelpButton(menuPane, helpPopupPane);
-        MenuButton aboutButton = new ContributeButton(menuPane, contributePopupPane);
+        CustomButton newGameButton = new NewGameButton(menuPane, newGamePopupParentBox);
+        CustomButton continueButton = new ContinueButton(menuPane, errorPopupPane);
+        CustomButton helpButton = new HelpButton(menuPane, helpPopupPane);
+        CustomButton aboutButton = new ContributeButton(menuPane, contributePopupPane);
 
         preparePopupBoxes();
 
@@ -114,9 +120,10 @@ public class MenuController implements Initializable {
     }
 
     private void preparePopupBoxes() {
-        new NewGamePopupFiller(menuPane, newGamePopupPane,
-                closeNewGameBox, difficultyHeader, difficultySliderBox, matchCountHeader, spinnerBox,
-                advancedOptionsHeader, advancedOptionsBox, playBox).fillPopup();
+        new NewGamePopupFiller(menuPane, newGamePopupParentBox, newGamePopupBox,
+                closeNewGameBox, difficultySliderBox, spinnerBox,
+                gameModeToggleBox, normalGameMode, practiceGameMode, cardTypeOptionBox,
+                lifeCountSpinnerBox, withLifeBox, withoutLifeBox, playBox).fillPopup();
         new HelpPopupFiller(menuPane, helpPopupPane, closeHelpBox, helpHeader, helpText, goalHeader, goalText,
                 ruleHeader, ruleText).fillPopup();
         new ContributePopupFiller(menuPane, contributePopupPane, closeContributeBox,

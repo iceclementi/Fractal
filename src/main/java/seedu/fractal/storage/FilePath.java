@@ -32,15 +32,19 @@ public class FilePath {
     public static final String CARD_ADVANCED_PATH = "/images/cards/advanced";
     public static final String CARD_GENIUS_PATH = "/images/cards/genius";
 
+    /* Path to Popup Images */
+    public static final String NEW_GAME_FRAME_IMAGE_PATH = "/images/popup/new_game_frame.png";
+    public static final String WIN_FRAME_IMAGE_PATH = "/images/popup/win_frame.png";
+    public static final String GAME_OVER_FRAME_IMAGE_PATH = "/images/popup/game_over_frame.png";
+    public static final String CLEARED_FRAME_IMAGE_PATH = "/images/popup/cleared_frame.png";
+    public static final String HEART_IMAGE_PATH = "/images/popup/heart.png";
+    public static final String CROSS_IMAGE_PATH = "/images/popup/cross.png";
+
     /* Path to Miscellaneous Images */
     public static final String ICON_IMAGE_PATH = "/images/misc/icon.png";
     public static final String LOGO_IMAGE_PATH = "/images/misc/logo.png";
     public static final String BACKGROUND_IMAGE_PATH = "/images/misc/background.png";
     public static final String LIFE_IMAGE_PATH = "/images/misc/life.png";
-    public static final String WIN_FRAME_IMAGE_PATH = "/images/misc/win_frame.png";
-    public static final String GAME_OVER_FRAME_IMAGE_PATH = "/images/misc/game_over_frame.png";
-    public static final String CLEARED_FRAME_IMAGE_PATH = "/images/misc/cleared_frame.png";
-
 
     /* Path to Storage */
     public static final String GAME_DETAILS_STORAGE_PATH = "data\\game\\details.log";

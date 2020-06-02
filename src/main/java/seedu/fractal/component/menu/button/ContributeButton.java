@@ -6,7 +6,7 @@ import javafx.scene.layout.GridPane;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.ComponentUtil;
 
-public class ContributeButton extends MenuButton {
+public class ContributeButton extends CustomButton {
 
     private GridPane menuPane;
     private GridPane contributePopupPane;

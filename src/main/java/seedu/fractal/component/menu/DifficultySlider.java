@@ -16,7 +16,6 @@ public class DifficultySlider extends Slider {
         super();
 
         initialiseStyle();
-        initialiseEvents();
     }
 
     public Difficulty getDifficulty() {
@@ -101,11 +100,6 @@ public class DifficultySlider extends Slider {
             }
         });
 
-        setPrefWidth(800);
+        setPrefWidth(400);
     }
-
-    private void initialiseEvents() {
-
-    }
-
 }

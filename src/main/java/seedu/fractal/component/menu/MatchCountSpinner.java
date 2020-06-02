@@ -31,7 +31,7 @@ public class MatchCountSpinner extends Spinner<Integer> {
     }
 
     private void initialiseStyle() {
-        ComponentUtil.setStyleClass(this, FilePath.MENU_STYLE_PATH, "match-count-spinner");
+        ComponentUtil.setStyleClass(this, FilePath.MENU_STYLE_PATH, "count-spinner");
         getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
     }
 

@@ -9,7 +9,7 @@ import seedu.fractal.storage.Storage;
 import seedu.fractal.util.ComponentUtil;
 import seedu.fractal.util.SceneUtil;
 
-public class PlayButton extends MenuButton {
+public class PlayButton extends CustomButton {
 
     private DifficultySlider difficultySlider;
     private MatchCountSpinner spinner;

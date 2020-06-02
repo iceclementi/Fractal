@@ -1,13 +1,13 @@
 package seedu.fractal.component.game.button;
 
 import javafx.scene.input.MouseEvent;
-import seedu.fractal.component.menu.button.MenuButton;
+import seedu.fractal.component.menu.button.CustomButton;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.storage.Storage;
 import seedu.fractal.util.ComponentUtil;
 import seedu.fractal.util.SceneUtil;
 
-public class GameBackButton extends MenuButton {
+public class GameBackButton extends CustomButton {
 
     /**
      * Constructor for the back button.

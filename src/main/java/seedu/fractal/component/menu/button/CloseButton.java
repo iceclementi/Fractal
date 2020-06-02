@@ -1,5 +1,6 @@
 package seedu.fractal.component.menu.button;
 
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.ColorAdjust;
@@ -13,9 +14,9 @@ import seedu.fractal.util.ComponentUtil;
 public class CloseButton extends Button {
 
     private GridPane menuPane;
-    private GridPane popupPane;
+    private Parent popupPane;
 
-    public CloseButton(GridPane menuPane, GridPane popupPane) {
+    public CloseButton(GridPane menuPane, Parent popupPane) {
         super();
         this.menuPane = menuPane;
         this.popupPane = popupPane;

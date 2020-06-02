@@ -9,12 +9,12 @@ import javafx.scene.paint.Color;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.ComponentUtil;
 
-public abstract class MenuButton extends Button {
+public abstract class CustomButton extends Button {
 
     /**
-     * Constructor for a custom menu button.
+     * Constructor for a custom button.
      */
-    public MenuButton() {
+    public CustomButton() {
         super();
 
         initialiseStyle();
@@ -22,7 +22,7 @@ public abstract class MenuButton extends Button {
     }
 
     private void initialiseStyle() {
-        ComponentUtil.setStyleClass(this, FilePath.MENU_STYLE_PATH, "menu-button");
+        ComponentUtil.setStyleClass(this, FilePath.MENU_STYLE_PATH, "custom-button");
 
         setPrefSize(400, 67);
     }

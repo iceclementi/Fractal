@@ -1,5 +1,6 @@
 package seedu.fractal.component.menu.popup;
 
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -12,9 +13,9 @@ import seedu.fractal.storage.FilePath;
 public abstract class PopupFiller {
 
     private GridPane menuPane;
-    private GridPane popupPane;
+    private Parent popupPane;
 
-    public PopupFiller(GridPane menuPane, GridPane popupPane) {
+    public PopupFiller(GridPane menuPane, Parent popupPane) {
         this.menuPane = menuPane;
         this.popupPane = popupPane;
     }
