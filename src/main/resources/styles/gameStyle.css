@@ -6,10 +6,6 @@
     src: url("D-DIN.otf");
 }
 
-@font-face {
-    src: url("D-DIN-Bold.otf");
-}
-
 .game-mode {
     -fx-font-family: D-DIN;
     -fx-text-fill: #203864;
@@ -18,7 +14,7 @@
 }
 
 .game-score {
-    -fx-font-family: Bahnschrift;
+    -fx-font-family: D-DIN;
     -fx-text-fill: #203864;
     -fx-font-size: 16pt;
     -fx-font-weight: bold;
@@ -32,6 +28,7 @@
     -fx-cursor: hand;
 }
 
+/* Selection buttons */
 .match-button {
     -fx-background-color: #7eabdb;
     -fx-background-radius: 10;
@@ -74,14 +71,7 @@
 }
 
 
-/* Ending Popup */
-
-.statistics-text {
-    -fx-font-family: Bahnschrift;
-    -fx-text-fill: #203864;
-    -fx-font-size: 16pt;
-}
-
+/* Ending Popups */
 .statistics {
     -fx-font-family: Bahnschrift;
     -fx-text-fill: #203864;

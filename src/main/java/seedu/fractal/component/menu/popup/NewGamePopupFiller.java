@@ -31,6 +31,7 @@ public class NewGamePopupFiller extends PopupFiller {
     private DifficultySlider difficultySlider;
     private MatchCountSpinner matchCountSpinner;
     private OptionCheckBoxGroup optionCheckBoxGroup;
+    private LifeCountSpinner lifeCountSpinner;
 
     public NewGamePopupFiller(GridPane menuPane, VBox newGamePopupParentBox, VBox newGamePopupBox,
             HBox closeNewGameBox, VBox difficultySliderBox, VBox spinnerBox, VBox gameModeToggleBox,
@@ -86,15 +87,18 @@ public class NewGamePopupFiller extends PopupFiller {
         GameModeToggle gameModeToggle = new GameModeToggle(normalGameMode, practiceGameMode);
         gameModeToggleBox.getChildren().add(gameModeToggle);
 
-        optionCheckBoxGroup = new OptionCheckBoxGroup(cardTypeOptionBox);
+        optionCheckBoxGroup = new OptionCheckBoxGroup(cardTypeOptionBox, gameModeToggle);
         optionCheckBoxGroup.fillGroup();
 
-        LifeCountSpinner lifeCountSpinner = new LifeCountSpinner(withLifeBox, withoutLifeBox);
+        lifeCountSpinner = new LifeCountSpinner(withLifeBox, withoutLifeBox, gameModeToggle);
         lifeCountSpinnerBox.getChildren().add(lifeCountSpinner);
+
+        gameModeToggle.initialise(optionCheckBoxGroup, lifeCountSpinner);
     }
 
     private void fillPlaySection() {
-        PlayButton playButton = new PlayButton(difficultySlider, matchCountSpinner, optionCheckBoxGroup);
+        PlayButton playButton =
+                new PlayButton(difficultySlider, matchCountSpinner, optionCheckBoxGroup, lifeCountSpinner);
         playBox.getChildren().add(playButton);
     }
 }

@@ -11,6 +11,8 @@ public class GameModeToggle extends Slider {
 
     private GameMode previousSelection;
 
+    private OptionCheckBoxGroup cardTypeOptions;
+    private LifeCountSpinner lifeCountSpinner;
     private Label normalGameMode;
     private Label practiceGameMode;
 
@@ -28,7 +30,6 @@ public class GameModeToggle extends Slider {
         this.practiceGameMode = practiceGameMode;
 
         initialiseStyle();
-        initialiseEvents();
 
         previousSelection = getGameMode();
     }
@@ -70,6 +71,30 @@ public class GameModeToggle extends Slider {
         }
     }
 
+    /**
+     * Initialises the game mode toggle to link to the other components in the advanced options section.
+     *
+     * @param cardTypeOptions
+     *  The checkbox group about the card type options on the new game popup
+     * @param lifeCountSpinner
+     *  The life count spinner on the new game popup
+     */
+    public void initialise(OptionCheckBoxGroup cardTypeOptions, LifeCountSpinner lifeCountSpinner) {
+        this.cardTypeOptions = cardTypeOptions;
+        this.lifeCountSpinner = lifeCountSpinner;
+
+        initialiseEvents();
+    }
+
+    /**
+     * Toggles to the practice mode.
+     */
+    public void togglePracticeMode() {
+        setGameMode(GameMode.PRACTICE);
+
+        previousSelection = getGameMode();
+    }
+
     private void initialiseStyle() {
         ComponentUtil.setStyleClass(this, FilePath.MENU_STYLE_PATH, "game-mode-toggle");
 
@@ -106,6 +131,11 @@ public class GameModeToggle extends Slider {
         }
 
         previousSelection = getGameMode();
+
+        if (getGameMode() == GameMode.NORMAL) {
+            cardTypeOptions.setNormalMode();
+            lifeCountSpinner.setNormalMode();
+        }
     }
 
     private void toggle() {

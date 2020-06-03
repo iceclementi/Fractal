@@ -20,19 +20,23 @@ public class OptionCheckBoxGroup {
     private OptionCheckBox simplifiedCheckBox;
     private OptionCheckBox properCheckBox;
 
-    private HBox advancedOptionsBox;
+    private HBox cardTypeOptionBox;
+    private GameModeToggle gameModeToggle;
 
     /**
      * Constructor for the advanced options checkbox group.
      *
-     * @param advancedOptionsBox
+     * @param cardTypeOptionBox
      *  The horizontal box of the advanced options section
+     * @param gameModeToggle
+     *  The game mode toggle on the new game popup
      */
-    public OptionCheckBoxGroup(HBox advancedOptionsBox) {
-        this.advancedOptionsBox = advancedOptionsBox;
+    public OptionCheckBoxGroup(HBox cardTypeOptionBox, GameModeToggle gameModeToggle) {
+        this.cardTypeOptionBox = cardTypeOptionBox;
+        this.gameModeToggle = gameModeToggle;
 
         initialiseStyle();
-        initialiseAdvancedOptions();
+        initialiseCardTypeOptions();
     }
 
     /**
@@ -67,7 +71,7 @@ public class OptionCheckBoxGroup {
      * Fills the checkbox group with checkboxes.
      */
     public void fillGroup() {
-        advancedOptionsBox.getChildren().addAll(leftBox, rightBox);
+        cardTypeOptionBox.getChildren().addAll(leftBox, rightBox);
     }
 
     /**
@@ -90,6 +94,19 @@ public class OptionCheckBoxGroup {
         return advancedOptions;
     }
 
+    /**
+     * Sets the checkboxes to the default normal mode options.
+     */
+    public void setNormalMode() {
+        fractionCheckBox.setNormalMode();
+        decimalCheckBox.setNormalMode();
+        percentageCheckBox.setNormalMode();
+        ratioCheckBox.setNormalMode();
+        partsCheckBox.setNormalMode();
+        simplifiedCheckBox.setNormalMode();
+        properCheckBox.setNormalMode();
+    }
+
     private void initialiseStyle() {
         leftBox = new VBox();
         rightBox = new VBox();
@@ -98,22 +115,22 @@ public class OptionCheckBoxGroup {
         leftBox.setSpacing(5);
         rightBox.setSpacing(5);
 
-        fractionCheckBox = new OptionCheckBox("Fraction", this);
-        decimalCheckBox = new OptionCheckBox("Decimal", this);
-        percentageCheckBox = new OptionCheckBox("Percentage", this);
-        ratioCheckBox = new OptionCheckBox("Ratio", this);
-        partsCheckBox = new OptionCheckBox("Parts", this);
+        fractionCheckBox = new OptionCheckBox(this, gameModeToggle, true, "Fraction");
+        decimalCheckBox = new OptionCheckBox(this, gameModeToggle, true, "Decimal");
+        percentageCheckBox = new OptionCheckBox(this, gameModeToggle, true, "Percentage");
+        ratioCheckBox = new OptionCheckBox(this, gameModeToggle, true, "Ratio");
+        partsCheckBox = new OptionCheckBox(this, gameModeToggle, true, "Parts");
         leftBox.getChildren().addAll(fractionCheckBox, decimalCheckBox, percentageCheckBox,
                 ratioCheckBox, partsCheckBox);
 
-        simplifiedCheckBox = new OptionCheckBox("Simplified", this);
-        properCheckBox = new OptionCheckBox("Proper", this);
+        simplifiedCheckBox = new OptionCheckBox(this, gameModeToggle, false, "Simplified");
+        properCheckBox = new OptionCheckBox(this, gameModeToggle, true, "Proper");
         properCheckBox.setDisable(true);
         rightBox.getChildren().addAll(simplifiedCheckBox, properCheckBox);
     }
 
-    private void initialiseAdvancedOptions() {
-        HashMap<CardType, Boolean> advancedOptions = GameBoard.getInstance().getAdvancedOptions();
+    private void initialiseCardTypeOptions() {
+        HashMap<CardType, Boolean> advancedOptions = GameBoard.getInstance().getCardTypeOptions();
 
         fractionCheckBox.setSelected(advancedOptions.get(CardType.FRACTION));
         decimalCheckBox.setSelected(advancedOptions.get(CardType.DECIMAL));

@@ -25,7 +25,7 @@ public abstract class EndGamePopup {
      *  The label for the score text
      */
     protected void setCommonLabels(Label matchedText, Label matchedPercent, Label score, Label scoreText) {
-        ComponentUtil.setStyleClass(matchedText, FilePath.GAME_STYLE_PATH, "statistics-text");
+        ComponentUtil.setStyleClass(matchedText, FilePath.GAME_STYLE_PATH, "statistics");
         matchedText.setText("MATCHED:");
 
         ComponentUtil.setStyleClass(matchedPercent, FilePath.GAME_STYLE_PATH, "statistics");

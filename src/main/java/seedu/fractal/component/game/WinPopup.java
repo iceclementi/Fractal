@@ -116,7 +116,7 @@ public class WinPopup extends EndGamePopup {
 
         ComponentUtil.setStyleClass(bonusScore, FilePath.GAME_STYLE_PATH, "bonus-score");
 
-        ComponentUtil.setStyleClass(timeText, FilePath.GAME_STYLE_PATH, "statistics-text");
+        ComponentUtil.setStyleClass(timeText, FilePath.GAME_STYLE_PATH, "statistics");
         timeText.setText("TIME:");
 
         ComponentUtil.setStyleClass(time, FilePath.GAME_STYLE_PATH, "statistics");

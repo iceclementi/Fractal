@@ -17,7 +17,7 @@ public class GameBoard {
     /* Game details */
     private Difficulty difficulty = Difficulty.EASY;
     private int numberOfMatches = 4;
-    private HashMap<CardType, Boolean> advancedOptions = new HashMap<>();
+    private HashMap<CardType, Boolean> cardTypeOptions = new HashMap<>();
 
     private boolean isOngoing = false;
 
@@ -68,7 +68,7 @@ public class GameBoard {
 
         isOngoing = true;
 
-        Storage.saveGameDetails(difficulty, numberOfMatches, advancedOptions, lifeManager.getNumberOfLives(), true);
+        Storage.saveGameDetails(difficulty, numberOfMatches, cardTypeOptions, lifeManager.getNumberOfLives(), true);
     }
 
     public Difficulty getDifficulty() {
@@ -79,8 +79,8 @@ public class GameBoard {
         return numberOfMatches;
     }
 
-    public HashMap<CardType, Boolean> getAdvancedOptions() {
-        return advancedOptions;
+    public HashMap<CardType, Boolean> getCardTypeOptions() {
+        return cardTypeOptions;
     }
 
     public int getNumberOfLives() {
@@ -94,16 +94,16 @@ public class GameBoard {
      *  The difficulty of the game
      * @param numberOfMatches
      *  The number of matches in the game
-     * @param advancedOptions
-     *  The advanced options selected in the game
+     * @param cardTypeOptions
+     *  The card type options selected in the game
      * @param numberOfLives
      *  The number of lives in the game
      */
     public void setDetails(Difficulty difficulty, int numberOfMatches,
-            HashMap<CardType, Boolean> advancedOptions, int numberOfLives) {
+            HashMap<CardType, Boolean> cardTypeOptions, int numberOfLives) {
         this.difficulty = difficulty;
         this.numberOfMatches = numberOfMatches;
-        this.advancedOptions = advancedOptions;
+        this.cardTypeOptions = cardTypeOptions;
         lifeManager.setNumberOfLives(numberOfLives);
     }
 
@@ -114,9 +114,13 @@ public class GameBoard {
         difficulty = Difficulty.EASY;
         numberOfMatches = 4;
 
-        for (CardType cardType : CardType.values()) {
-            advancedOptions.put(cardType, true);
-        }
+        cardTypeOptions.put(CardType.FRACTION, true);
+        cardTypeOptions.put(CardType.DECIMAL, true);
+        cardTypeOptions.put(CardType.PERCENTAGE, true);
+        cardTypeOptions.put(CardType.RATIO, true);
+        cardTypeOptions.put(CardType.PART, true);
+        cardTypeOptions.put(CardType.SIMPLIFIED, false);
+        cardTypeOptions.put(CardType.PROPER, true);
 
         lifeManager.setNumberOfLives(3);
         // currentNumberOfLives = 3;
@@ -290,7 +294,7 @@ public class GameBoard {
 
         isOngoing = false;
         isGameEnd = false;
-        Storage.saveGameDetails(difficulty, numberOfMatches, advancedOptions, lifeManager.getNumberOfLives(), false);
+        Storage.saveGameDetails(difficulty, numberOfMatches, cardTypeOptions, lifeManager.getNumberOfLives(), false);
         Storage.saveGame();
     }
 

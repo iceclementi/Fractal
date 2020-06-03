@@ -56,7 +56,7 @@ public class Storage {
     public static void saveGame() {
         saveToFile(generateGameBoardContent(), FilePath.GAME_STORAGE_PATH);
         saveGameDetails(gameBoard.getDifficulty(), gameBoard.getNumberOfMatches(),
-                gameBoard.getAdvancedOptions(), gameBoard.getNumberOfLives(), gameBoard.isOngoing());
+                gameBoard.getCardTypeOptions(), gameBoard.getNumberOfLives(), gameBoard.isOngoing());
         // Save time?
     }
 

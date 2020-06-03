@@ -2,6 +2,7 @@ package seedu.fractal.component.menu.button;
 
 import javafx.scene.input.MouseEvent;
 import seedu.fractal.component.menu.DifficultySlider;
+import seedu.fractal.component.menu.LifeCountSpinner;
 import seedu.fractal.component.menu.MatchCountSpinner;
 import seedu.fractal.component.menu.OptionCheckBoxGroup;
 import seedu.fractal.storage.FilePath;
@@ -12,23 +13,29 @@ import seedu.fractal.util.SceneUtil;
 public class PlayButton extends CustomButton {
 
     private DifficultySlider difficultySlider;
-    private MatchCountSpinner spinner;
-    private OptionCheckBoxGroup advancedOptions;
+    private MatchCountSpinner matchCountSpinner;
+    private OptionCheckBoxGroup cardTypeOptions;
+    private LifeCountSpinner lifeCountSpinner;
 
     /**
      * Constructor of the play button.
      *
      * @param difficultySlider
      *  The difficulty slider on the new game popup
-     * @param spinner
+     * @param matchCountSpinner
      *  The match count spinner on the new game popup
+     * @param cardTypeOptions
+     *  The group of checkboxes about the card types on the new game popup
+     * @param lifeCountSpinner
+     *  The life count spinner on the new game popup
      */
-    public PlayButton(DifficultySlider difficultySlider, MatchCountSpinner spinner,
-          OptionCheckBoxGroup advancedOptions) {
+    public PlayButton(DifficultySlider difficultySlider, MatchCountSpinner matchCountSpinner,
+          OptionCheckBoxGroup cardTypeOptions, LifeCountSpinner lifeCountSpinner) {
         super();
         this.difficultySlider = difficultySlider;
-        this.spinner = spinner;
-        this.advancedOptions = advancedOptions;
+        this.matchCountSpinner = matchCountSpinner;
+        this.cardTypeOptions = cardTypeOptions;
+        this.lifeCountSpinner = lifeCountSpinner;
 
         initialiseStyle();
         initialiseEvents();
@@ -43,8 +50,8 @@ public class PlayButton extends CustomButton {
     }
 
     private void onRelease(MouseEvent mouseEvent) {
-        Storage.saveGameDetails(difficultySlider.getDifficulty(), spinner.getValue(),
-                advancedOptions.getSelectedOptions(), 3, false);
+        Storage.saveGameDetails(difficultySlider.getDifficulty(), matchCountSpinner.getValue(),
+                cardTypeOptions.getSelectedOptions(), lifeCountSpinner.getValue(), false);
 
         SceneUtil.changeScene(this, FilePath.GAME_SCENE_PATH);
     }
