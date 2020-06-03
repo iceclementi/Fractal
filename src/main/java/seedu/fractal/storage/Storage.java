@@ -1,8 +1,12 @@
 package seedu.fractal.storage;
 
 import seedu.fractal.component.game.button.CardButton;
-import seedu.fractal.logic.*;
 import seedu.fractal.component.game.GameBoard;
+import seedu.fractal.logic.Card;
+import seedu.fractal.logic.CardStatus;
+import seedu.fractal.logic.CardType;
+import seedu.fractal.logic.Difficulty;
+import seedu.fractal.logic.GameMode;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -124,16 +128,20 @@ public class Storage {
             boolean isGameEnd = Boolean.parseBoolean(contentLines[0]);
             gameBoard.setGameEnd(isGameEnd);
 
-            String[] statusInformation = splitString(contentLines[1], DIVIDER, 3);
-            int currentNumberOfLives = Integer.parseInt(statusInformation[0]);
-            int score = Integer.parseInt(statusInformation[1]);
-            int streak = Integer.parseInt(statusInformation[2]);
+            String[] statusInformation = splitString(contentLines[1], DIVIDER, 4);
 
+            int currentNumberOfLives = Integer.parseInt(statusInformation[0]);
             gameBoard.setCurrentNumberOfLives(currentNumberOfLives);
-            gameBoard.setScore(score);
-            gameBoard.setStreak(streak);
             assert gameBoard.getCurrentNumberOfLives() <= gameBoard.getNumberOfLives() :
                     "Storage: Current number of lives exceed number of lives";
+
+            int score = Integer.parseInt(statusInformation[1]);
+            int streak = Integer.parseInt(statusInformation[2]);
+            gameBoard.setScore(score);
+            gameBoard.setStreak(streak);
+
+            int returnTime = Integer.parseInt(statusInformation[3]);
+            gameBoard.setReturnTime(returnTime);
 
             String[] countInformation = splitString(contentLines[2], DIVIDER, 3);
             int matchedCardCount = Integer.parseInt(countInformation[0]);
@@ -193,9 +201,10 @@ public class Storage {
 
         gameBoardContent.append(String.format("%s\n", gameBoard.isGameEnd()));
 
-        gameBoardContent.append(String.format("%s%s%s%s%s\n",
+        gameBoardContent.append(String.format("%s%s%s%s%s%s%s\n",
                 gameBoard.getCurrentNumberOfLives(), DIVIDER,
-                gameBoard.getScore(), DIVIDER, gameBoard.getStreak()));
+                gameBoard.getScore(), DIVIDER, gameBoard.getStreak(), DIVIDER,
+                gameBoard.getElapsedTime()));
 
         gameBoardContent.append(String.format("%s%s%s%s%s\n",
                 gameBoard.getMatchedCardCount(), DIVIDER, gameBoard.getSelectedCardCount(), DIVIDER,

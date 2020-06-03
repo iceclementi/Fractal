@@ -17,6 +17,7 @@ import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.component.game.button.MatchButton;
 import seedu.fractal.logic.Card;
 import seedu.fractal.logic.CardGenerator;
+import seedu.fractal.logic.GameMode;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.storage.Storage;
 import seedu.fractal.util.ComponentUtil;
@@ -124,14 +125,15 @@ public class GameController implements Initializable {
 
         selectionBox.getChildren().addAll(matchButton, cancelButton);
 
-
         Storage.saveGame();
     }
 
     // To be changed to image?
     private void setComponentStyles() {
         ComponentUtil.setStyleClass(gameMode, FilePath.GAME_STYLE_PATH, "game-mode");
-        gameMode.setText(gameBoard.getDifficulty().name());
+        String gameModeText = gameBoard.getDifficulty().name()
+                + ((gameBoard.getGameMode() == GameMode.NORMAL) ? "" : "  (PRACTICE)");
+        gameMode.setText(gameModeText);
 
         ComponentUtil.setStyleClass(gameScoreText, FilePath.GAME_STYLE_PATH, "game-score");
         gameScoreText.setText("SCORE:");

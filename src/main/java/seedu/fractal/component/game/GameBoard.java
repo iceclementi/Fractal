@@ -38,6 +38,7 @@ public class GameBoard {
 
     private LifeManager lifeManager = new LifeManager();
     private ScoreTracker scoreTracker = new ScoreTracker();
+    private TimeTracker timeTracker = new TimeTracker(0);
 
     private static GameBoard gameBoard = null;
 
@@ -67,6 +68,8 @@ public class GameBoard {
         } else {
             scoreTracker.start();
         }
+
+        timeTracker.start();
 
         isOngoing = true;
 
@@ -137,6 +140,14 @@ public class GameBoard {
         gameMode = GameMode.NORMAL;
     }
 
+    public boolean isOngoing() {
+        return isOngoing;
+    }
+
+    public void setOngoing(boolean ongoing) {
+        isOngoing = ongoing;
+    }
+
     public int getMatchedCardCount() {
         return matchedCardCount;
     }
@@ -187,20 +198,20 @@ public class GameBoard {
         scoreTracker.setStreak(streak);
     }
 
+    public int getElapsedTime() {
+        return timeTracker.getElapsedTime();
+    }
+
+    public void setReturnTime(int returnTime) {
+        timeTracker = new TimeTracker(returnTime);
+    }
+
     public ArrayList<CardButton> getCardButtons() {
         return cardButtons;
     }
 
     public void setCardButtons(ArrayList<CardButton> cardButtons) {
         this.cardButtons = cardButtons;
-    }
-
-    public boolean isOngoing() {
-        return isOngoing;
-    }
-
-    public void setOngoing(boolean ongoing) {
-        isOngoing = ongoing;
     }
 
     public boolean isGameEnd() {
@@ -284,7 +295,7 @@ public class GameBoard {
 
     public void gameOver() {
         String matchedPercent = String.format("%.1f%%", 100.0 * matchedCardCount /  numberOfMatches / 2);
-        String score = String.valueOf(scoreTracker.getScore());
+        String score = String.valueOf(getScore());
 
         GameOverPopup.getInstance().show(matchedPercent, score);
 
@@ -303,6 +314,8 @@ public class GameBoard {
         lifeManager.reset();
         scoreTracker.reset();
 
+        timeTracker = new TimeTracker(0);
+
         isOngoing = false;
         isGameEnd = false;
         Storage.saveGameDetails(difficulty, numberOfMatches, cardTypeOptions, lifeManager.getNumberOfLives(),
@@ -319,18 +332,20 @@ public class GameBoard {
 
     private void endGame() {
         String matchedPercent = String.format("%.1f%%", 100.0 * matchedCardCount /  numberOfMatches / 2);
-        String time = "-";
+        String time;
         String score;
         String bonusScore;
 
         if (lifeManager.getCurrentNumberOfLives() > 0 && gameMode == GameMode.NORMAL) {
             scoreTracker.addBonus();
-            score = String.valueOf(scoreTracker.getScore());
+
+            time = timeTracker.getTimeString();
+            score = String.valueOf(getScore());
             bonusScore = String.format("MOVE BONUS: %s",
                     scoreTracker.getBonusScore() == 0 ? "-" : scoreTracker.getBonusScore());
             WinPopup.getInstance().show(matchedPercent, time, score, bonusScore);
         } else {
-            score = String.valueOf(scoreTracker.getScore());
+            score = String.valueOf(getScore());
             GameOverPopup.getInstance().showClear(matchedPercent, score);
         }
 

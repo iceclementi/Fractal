@@ -54,7 +54,7 @@ public class PlayButton extends CustomButton {
 
     private void onRelease(MouseEvent mouseEvent) {
         Storage.saveGameDetails(difficultySlider.getDifficulty(), matchCountSpinner.getValue(),
-                cardTypeOptions.getSelectedOptions(), lifeCountSpinner.getValue(), gameModeToggle.getGameMode(),  false);
+                cardTypeOptions.getSelectedOptions(), lifeCountSpinner.getValue(), gameModeToggle.getGameMode(), false);
 
         SceneUtil.changeScene(this, FilePath.GAME_SCENE_PATH);
     }
