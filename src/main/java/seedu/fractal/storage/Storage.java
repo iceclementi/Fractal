@@ -1,11 +1,8 @@
 package seedu.fractal.storage;
 
 import seedu.fractal.component.game.button.CardButton;
-import seedu.fractal.logic.CardStatus;
+import seedu.fractal.logic.*;
 import seedu.fractal.component.game.GameBoard;
-import seedu.fractal.logic.Card;
-import seedu.fractal.logic.CardType;
-import seedu.fractal.logic.Difficulty;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -44,10 +41,9 @@ public class Storage {
      *  Checks if the game is ongoing
      */
     public static void saveGameDetails(Difficulty difficulty, int numberOfMatches,
-            HashMap<CardType, Boolean> isSelected, int numberOfLives, boolean isOngoing) {
-        // numberOfLives
-        saveToFile(generateGameDetailsContent(difficulty, numberOfMatches, isSelected, numberOfLives, isOngoing),
-                FilePath.GAME_DETAILS_STORAGE_PATH);
+            HashMap<CardType, Boolean> isSelected, int numberOfLives, GameMode gameMode, boolean isOngoing) {
+        saveToFile(generateGameDetailsContent(difficulty, numberOfMatches, isSelected, numberOfLives,
+                gameMode, isOngoing), FilePath.GAME_DETAILS_STORAGE_PATH);
     }
 
     /**
@@ -55,8 +51,8 @@ public class Storage {
      */
     public static void saveGame() {
         saveToFile(generateGameBoardContent(), FilePath.GAME_STORAGE_PATH);
-        saveGameDetails(gameBoard.getDifficulty(), gameBoard.getNumberOfMatches(),
-                gameBoard.getCardTypeOptions(), gameBoard.getNumberOfLives(), gameBoard.isOngoing());
+        saveGameDetails(gameBoard.getDifficulty(), gameBoard.getNumberOfMatches(), gameBoard.getCardTypeOptions(),
+                gameBoard.getNumberOfLives(), gameBoard.getGameMode(), gameBoard.isOngoing());
         // Save time?
     }
 
@@ -69,7 +65,7 @@ public class Storage {
     public static void loadGameDetails() throws Exception {
         try {
             String content = loadContentFromFile(FilePath.GAME_DETAILS_STORAGE_PATH);
-            String[] contentLines = splitString(content, NEWLINE, 5, true);
+            String[] contentLines = splitString(content, NEWLINE, 6, true);
 
             String[] gameDetails = splitString(contentLines[0], DIVIDER, 2);
             Difficulty difficulty = Difficulty.valueOf(gameDetails[0]);
@@ -85,9 +81,11 @@ public class Storage {
 
             int numberOfLives = Integer.parseInt(contentLines[2]);
 
-            gameBoard.setDetails(difficulty, numberOfMatches, advancedOptions, numberOfLives);
+            GameMode gameMode = GameMode.valueOf(contentLines[3]);
 
-            boolean isOngoing = Boolean.parseBoolean(contentLines[3]);
+            gameBoard.setDetails(difficulty, numberOfMatches, advancedOptions, numberOfLives, gameMode);
+
+            boolean isOngoing = Boolean.parseBoolean(contentLines[4]);
             gameBoard.setOngoing(isOngoing);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -172,7 +170,7 @@ public class Storage {
     }
 
     private static String generateGameDetailsContent(Difficulty difficulty, int numberOfMatches,
-             HashMap<CardType, Boolean> isSelected, int numberOfLives, boolean isOngoing) {
+             HashMap<CardType, Boolean> isSelected, int numberOfLives, GameMode gameMode, boolean isOngoing) {
         StringBuilder gameDetailsContent = new StringBuilder();
 
         gameDetailsContent.append(String.format("%s%s%s\n", difficulty.name(), DIVIDER, numberOfMatches));
@@ -185,7 +183,7 @@ public class Storage {
             gameDetailsContent.append(isSelected.get(cardTypes[i]));
         }
 
-        gameDetailsContent.append(String.format("\n%s\n%s\n%s", numberOfLives, isOngoing, END));
+        gameDetailsContent.append(String.format("\n%s\n%s\n%s\n%s", numberOfLives, gameMode, isOngoing, END));
 
         return gameDetailsContent.toString();
     }

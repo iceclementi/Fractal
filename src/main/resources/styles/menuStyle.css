@@ -105,7 +105,6 @@
 }
 
 .game-mode-toggle .track {
-    -fx-background-color: #446187;
     -fx-background-radius: 20;
     -fx-border-radius: 20;
     -fx-pref-width: 30;
@@ -128,6 +127,14 @@
     -fx-text-fill: #446187;
     -fx-font-size: 12pt;
     -fx-font-weight: bold;
+}
+
+.game-mode-toggle-normal .track {
+    -fx-background-color: #446187;
+}
+
+.game-mode-toggle-practice .track {
+    -fx-background-color: #bdbdbd;
 }
 
 /* Life Count Spinner Icon */

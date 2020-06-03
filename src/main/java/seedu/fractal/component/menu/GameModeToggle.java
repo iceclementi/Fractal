@@ -3,6 +3,7 @@ package seedu.fractal.component.menu;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
+import seedu.fractal.component.game.GameBoard;
 import seedu.fractal.logic.GameMode;
 import seedu.fractal.storage.FilePath;
 import seedu.fractal.util.ComponentUtil;
@@ -47,7 +48,7 @@ public class GameModeToggle extends Slider {
         case 1:
             return GameMode.PRACTICE;
         default:
-            System.out.println("GameModeToggle: Unknown game mode... Setting to NORMAL instead.");
+            System.out.println("GameModeToggle: Unknown game mode... Getting NORMAL instead.");
             return GameMode.NORMAL;
         }
     }
@@ -62,13 +63,16 @@ public class GameModeToggle extends Slider {
         switch (gameMode) {
         case NORMAL:
             setValue(0);
-            return;
+            break;
         case PRACTICE:
             setValue(1);
-            return;
+            break;
         default:
+            System.out.println("GameModeToggle: Unknown game mode... Setting to NORMAL instead.");
             setValue(0);
         }
+
+        previousSelection = getGameMode();
     }
 
     /**
@@ -91,8 +95,6 @@ public class GameModeToggle extends Slider {
      */
     public void togglePracticeMode() {
         setGameMode(GameMode.PRACTICE);
-
-        previousSelection = getGameMode();
     }
 
     private void initialiseStyle() {
@@ -101,7 +103,7 @@ public class GameModeToggle extends Slider {
         /* Set range */
         setMin(0);
         setMax(1);
-        setGameMode(GameMode.NORMAL);
+        setGameMode(GameBoard.getInstance().getGameMode());
 
         setMinorTickCount(0);
         setMajorTickUnit(1);
@@ -141,5 +143,13 @@ public class GameModeToggle extends Slider {
     private void toggle() {
         normalGameMode.setDisable(getGameMode() == GameMode.PRACTICE);
         practiceGameMode.setDisable(getGameMode() == GameMode.NORMAL);
+
+        if (getGameMode() == GameMode.NORMAL) {
+            getStyleClass().remove("game-mode-toggle-practice");
+            getStyleClass().add("game-mode-toggle-normal");
+        } else {
+            getStyleClass().remove("game-mode-toggle-normal");
+            getStyleClass().add("game-mode-toggle-practice");
+        }
     }
 }

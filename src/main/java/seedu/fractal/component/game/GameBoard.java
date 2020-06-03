@@ -7,6 +7,7 @@ import seedu.fractal.component.game.button.CardButton;
 import seedu.fractal.component.game.button.MatchButton;
 import seedu.fractal.logic.CardType;
 import seedu.fractal.logic.Difficulty;
+import seedu.fractal.logic.GameMode;
 import seedu.fractal.storage.Storage;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class GameBoard {
     private Difficulty difficulty = Difficulty.EASY;
     private int numberOfMatches = 4;
     private HashMap<CardType, Boolean> cardTypeOptions = new HashMap<>();
+    private GameMode gameMode = GameMode.NORMAL;
 
     private boolean isOngoing = false;
 
@@ -68,7 +70,8 @@ public class GameBoard {
 
         isOngoing = true;
 
-        Storage.saveGameDetails(difficulty, numberOfMatches, cardTypeOptions, lifeManager.getNumberOfLives(), true);
+        Storage.saveGameDetails(difficulty, numberOfMatches, cardTypeOptions, lifeManager.getNumberOfLives(),
+                gameMode, true);
     }
 
     public Difficulty getDifficulty() {
@@ -87,6 +90,10 @@ public class GameBoard {
         return lifeManager.getNumberOfLives();
     }
 
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
     /**
      * Sets the details of the game.
      *
@@ -98,13 +105,16 @@ public class GameBoard {
      *  The card type options selected in the game
      * @param numberOfLives
      *  The number of lives in the game
+     * @param gameMode
+     *  The mode of the game
      */
     public void setDetails(Difficulty difficulty, int numberOfMatches,
-            HashMap<CardType, Boolean> cardTypeOptions, int numberOfLives) {
+            HashMap<CardType, Boolean> cardTypeOptions, int numberOfLives, GameMode gameMode) {
         this.difficulty = difficulty;
         this.numberOfMatches = numberOfMatches;
         this.cardTypeOptions = cardTypeOptions;
         lifeManager.setNumberOfLives(numberOfLives);
+        this.gameMode = gameMode;
     }
 
     /**
@@ -123,7 +133,8 @@ public class GameBoard {
         cardTypeOptions.put(CardType.PROPER, true);
 
         lifeManager.setNumberOfLives(3);
-        // currentNumberOfLives = 3;
+
+        gameMode = GameMode.NORMAL;
     }
 
     public int getMatchedCardCount() {
@@ -294,7 +305,8 @@ public class GameBoard {
 
         isOngoing = false;
         isGameEnd = false;
-        Storage.saveGameDetails(difficulty, numberOfMatches, cardTypeOptions, lifeManager.getNumberOfLives(), false);
+        Storage.saveGameDetails(difficulty, numberOfMatches, cardTypeOptions, lifeManager.getNumberOfLives(),
+                gameMode, false);
         Storage.saveGame();
     }
 
@@ -308,14 +320,17 @@ public class GameBoard {
     private void endGame() {
         String matchedPercent = String.format("%.1f%%", 100.0 * matchedCardCount /  numberOfMatches / 2);
         String time = "-";
-        scoreTracker.addBonus();
-        String score = String.valueOf(scoreTracker.getScore());
-        String bonusScore = String.format("MOVE BONUS: %s",
-                scoreTracker.getBonusScore() == 0 ? "-" : scoreTracker.getBonusScore());
+        String score;
+        String bonusScore;
 
-        if (lifeManager.getCurrentNumberOfLives() > 0) {
+        if (lifeManager.getCurrentNumberOfLives() > 0 && gameMode == GameMode.NORMAL) {
+            scoreTracker.addBonus();
+            score = String.valueOf(scoreTracker.getScore());
+            bonusScore = String.format("MOVE BONUS: %s",
+                    scoreTracker.getBonusScore() == 0 ? "-" : scoreTracker.getBonusScore());
             WinPopup.getInstance().show(matchedPercent, time, score, bonusScore);
         } else {
+            score = String.valueOf(scoreTracker.getScore());
             GameOverPopup.getInstance().showClear(matchedPercent, score);
         }
 

@@ -57,7 +57,6 @@ public class LifeManager {
         lives.get(--currentNumberOfLives).setDisable(true);
 
         if (currentNumberOfLives == 0) {
-            System.out.println("Game Over - Current health: " + currentNumberOfLives);
             GameBoard.getInstance().gameOver();
         }
     }

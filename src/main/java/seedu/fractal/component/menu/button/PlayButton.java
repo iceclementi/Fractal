@@ -2,6 +2,7 @@ package seedu.fractal.component.menu.button;
 
 import javafx.scene.input.MouseEvent;
 import seedu.fractal.component.menu.DifficultySlider;
+import seedu.fractal.component.menu.GameModeToggle;
 import seedu.fractal.component.menu.LifeCountSpinner;
 import seedu.fractal.component.menu.MatchCountSpinner;
 import seedu.fractal.component.menu.OptionCheckBoxGroup;
@@ -16,6 +17,7 @@ public class PlayButton extends CustomButton {
     private MatchCountSpinner matchCountSpinner;
     private OptionCheckBoxGroup cardTypeOptions;
     private LifeCountSpinner lifeCountSpinner;
+    private GameModeToggle gameModeToggle;
 
     /**
      * Constructor of the play button.
@@ -30,12 +32,13 @@ public class PlayButton extends CustomButton {
      *  The life count spinner on the new game popup
      */
     public PlayButton(DifficultySlider difficultySlider, MatchCountSpinner matchCountSpinner,
-          OptionCheckBoxGroup cardTypeOptions, LifeCountSpinner lifeCountSpinner) {
+            OptionCheckBoxGroup cardTypeOptions, LifeCountSpinner lifeCountSpinner, GameModeToggle gameModeToggle) {
         super();
         this.difficultySlider = difficultySlider;
         this.matchCountSpinner = matchCountSpinner;
         this.cardTypeOptions = cardTypeOptions;
         this.lifeCountSpinner = lifeCountSpinner;
+        this.gameModeToggle = gameModeToggle;
 
         initialiseStyle();
         initialiseEvents();
@@ -51,7 +54,7 @@ public class PlayButton extends CustomButton {
 
     private void onRelease(MouseEvent mouseEvent) {
         Storage.saveGameDetails(difficultySlider.getDifficulty(), matchCountSpinner.getValue(),
-                cardTypeOptions.getSelectedOptions(), lifeCountSpinner.getValue(), false);
+                cardTypeOptions.getSelectedOptions(), lifeCountSpinner.getValue(), gameModeToggle.getGameMode(),  false);
 
         SceneUtil.changeScene(this, FilePath.GAME_SCENE_PATH);
     }
